@@ -1,3 +1,11 @@
+THE JCOMMON CLASS LIBRARY: Version 1.0.24 FORK
+> - 클린코드 16장을 보면 SerialDate를 리팩토링하는 장이 있습니다.
+> - 해당 스터디를 직접 하기 위해서 Fork하였습니다.
+> - 이미 수년전 [PR6](https://github.com/jfree/jcommon/pull/6)등에서 시도 되고 있습니다.
+> - 저도 오늘 시작합니다.
+
+
+
 THE JCOMMON CLASS LIBRARY: Version 1.0.24
 =========================================
 
