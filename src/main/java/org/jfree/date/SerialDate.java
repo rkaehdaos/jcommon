@@ -36,13 +36,11 @@
 package org.jfree.date;
 
 import java.io.Serializable;
-import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.text.*;
+import java.util.*;
 
 /**
+ *  <pre>
  *  An abstract class that defines our requirements for manipulating dates,
  *  without tying down a particular implementation.
  *  <P>
@@ -58,7 +56,7 @@ import java.util.Locale;
  *  <P>
  *  You can call getInstance() to get a concrete subclass of SerialDate,
  *  without worrying about the exact implementation.
- *
+ *  </pre>
  * @author David Gilbert
  */
 public abstract class SerialDate implements Comparable, 
