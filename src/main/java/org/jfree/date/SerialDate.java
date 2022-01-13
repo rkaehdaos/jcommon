@@ -1,59 +1,36 @@
 /* ========================================================================
- * JCommon : a free general purpose class library for the Java(tm) platform
+ * JCommon : Java(tm) 플랫폼을 위한 범용 클래스 오픈 소스 라이브러리
  * ========================================================================
  *
  * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
  * 
  * Project Info:  http://www.jfree.org/jcommon/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
- * (at your option) any later version.
+ * 이 라이브러리는 자유 소프트웨어입니다.
+ * 소프트웨어의 피양도자는 자유 소프트웨어 재단이 공표한 GNU 약소 일반 공중 사용 허가서 2.1판 또는 그 이후 판을 임의로 선택해서,
+ * 그 규정에 따라 라이브러리를 개작하거나 재배포할 수 있습니다.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
- * License for more details.
+ * 이 라이브러리는 유용하게 사용될 수 있으리라는 희망에서 배포되고 있지만,
+ * 특정한 목적에 맞는 적합성 여부나 판매용으로 사용할 수 있으리라는 묵시적인 보증을 포함한 어떠한 형태의 보증도 제공하지 않습니다.
+ * 보다 자세한 사항에 대해서는 GNU 약소 일반 공중 사용 허가서를 참고하시기 바랍니다.
  *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * GNU 약소 일반 공중 사용 허가서는 이 라이브러리와 함께 제공됩니다.
+ * 만약, 이 문서가 누락되어 있다면 자유 소프트웨어 재단으로 문의하시기 바랍니다.
+ * (자유 소프트웨어 재단: Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA)
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
- * in the United States and other countries.]
+ * [자바는 썬 마이크로시스템즈(Sun Microsystems, Inc)의 등록 상표로써,
+ * 미국과 다른 국가에서 적용된다.]
  *
  * ---------------
  * SerialDate.java
  * ---------------
  * (C) Copyright 2001-2006, by Object Refinery Limited.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * 원래 저자:  David Gilbert(데이비드 길버트)  (for Object Refinery Limited);
+ * 공헌자:   -;
  *
  * $Id: SerialDate.java,v 1.9 2011/10/17 20:08:22 mungady Exp $
- *
- * Changes (from 11-Oct-2001)
- * --------------------------
- * 11-Oct-2001 : Re-organised the class and moved it to new package 
- *               com.jrefinery.date (DG);
- * 05-Nov-2001 : Added a getDescription() method, and eliminated NotableDate 
- *               class (DG);
- * 12-Nov-2001 : IBD requires setDescription() method, now that NotableDate 
- *               class is gone (DG);  Changed getPreviousDayOfWeek(), 
- *               getFollowingDayOfWeek() and getNearestDayOfWeek() to correct 
- *               bugs (DG);
- * 05-Dec-2001 : Fixed bug in SpreadsheetDate class (DG);
- * 29-May-2002 : Moved the month constants into a separate interface 
- *               (MonthConstants) (DG);
- * 27-Aug-2002 : Fixed bug in addMonths() method, thanks to N???levka Petr (DG);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Implemented Serializable (DG);
- * 29-May-2003 : Fixed bug in addMonths method (DG);
- * 04-Sep-2003 : Implemented Comparable.  Updated the isInRange javadocs (DG);
- * 05-Jan-2005 : Fixed bug in addYears() method (1096282) (DG);
- * 
+
  */
 
 package org.jfree.date;
