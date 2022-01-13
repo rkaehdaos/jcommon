@@ -416,11 +416,11 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals("Fourth", weekInMonthToString(FOURTH_WEEK_IN_MONTH));
         assertEquals("Last", weekInMonthToString(LAST_WEEK_IN_MONTH));
 
-        //todo    try {
-        //      weekInMonthToString(-1);
-        //      fail("Invalid week code should throw exception");
-        //    } catch (IllegalArgumentException e) {
-        //    }
+        try {
+            weekInMonthToString(-1);
+            fail("Invalid week code should throw exception");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testRelativeToString() throws Exception {
@@ -428,11 +428,11 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals("Nearest", relativeToString(NEAREST));
         assertEquals("Following", relativeToString(FOLLOWING));
 
-        //todo    try {
-        //      relativeToString(-1000);
-        //      fail("Invalid relative code should throw exception");
-        //    } catch (IllegalArgumentException e) {
-        //    }
+        try {
+            relativeToString(-1000);
+            fail("Invalid relative code should throw exception");
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     public void testCreateInstanceFromDDMMYYY() throws Exception {
@@ -453,7 +453,7 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals(d(1, JANUARY, 2006), createInstance(new GregorianCalendar(2006, 0, 1).getTime()));
     }
 
-//  public static void main(String[] args) {
-//    junit.textui.TestRunner.run(BobsSerialDateTest.class);
-//  }
+  public static void main(String[] args) {
+    junit.textui.TestRunner.run(BobsSerialDateTest.class);
+  }
 }
