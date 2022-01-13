@@ -29,7 +29,6 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals(TUESDAY, stringToWeekdayCode("tuesday"));
         assertEquals(TUESDAY, stringToWeekdayCode("TUESDAY"));
         assertEquals(TUESDAY, stringToWeekdayCode("tue"));
-// 약어 지원 불분명
 //            assertEquals(TUESDAY, stringToWeekdayCode("tues"));
 
         assertEquals(WEDNESDAY, stringToWeekdayCode("Wednesday"));
@@ -43,7 +42,6 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals(THURSDAY, stringToWeekdayCode("thursday"));
         assertEquals(THURSDAY, stringToWeekdayCode("THURSDAY"));
         assertEquals(THURSDAY, stringToWeekdayCode("thu"));
-// 약어 지원 불분명
 //            assertEquals(THURSDAY, stringToWeekdayCode("thurs"));
 
         assertEquals(FRIDAY, stringToWeekdayCode("Friday"));
@@ -319,7 +317,7 @@ public class BobsSerialDateTest extends TestCase {
     }
 
     public void testGetFollowingDayOfWeek() throws Exception {
-        //    assertEquals(d(1, JANUARY, 2005),getFollowingDayOfWeek(SATURDAY, d(25, DECEMBER, 2004)));
+        assertEquals(d(1, JANUARY, 2005), getFollowingDayOfWeek(SATURDAY, d(25, DECEMBER, 2004)));
         assertEquals(d(1, JANUARY, 2005), getFollowingDayOfWeek(SATURDAY, d(26, DECEMBER, 2004)));
         assertEquals(d(3, MARCH, 2004), getFollowingDayOfWeek(WEDNESDAY, d(28, FEBRUARY, 2004)));
 
