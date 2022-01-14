@@ -193,13 +193,13 @@ public class DayDateTest extends TestCase {
     public void testStringToMonthCode() {
 
         Month m = DayDate.stringToMonthEnum("January");
-        assertEquals(MonthConstants.JANUARY, m);
+        assertEquals(JANUARY, m);
 
         m = DayDate.stringToMonthEnum(" January ");
-        assertEquals(MonthConstants.JANUARY, m);
+        assertEquals(JANUARY, m);
 
         m = DayDate.stringToMonthEnum("Jan");
-        assertEquals(MonthConstants.JANUARY, m);
+        assertEquals(JANUARY, m);
 
     }
 
@@ -305,17 +305,17 @@ public class DayDateTest extends TestCase {
         
         DayDate d2 = DayDate.addMonths(1, d1);
         assertEquals(30, d2.getDayOfMonth());
-        assertEquals(6, d2.getMonth());
+        assertEquals(JUNE, d2.getMonth());
         assertEquals(2004, d2.getYYYY());
         
         DayDate d3 = DayDate.addMonths(2, d1);
         assertEquals(31, d3.getDayOfMonth());
-        assertEquals(7, d3.getMonth());
+        assertEquals(JULY, d3.getMonth());
         assertEquals(2004, d3.getYYYY());
         
         DayDate d4 = DayDate.addMonths(1, DayDate.addMonths(1, d1));
         assertEquals(30, d4.getDayOfMonth());
-        assertEquals(7, d4.getMonth());
+        assertEquals(JULY, d4.getMonth());
         assertEquals(2004, d4.getYYYY());
     }
 }

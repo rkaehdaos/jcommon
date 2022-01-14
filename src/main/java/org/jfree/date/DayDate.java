@@ -61,13 +61,8 @@ import static org.jfree.date.Month.*;
  *  </pre>
  * @author David Gilbert
  */
-public abstract class DayDate implements Comparable,
-                                            Serializable
-                                             {
+public abstract class DayDate implements Comparable, Serializable {
 
-    /** For serialization. */
-    private static final long serialVersionUID = -293716040467423637L;
-    
     /** Date format symbols. */
     public static final DateFormatSymbols
         DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();

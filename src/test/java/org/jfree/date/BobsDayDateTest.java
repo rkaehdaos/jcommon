@@ -9,6 +9,14 @@ import static org.jfree.date.Month.*;
 
 public class BobsDayDateTest extends TestCase {
 
+    public void testGetMonths() throws Exception {
+        assertEquals(13, getMonths().length);
+        assertEquals(13, getMonths(false).length);
+        assertEquals(13, getMonths(true).length);
+    }
+
+
+
     public void testIsValidWeekdayCode() throws Exception {
         for (int day = 1; day <= 7; day++)
             assertTrue(isValidWeekdayCode(day));
@@ -146,7 +154,6 @@ public class BobsDayDateTest extends TestCase {
             assertEquals(m, stringToMonthEnum(monthEnumToString(m, true)));
         }
 
-
         assertEquals(JANUARY, stringToMonthEnum("jan"));
         assertEquals(FEBRUARY, stringToMonthEnum("feb"));
         assertEquals(MARCH, stringToMonthEnum("mar"));
@@ -159,7 +166,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(OCTOBER, stringToMonthEnum("oct"));
         assertEquals(NOVEMBER, stringToMonthEnum("nov"));
         assertEquals(DECEMBER, stringToMonthEnum("dec"));
-
 
         assertEquals(JANUARY, stringToMonthEnum("JAN"));
         assertEquals(FEBRUARY, stringToMonthEnum("FEB"));
@@ -174,7 +180,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(NOVEMBER, stringToMonthEnum("NOV"));
         assertEquals(DECEMBER, stringToMonthEnum("DEC"));
 
-
         assertEquals(JANUARY, stringToMonthEnum("january"));
         assertEquals(FEBRUARY, stringToMonthEnum("february"));
         assertEquals(MARCH, stringToMonthEnum("march"));
@@ -188,7 +193,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(NOVEMBER, stringToMonthEnum("november"));
         assertEquals(DECEMBER, stringToMonthEnum("december"));
 
-
         assertEquals(JANUARY, stringToMonthEnum("JANUARY"));
         assertEquals(FEBRUARY, stringToMonthEnum("FEBRUARY"));
         assertEquals(MARCH, stringToMonthEnum("MAR"));
@@ -201,8 +205,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(OCTOBER, stringToMonthEnum("OCTOBER"));
         assertEquals(NOVEMBER, stringToMonthEnum("NOVEMBER"));
         assertEquals(DECEMBER, stringToMonthEnum("DECEMBER"));
-
-
 
     }
 
@@ -386,7 +388,7 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testEndOfCurrentMonth() throws Exception {
-        DayDate d = DayDate.createInstance(2);
+        DayDate d = createInstance(2);
         assertEquals(d(31, JANUARY, 2006), d.getEndOfCurrentMonth(d(1, JANUARY, 2006)));
         assertEquals(d(28, FEBRUARY, 2006), d.getEndOfCurrentMonth(d(1, FEBRUARY, 2006)));
         assertEquals(d(31, MARCH, 2006), d.getEndOfCurrentMonth(d(1, MARCH, 2006)));
