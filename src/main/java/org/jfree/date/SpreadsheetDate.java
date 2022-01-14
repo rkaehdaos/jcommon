@@ -93,7 +93,7 @@ public class SpreadsheetDate extends DayDate {
     private final int day;
 
     /** The month of the year (1 to 12). */
-    private final int month;
+    private final Month month;
 
     /** The year (1900 to 9999). */
     private final int year;
@@ -105,7 +105,7 @@ public class SpreadsheetDate extends DayDate {
      * @param month  the month (in the range 1 to 12).
      * @param year  the year (in the range 1900 to 9999).
      */
-    public SpreadsheetDate(final int day, final int month, final int year) {
+    public SpreadsheetDate(final int day, final Month month, final int year) {
 
         if ((year >= 1900) && (year <= 9999)) {
             this.year = year;
@@ -116,8 +116,8 @@ public class SpreadsheetDate extends DayDate {
             );
         }
 
-        if ((month >= MonthConstants.JANUARY) 
-                && (month <= MonthConstants.DECEMBER)) {
+        if ((month.index >= Month.JANUARY.index)
+                && (month.index <= Month.DECEMBER.index)) {
             this.month = month;
         }
         else {
@@ -168,15 +168,15 @@ public class SpreadsheetDate extends DayDate {
           this.year = underestimatedYYYY;
       }
       else {
-          int ss1 = calcSerial(1, 1, underestimatedYYYY);
+          int ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
           while (ss1 <= this.serial) {
               underestimatedYYYY = underestimatedYYYY + 1;
-              ss1 = calcSerial(1, 1, underestimatedYYYY);
+              ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
           }
           this.year = underestimatedYYYY - 1;
       }
 
-      final int ss2 = calcSerial(1, 1, this.year);
+      final int ss2 = calcSerial(1, Month.JANUARY, this.year);
 
       int[] daysToEndOfPrecedingMonth 
           = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
@@ -193,11 +193,11 @@ public class SpreadsheetDate extends DayDate {
           mm = mm + 1;
           sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
       }
-      this.month = mm - 1;
+      this.month = Month.fromInt(mm - 1);
 
       // what's left is d(+1);
       this.day = this.serial - ss2 
-                 - daysToEndOfPrecedingMonth[this.month] + 1;
+                 - daysToEndOfPrecedingMonth[this.month.index] + 1;
 
     }
 
@@ -208,6 +208,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The serial number of this date.
      */
+    @Override
     public int toSerial() {
         return this.serial;
     }
@@ -217,9 +218,10 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The date.
      */
+    @Override
     public Date toDate() {
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYYYY(), getMonth() - 1, getDayOfMonth(), 0, 0, 0);
+        calendar.set(getYYYY(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
         return calendar.getTime();
     }
 
@@ -228,6 +230,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The year.
      */
+    @Override
     public int getYYYY() {
         return this.year;
     }
@@ -237,7 +240,8 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The month of the year.
      */
-    public int getMonth() {
+    @Override
+    public Month getMonth() {
         return this.month;
     }
 
@@ -246,6 +250,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The day of the month.
      */
+    @Override
     public int getDayOfMonth() {
         return this.day;
     }
@@ -260,6 +265,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return A code representing the day of the week.
      */
+    @Override
     public int getDayOfWeek() {
         return (this.serial + 6) % 7 + 1;
     }
@@ -275,6 +281,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(final Object object) {
 
         if (object instanceof DayDate) {
@@ -292,6 +299,7 @@ public class SpreadsheetDate extends DayDate {
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return toSerial();
     }
@@ -305,6 +313,7 @@ public class SpreadsheetDate extends DayDate {
      * @return The difference (in days) between this date and the specified 
      *         'other' date.
      */
+    @Override
     public int compare(final DayDate other) {
         return this.serial - other.toSerial();
     }
@@ -317,6 +326,7 @@ public class SpreadsheetDate extends DayDate {
      * @return A negative integer, zero, or a positive integer as this object 
      *         is less than, equal to, or greater than the specified object.
      */
+    @Override
     public int compareTo(final Object other) {
         return compare((DayDate) other);
     }
@@ -330,6 +340,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate represents the same date as
      *         the specified SerialDate.
      */
+    @Override
     public boolean isOn(final DayDate other) {
         return (this.serial == other.toSerial());
     }
@@ -343,6 +354,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate represents an earlier date
      *         compared to the specified SerialDate.
      */
+    @Override
     public boolean isBefore(final DayDate other) {
         return (this.serial < other.toSerial());
     }
@@ -356,6 +368,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
+    @Override
     public boolean isOnOrBefore(final DayDate other) {
         return (this.serial <= other.toSerial());
     }
@@ -369,6 +382,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
+    @Override
     public boolean isAfter(final DayDate other) {
         return (this.serial > other.toSerial());
     }
@@ -382,6 +396,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate represents the same date as
      *         the specified SerialDate.
      */
+    @Override
     public boolean isOnOrAfter(final DayDate other) {
         return (this.serial >= other.toSerial());
     }
@@ -396,6 +411,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return A boolean.
      */
+    @Override
     public boolean isInRange(final DayDate d1, final DayDate d2) {
         return isInRange(d1, d2, DayDate.INCLUDE_BOTH);
     }
@@ -413,6 +429,7 @@ public class SpreadsheetDate extends DayDate {
      * @return <code>true</code> if this SerialDate is within the specified 
      *         range.
      */
+    @Override
     public boolean isInRange(final DayDate d1, final DayDate d2,
                              final int include) {
         final int s1 = d1.toSerial();
@@ -446,10 +463,10 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return the serial number from the day, month and year.
      */
-    private int calcSerial(final int d, final int m, final int y) {
+    private int calcSerial(final int d, final Month m, final int y) {
         final int yy = ((y - 1900) * 365) + DayDate.leapYearCount(y - 1);
-        int mm = DayDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m];
-        if (m > MonthConstants.FEBRUARY) {
+        int mm = DayDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m.index];
+        if (m.index > Month.FEBRUARY.index) {
             if (DayDate.isLeapYear(y)) {
                 mm = mm + 1;
             }

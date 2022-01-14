@@ -49,6 +49,8 @@ package org.jfree.date;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
+import static org.jfree.date.Month.*;
+
 /**
  * A utility class that provides a number of useful methods (some static).
  * Many of these are used in the implementation of the day-count convention
@@ -170,10 +172,10 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {  // check the order of the dates
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
+            m1 = start.getMonth().index;
             y1 = start.getYYYY();
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
+            m2 = end.getMonth().index;
             y2 = end.getYYYY();
             return 360 * (y2 - y1) + 30 * (m2 - m1) + (d2 - d1);
         }
@@ -206,13 +208,13 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
+            m1 = start.getMonth().index;
             y1 = start.getYYYY();
             if (d1 == 31) {  // first ISDA adjustment
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
+            m2 = end.getMonth().index;
             y2 = end.getYYYY();
             if ((d2 == 31) && (d1 == 30)) {  // second ISDA adjustment
                 d2 = 30;
@@ -250,7 +252,7 @@ public class SerialDateUtilities {
 
         if (start.isOnOrBefore(end)) { // check the order of the dates
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
+            m1 = start.getMonth().index;
             y1 = start.getYYYY();
 
             if (SerialDateUtilities.isLastDayOfFebruary(start)) {
@@ -261,7 +263,7 @@ public class SerialDateUtilities {
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
+            m2 = end.getMonth().index;
             y2 = end.getYYYY();
             if ((d2 == 31) && (d1 == 30)) {  // second PSA adjustment
                 d2 = 30;
@@ -297,13 +299,13 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
+            m1 = start.getMonth().index;
             y1 = start.getYYYY();
             if (d1 == 31) {  // first European adjustment
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
+            m2 = end.getMonth().index;
             y2 = end.getYYYY();
             if (d2 == 31) {  // first European adjustment
                 d2 = 30;
@@ -330,7 +332,7 @@ public class SerialDateUtilities {
     public static boolean isLastDayOfFebruary(final DayDate d) {
 
         final int dom;
-        if (d.getMonth() == MonthConstants.FEBRUARY) {
+        if (d.getMonth() == FEBRUARY) {
             dom = d.getDayOfMonth();
             if (DayDate.isLeapYear(d.getYYYY())) {
                 return (dom == 29);
@@ -372,7 +374,7 @@ public class SerialDateUtilities {
             y2 = end.getYYYY();
             for (year = y1; year == y2; year++) {
                 if (DayDate.isLeapYear(year)) {
-                    feb29 = DayDate.createInstance(29, MonthConstants.FEBRUARY, year);
+                    feb29 = DayDate.createInstance(29, FEBRUARY, year);
                     if (feb29.isInRange(start, end, DayDate.INCLUDE_SECOND)) {
                         count++;
                     }

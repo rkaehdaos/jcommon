@@ -59,8 +59,7 @@ public class DayAndMonthRule extends AnnualDateRule {
     /** The day of the month. */
     private int dayOfMonth;
 
-    /** The month (uses 1 to 12 in the obvious way). */
-    private int month;
+    private Month month;
 
     /**
      * Default constructor: builds a DayAndMonthRule for 1 January.
@@ -83,7 +82,7 @@ public class DayAndMonthRule extends AnnualDateRule {
     public DayAndMonthRule(final int dayOfMonth, final int month) {
 
         // check arguments delegated to setter methods...
-        setMonth(month);
+        setMonth(Month.fromInt(month));
         setDayOfMonth(dayOfMonth);
 
     }
@@ -105,7 +104,7 @@ public class DayAndMonthRule extends AnnualDateRule {
     public void setDayOfMonth(final int dayOfMonth) {
 
         // check arguments...
-        if ((dayOfMonth < 1) || (dayOfMonth > DayDate.LAST_DAY_OF_MONTH[this.month])) {
+        if ((dayOfMonth < 1) || (dayOfMonth > DayDate.LAST_DAY_OF_MONTH[this.month.index])) {
             throw new IllegalArgumentException(
                 "DayAndMonthRule(): dayOfMonth outside valid range.");
         }
@@ -124,7 +123,7 @@ public class DayAndMonthRule extends AnnualDateRule {
      *
      * @return an integer code representing the month.
      */
-    public int getMonth() {
+    public Month getMonth() {
         return this.month;
     }
 
@@ -133,12 +132,7 @@ public class DayAndMonthRule extends AnnualDateRule {
      *
      * @param month  the month for this rule.
      */
-    public void setMonth(final int month) {
-
-        // check arguments...
-        if (!DayDate.isValidMonthCode(month)) {
-            throw new IllegalArgumentException("DayAndMonthRule(): month code not valid.");
-        }
+    public void setMonth(final Month month) {
 
         // make the change...
         this.month = month;

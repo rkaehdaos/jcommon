@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import java.util.GregorianCalendar;
 
 import static org.jfree.date.DayDate.*;
+import static org.jfree.date.Month.*;
 
 public class BobsDayDateTest extends TestCase {
 
@@ -73,42 +74,35 @@ public class BobsDayDateTest extends TestCase {
         assertEquals("Saturday", weekdayCodeToString(SATURDAY));
     }
 
-    public void testIsValidMonthCode() throws Exception {
-        for (int i = 1; i <= 12; i++)
-            assertTrue(isValidMonthCode(i));
-        assertFalse(isValidMonthCode(0));
-        assertFalse(isValidMonthCode(13));
-    }
-
      public void testMonthCodeToString() throws Exception {
-        assertEquals("January", monthCodeToString(JANUARY));
-        assertEquals("February", monthCodeToString(FEBRUARY));
-        assertEquals("March", monthCodeToString(MARCH));
-        assertEquals("April", monthCodeToString(APRIL));
-        assertEquals("May", monthCodeToString(MAY));
-        assertEquals("June", monthCodeToString(JUNE));
-        assertEquals("July", monthCodeToString(JULY));
-        assertEquals("August", monthCodeToString(AUGUST));
-        assertEquals("September", monthCodeToString(SEPTEMBER));
-        assertEquals("October", monthCodeToString(OCTOBER));
-        assertEquals("November", monthCodeToString(NOVEMBER));
-        assertEquals("December", monthCodeToString(DECEMBER));
+        assertEquals("January", monthEnumToString(JANUARY));
+        assertEquals("February", monthEnumToString(FEBRUARY));
+        assertEquals("March", monthEnumToString(MARCH));
+        assertEquals("April", monthEnumToString(APRIL));
+        assertEquals("May", monthEnumToString(MAY));
+        assertEquals("June", monthEnumToString(JUNE));
+        assertEquals("July", monthEnumToString(JULY));
+        assertEquals("August", monthEnumToString(AUGUST));
+        assertEquals("September", monthEnumToString(SEPTEMBER));
+        assertEquals("October", monthEnumToString(OCTOBER));
+        assertEquals("November", monthEnumToString(NOVEMBER));
+        assertEquals("December", monthEnumToString(DECEMBER));
 
-        assertEquals("Jan", monthCodeToString(JANUARY, true));
-        assertEquals("Feb", monthCodeToString(FEBRUARY, true));
-        assertEquals("Mar", monthCodeToString(MARCH, true));
-        assertEquals("Apr", monthCodeToString(APRIL, true));
-        assertEquals("May", monthCodeToString(MAY, true));
-        assertEquals("Jun", monthCodeToString(JUNE, true));
-        assertEquals("Jul", monthCodeToString(JULY, true));
-        assertEquals("Aug", monthCodeToString(AUGUST, true));
-        assertEquals("Sep", monthCodeToString(SEPTEMBER, true));
-        assertEquals("Oct", monthCodeToString(OCTOBER, true));
-        assertEquals("Nov", monthCodeToString(NOVEMBER, true));
-        assertEquals("Dec", monthCodeToString(DECEMBER, true));
+        assertEquals("Jan", monthEnumToString(JANUARY, true));
+        assertEquals("Feb", monthEnumToString(FEBRUARY, true));
+        assertEquals("Mar", monthEnumToString(MARCH, true));
+        assertEquals("Apr", monthEnumToString(APRIL, true));
+        assertEquals("May", monthEnumToString(MAY, true));
+        assertEquals("Jun", monthEnumToString(JUNE, true));
+        assertEquals("Jul", monthEnumToString(JULY, true));
+        assertEquals("Aug", monthEnumToString(AUGUST, true));
+        assertEquals("Sep", monthEnumToString(SEPTEMBER, true));
+        assertEquals("Oct", monthEnumToString(OCTOBER, true));
+        assertEquals("Nov", monthEnumToString(NOVEMBER, true));
+        assertEquals("Dec", monthEnumToString(DECEMBER, true));
 
         try {
-            monthCodeToString(-1);
+            monthEnumToString(Month.fromInt(-1));
             fail("Invalid month code should throw exception");
         } catch (IllegalArgumentException e) {
         }
@@ -116,28 +110,42 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testStringToMonthCode() throws Exception {
-        assertEquals(JANUARY, stringToMonthCode("1"));
-        assertEquals(FEBRUARY, stringToMonthCode("2"));
-        assertEquals(MARCH, stringToMonthCode("3"));
-        assertEquals(APRIL, stringToMonthCode("4"));
-        assertEquals(MAY, stringToMonthCode("5"));
-        assertEquals(JUNE, stringToMonthCode("6"));
-        assertEquals(JULY, stringToMonthCode("7"));
-        assertEquals(AUGUST, stringToMonthCode("8"));
-        assertEquals(SEPTEMBER, stringToMonthCode("9"));
-        assertEquals(OCTOBER, stringToMonthCode("10"));
-        assertEquals(NOVEMBER, stringToMonthCode("11"));
-        assertEquals(DECEMBER, stringToMonthCode("12"));
+        assertEquals(JANUARY, stringToMonthEnum("1"));
+        assertEquals(FEBRUARY, stringToMonthEnum("2"));
+        assertEquals(MARCH, stringToMonthEnum("3"));
+        assertEquals(APRIL, stringToMonthEnum("4"));
+        assertEquals(MAY, stringToMonthEnum("5"));
+        assertEquals(JUNE, stringToMonthEnum("6"));
+        assertEquals(JULY, stringToMonthEnum("7"));
+        assertEquals(AUGUST, stringToMonthEnum("8"));
+        assertEquals(SEPTEMBER, stringToMonthEnum("9"));
+        assertEquals(OCTOBER, stringToMonthEnum("10"));
+        assertEquals(NOVEMBER, stringToMonthEnum("11"));
+        assertEquals(DECEMBER, stringToMonthEnum("12"));
 
-        assertEquals(-1, stringToMonthCode("0"));
-         assertEquals(-1, stringToMonthCode("13"));
+        try {
+            assertEquals(-1, stringToMonthEnum("0"));
+            fail("실패해야함");
+        } catch (IllegalArgumentException e) {}
 
-        assertEquals(-1, stringToMonthCode("Hello"));
+        try {
+            assertEquals(-1, stringToMonthEnum("13"));
+            fail("실패해야함");
 
-        for (int m = 1; m <= 12; m++) {
-            assertEquals(m, stringToMonthCode(monthCodeToString(m, false)));
-            assertEquals(m, stringToMonthCode(monthCodeToString(m, true)));
+        } catch (IllegalArgumentException e) {}
+
+        try {
+            assertEquals(-1, stringToMonthEnum("Hello"));
+            fail("실패해야함");
+
+        } catch (IllegalArgumentException e) {}
+
+
+        for (Month m : values()) {
+            assertEquals(m, stringToMonthEnum(monthEnumToString(m, false)));
+            assertEquals(m, stringToMonthEnum(monthEnumToString(m, true)));
         }
+
 
         //    assertEquals(1,stringToMonthCode("jan"));
         //    assertEquals(2,stringToMonthCode("feb"));
@@ -256,7 +264,7 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(31, DECEMBER, 1904), addDays(5 * 365, newYears));
     }
 
-    private static SpreadsheetDate d(int day, int month, int year) {
+    private static SpreadsheetDate d(int day, Month month, int year) {
         return new SpreadsheetDate(day, month, year);
     }
 

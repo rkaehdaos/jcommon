@@ -39,6 +39,8 @@ import java.io.Serializable;
 import java.text.*;
 import java.util.*;
 
+import static org.jfree.date.Month.*;
+
 /**
  *  <pre>
  *  An abstract class that defines our requirements for manipulating dates,
@@ -60,8 +62,8 @@ import java.util.*;
  * @author David Gilbert
  */
 public abstract class DayDate implements Comparable,
-                                            Serializable,
-                                            MonthConstants {
+                                            Serializable
+                                             {
 
     /** For serialization. */
     private static final long serialVersionUID = -293716040467423637L;
@@ -292,38 +294,6 @@ public abstract class DayDate implements Comparable,
     }
 
     /**
-     * Returns true if the supplied integer code represents a valid month.
-     *
-     * @param code  the code being checked for validity.
-     *
-     * @return <code>true</code> if the supplied integer code represents a 
-     *         valid month.
-     */
-    public static boolean isValidMonthCode(final int code) {
-
-        switch(code) {
-            case JANUARY: 
-            case FEBRUARY: 
-            case MARCH: 
-            case APRIL: 
-            case MAY: 
-            case JUNE: 
-            case JULY: 
-            case AUGUST: 
-            case SEPTEMBER: 
-            case OCTOBER: 
-            case NOVEMBER: 
-            case DECEMBER: 
-                return true;
-            default: 
-                return false;
-        }
-
-    }
-
-
-
-    /**
      * Returns a string representing the supplied month.
      * <P>
      * The string returned is the long form of the month name taken from the 
@@ -333,9 +303,9 @@ public abstract class DayDate implements Comparable,
      *
      * @return a string representing the supplied month.
      */
-    public static String monthCodeToString(final int month) {
+    public static String monthEnumToString(final Month month) {
 
-        return monthCodeToString(month, false);
+        return monthEnumToString(month, false);
 
     }
 
@@ -351,14 +321,9 @@ public abstract class DayDate implements Comparable,
      *
      * @return a string representing the supplied month.
      */
-    public static String monthCodeToString(final int month, 
+    public static String monthEnumToString(final Month month,
                                            final boolean shortened) {
 
-        // check arguments...
-        if (!isValidMonthCode(month)) {
-            throw new IllegalArgumentException(
-                "SerialDate.monthCodeToString: month outside valid range.");
-        }
 
         final String[] months;
 
@@ -369,7 +334,7 @@ public abstract class DayDate implements Comparable,
             months = DATE_FORMAT_SYMBOLS.getMonths();
         }
 
-        return months[month - 1];
+        return months[month.index - 1];
 
     }
 
@@ -385,7 +350,7 @@ public abstract class DayDate implements Comparable,
      * @return <code>-1</code> if the string is not parseable, the month of the
      *         year otherwise.
      */
-    public static int stringToMonthCode(String s) {
+    public static Month stringToMonthEnum(String s) {
 
         final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
         final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
@@ -416,7 +381,7 @@ public abstract class DayDate implements Comparable,
             }
         }
 
-        return result;
+        return Month.fromInt(result);
 
     }
 
@@ -493,9 +458,9 @@ public abstract class DayDate implements Comparable,
      *
      * @return the number of the last day of the month.
      */
-    public static int lastDayOfMonth(final int month, final int yyyy) {
+    public static int lastDayOfMonth(final Month month, final int yyyy) {
 
-        final int result = LAST_DAY_OF_MONTH[month];
+        final int result = LAST_DAY_OF_MONTH[month.index];
         if (month != FEBRUARY) {
             return result;
         }
@@ -539,14 +504,14 @@ public abstract class DayDate implements Comparable,
     public static DayDate addMonths(final int months,
                                     final DayDate base) {
 
-        final int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) 
+        final int yy = (12 * base.getYYYY() + base.getMonth().index + months - 1)
                        / 12;
-        final int mm = (12 * base.getYYYY() + base.getMonth() + months - 1) 
+        final int mm = (12 * base.getYYYY() + base.getMonth().index + months - 1)
                        % 12 + 1;
         final int dd = Math.min(
-            base.getDayOfMonth(), DayDate.lastDayOfMonth(mm, yy)
+            base.getDayOfMonth(), DayDate.lastDayOfMonth(Month.fromInt(mm), yy)
         );
-        return DayDate.createInstance(dd, mm, yy);
+        return DayDate.createInstance(dd, Month.fromInt(mm), yy);
 
     }
 
@@ -562,7 +527,7 @@ public abstract class DayDate implements Comparable,
     public static DayDate addYears(final int years, final DayDate base) {
 
         final int baseY = base.getYYYY();
-        final int baseM = base.getMonth();
+        final Month baseM = base.getMonth();
         final int baseD = base.getDayOfMonth();
 
         final int targetY = baseY + years;
@@ -749,7 +714,7 @@ public abstract class DayDate implements Comparable,
      *
      * @return An instance of {@link DayDate}.
      */
-    public static DayDate createInstance(final int day, final int month,
+    public static DayDate createInstance(final int day, final Month month,
                                          final int yyyy) {
         return new SpreadsheetDate(day, month, yyyy);
     }
@@ -778,7 +743,7 @@ public abstract class DayDate implements Comparable,
         final GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         return new SpreadsheetDate(calendar.get(Calendar.DATE),
-                                   calendar.get(Calendar.MONTH) + 1,
+                                   Month.fromInt(calendar.get(Calendar.MONTH) + 1),
                                    calendar.get(Calendar.YEAR));
 
     }
@@ -827,7 +792,7 @@ public abstract class DayDate implements Comparable,
      * @return  a string representation of the date.
      */
     public String toString() {
-        return getDayOfMonth() + "-" + DayDate.monthCodeToString(getMonth())
+        return getDayOfMonth() + "-" + DayDate.monthEnumToString(getMonth())
                                + "-" + getYYYY();
     }
 
@@ -843,7 +808,7 @@ public abstract class DayDate implements Comparable,
      *
      * @return the month of the year.
      */
-    public abstract int getMonth();
+    public abstract Month getMonth();
 
     /**
      * Returns the day of the month.
