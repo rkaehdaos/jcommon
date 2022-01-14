@@ -80,28 +80,7 @@ public class BobsDayDateTest extends TestCase {
         assertFalse(isValidMonthCode(13));
     }
 
-    public void testMonthToQuarter() throws Exception {
-        assertEquals(1, monthCodeToQuarter(JANUARY));
-        assertEquals(1, monthCodeToQuarter(FEBRUARY));
-        assertEquals(1, monthCodeToQuarter(MARCH));
-        assertEquals(2, monthCodeToQuarter(APRIL));
-        assertEquals(2, monthCodeToQuarter(MAY));
-        assertEquals(2, monthCodeToQuarter(JUNE));
-        assertEquals(3, monthCodeToQuarter(JULY));
-        assertEquals(3, monthCodeToQuarter(AUGUST));
-        assertEquals(3, monthCodeToQuarter(SEPTEMBER));
-        assertEquals(4, monthCodeToQuarter(OCTOBER));
-        assertEquals(4, monthCodeToQuarter(NOVEMBER));
-        assertEquals(4, monthCodeToQuarter(DECEMBER));
-
-        try {
-            monthCodeToQuarter(-1);
-            fail("Invalid Month Code should throw exception");
-        } catch (IllegalArgumentException e) {
-        }
-    }
-
-    public void testMonthCodeToString() throws Exception {
+     public void testMonthCodeToString() throws Exception {
         assertEquals("January", monthCodeToString(JANUARY));
         assertEquals("February", monthCodeToString(FEBRUARY));
         assertEquals("March", monthCodeToString(MARCH));
