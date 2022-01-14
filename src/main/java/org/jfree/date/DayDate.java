@@ -68,43 +68,19 @@ public abstract class DayDate implements Comparable, Serializable {
 
 
     public static final int EARLIEST_DATE_ORDINAL = 2;      // 1/1/1900
-
     public static final int LATEST_DATE_ORDINAL = 2958465;  // 12/31/9999
-
-    /** The lowest year value supported by this date format. */
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
-
-    /** The highest year value supported by this date format. */
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
-    /** Useful constant for Monday. Equivalent to java.util.Calendar.MONDAY. */
+    /**
+     * Useful constant for Monday. Equivalent to java.util.Calendar.
+     */
     public static final int MONDAY = Calendar.MONDAY;
-
-    /** 
-     * Useful constant for Tuesday. Equivalent to java.util.Calendar.TUESDAY. 
-     */
     public static final int TUESDAY = Calendar.TUESDAY;
-
-    /** 
-     * Useful constant for Wednesday. Equivalent to 
-     * java.util.Calendar.WEDNESDAY. 
-     */
     public static final int WEDNESDAY = Calendar.WEDNESDAY;
-
-    /** 
-     * Useful constant for Thrusday. Equivalent to java.util.Calendar.THURSDAY. 
-     */
     public static final int THURSDAY = Calendar.THURSDAY;
-
-    /** Useful constant for Friday. Equivalent to java.util.Calendar.FRIDAY. */
     public static final int FRIDAY = Calendar.FRIDAY;
-
-    /** 
-     * Useful constant for Saturday. Equivalent to java.util.Calendar.SATURDAY.
-     */
     public static final int SATURDAY = Calendar.SATURDAY;
-
-    /** Useful constant for Sunday. Equivalent to java.util.Calendar.SUNDAY. */
     public static final int SUNDAY = Calendar.SUNDAY;
 
     /** The number of days in each month in non leap years. */
