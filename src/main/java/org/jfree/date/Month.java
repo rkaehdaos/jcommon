@@ -1,5 +1,9 @@
 package org.jfree.date;
 
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public enum Month {
     JANUARY(1),
     FEBRUARY(2),
@@ -13,6 +17,9 @@ public enum Month {
     OCTOBER(10),
     NOVEMBER(11),
     DECEMBER(12);
+    /** Date format symbols. */
+    public static final DateFormatSymbols
+            DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
     public final int index;
 
@@ -20,11 +27,44 @@ public enum Month {
         this.index = index;
     }
 
-    public static Month make(int monthIndex) {
+    public static Month fromInt(int monthIndex) {
         for (Month m : Month.values()) {
             if (m.index == monthIndex)
                 return m;
         }
         throw new IllegalArgumentException("Invalid month index " + monthIndex);
     }
+
+    public static Month parse(String s) {
+        s = s.trim();
+        for (Month m : Month.values()) {
+            if (m.matches(s)) return m;
+        }
+        try {
+            return fromInt(Integer.parseInt(s));
+        } catch (NumberFormatException e) {
+        }
+        throw new IllegalArgumentException("Invalid Month : " + s);
+
+    }
+
+    private boolean matches(String s) {
+        return s.equalsIgnoreCase(toString()) ||
+                s.equalsIgnoreCase(toShortString());
+    }
+
+
+    @Override
+    public String toString() {
+        return DATE_FORMAT_SYMBOLS.getMonths()[index - 1];
+    }
+
+    private String toShortString() {
+        return DATE_FORMAT_SYMBOLS.getShortMonths()[index - 1];
+    }
+
+    public int toInt(){
+        return index;
+    }
+
 }
