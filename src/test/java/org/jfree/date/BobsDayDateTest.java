@@ -15,8 +15,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(13, getMonths(true).length);
     }
 
-
-
     public void testIsValidWeekdayCode() throws Exception {
         for (int day = 1; day <= 7; day++)
             assertTrue(isValidWeekdayCode(day));

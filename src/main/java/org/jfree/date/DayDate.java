@@ -63,9 +63,8 @@ import static org.jfree.date.Month.*;
  */
 public abstract class DayDate implements Comparable, Serializable {
 
-    /** Date format symbols. */
     public static final DateFormatSymbols
-        DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
+            DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
     /** The serial number for 1 January 1900. */
     public static final int SERIAL_LOWER_BOUND = 2;
