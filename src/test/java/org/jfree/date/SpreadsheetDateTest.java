@@ -126,7 +126,7 @@ public class SpreadsheetDateTest extends TestCase {
      */
     public void testS2GetMonth() {
         final Month month = this.s2.getMonth();
-        assertEquals(MonthConstants.JANUARY, month);
+        assertEquals(JANUARY, month);
     }
 
     /**
@@ -143,7 +143,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test37986() {
         final SpreadsheetDate d = new SpreadsheetDate(37986);
         assertEquals(31, d.getDayOfMonth());
-        assertEquals(MonthConstants.DECEMBER, d.getMonth());
+        assertEquals(DECEMBER, d.getMonth());
         assertEquals(2003, d.getYYYY());
     }
 
@@ -153,7 +153,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test37987() {
         final SpreadsheetDate d = new SpreadsheetDate(37987);
         assertEquals(1, d.getDayOfMonth());
-        assertEquals(MonthConstants.JANUARY, d.getMonth());
+        assertEquals(JANUARY, d.getMonth());
         assertEquals(2004, d.getYYYY());
     }
 
@@ -163,7 +163,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test38352() {
         final SpreadsheetDate d = new SpreadsheetDate(38352);
         assertEquals(31, d.getDayOfMonth());
-        assertEquals(MonthConstants.DECEMBER, d.getMonth());
+        assertEquals(DECEMBER, d.getMonth());
         assertEquals(2004, d.getYYYY());
     }
 
@@ -173,7 +173,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test38353() {
         final SpreadsheetDate d = new SpreadsheetDate(38353);
         assertEquals(1, d.getDayOfMonth());
-        assertEquals(MonthConstants.JANUARY, d.getMonth());
+        assertEquals(JANUARY, d.getMonth());
         assertEquals(2005, d.getYYYY());
     }
 
@@ -183,7 +183,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test36584() {
         final SpreadsheetDate d = new SpreadsheetDate(36584);
         assertEquals(28, d.getDayOfMonth());
-        assertEquals(MonthConstants.FEBRUARY, d.getMonth());
+        assertEquals(FEBRUARY, d.getMonth());
         assertEquals(2000, d.getYYYY());
     }
 
@@ -193,7 +193,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test36585() {
         final SpreadsheetDate d = new SpreadsheetDate(36585);
         assertEquals(29, d.getDayOfMonth());
-        assertEquals(MonthConstants.FEBRUARY, d.getMonth());
+        assertEquals(FEBRUARY, d.getMonth());
         assertEquals(2000, d.getYYYY());
     }
 
@@ -203,7 +203,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test36586() {
         final SpreadsheetDate d = new SpreadsheetDate(36586);
         assertEquals(1, d.getDayOfMonth());
-        assertEquals(MonthConstants.MARCH, d.getMonth());
+        assertEquals(MARCH, d.getMonth());
         assertEquals(2000, d.getYYYY());
     }
 
