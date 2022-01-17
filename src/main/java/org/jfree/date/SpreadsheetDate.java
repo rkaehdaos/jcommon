@@ -100,6 +100,10 @@ public class SpreadsheetDate extends DayDate {
     /** The year (1900 to 9999). */
     private final int year;
 
+
+    public SpreadsheetDate(final int day, final int month, final int year) {
+        this(day, Month.fromInt(month), year);
+    }
     /**
      * Creates a new date instance.
      *
@@ -202,6 +206,8 @@ public class SpreadsheetDate extends DayDate {
                  - daysToEndOfPrecedingMonth[this.month.index] + 1;
 
     }
+
+
 
     /**
      * Returns the serial number for the date, where 1 January 1900 = 2
