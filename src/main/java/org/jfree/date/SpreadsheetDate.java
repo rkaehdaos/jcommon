@@ -84,6 +84,9 @@ public class SpreadsheetDate extends DayDate {
     public static final int LATEST_DATE_ORDINAL = 2958465;  // 12/31/9999
     static final int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
             {0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
+    static final int[]
+            LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
+            {0, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
     /** For serialization. */
     private static final long serialVersionUID = -2039586705374454461L;
     
