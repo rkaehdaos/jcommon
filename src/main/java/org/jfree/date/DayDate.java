@@ -70,17 +70,6 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
-
-
-//    public static final int MONDAY = Calendar.MONDAY;
-//    public static final int TUESDAY = Calendar.TUESDAY;
-//    public static final int WEDNESDAY = Calendar.WEDNESDAY;
-//    public static final int THURSDAY = Calendar.THURSDAY;
-//    public static final int FRIDAY = Calendar.FRIDAY;
-//    public static final int SATURDAY = Calendar.SATURDAY;
-//    public static final int SUNDAY = Calendar.SUNDAY;
-
-
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
