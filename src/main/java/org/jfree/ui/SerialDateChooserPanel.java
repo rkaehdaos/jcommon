@@ -61,6 +61,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.jfree.date.Day;
 import org.jfree.date.DayDate;
 import org.jfree.date.Month;
 
@@ -303,8 +304,8 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      *
      * @return the first day of the week.
      */
-    private int getFirstDayOfWeek() {
-        return this.firstDayOfWeek;
+    private Day getFirstDayOfWeek() {
+        return Day.fromInt(this.firstDayOfWeek);
     }
 
     /**

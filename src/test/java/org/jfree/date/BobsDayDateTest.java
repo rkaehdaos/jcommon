@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.GregorianCalendar;
 
+import static org.jfree.date.Day.*;
 import static org.jfree.date.DayDate.*;
 import static org.jfree.date.Month.*;
 
@@ -15,69 +16,67 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(13, getMonths(true).length);
     }
 
-    public void testIsValidWeekdayCode() throws Exception {
-        for (int day = 1; day <= 7; day++)
-            assertTrue(isValidWeekdayCode(day));
-        assertFalse(isValidWeekdayCode(0));
-        assertFalse(isValidWeekdayCode(8));
-    }
+    public void testStringToWeekdayEnum() throws Exception {
 
-    public void testStringToWeekdayCode() throws Exception {
+        assertEquals(MONDAY, stringToWeekdayEnum("Monday"));
+        assertEquals(MONDAY, stringToWeekdayEnum("Mon"));
+        assertEquals(MONDAY, stringToWeekdayEnum("monday"));
+        assertEquals(MONDAY, stringToWeekdayEnum("MONDAY"));
+        assertEquals(MONDAY, stringToWeekdayEnum("mon"));
 
-        assertEquals(-1, stringToWeekdayCode("Hello"));
-        assertEquals(MONDAY, stringToWeekdayCode("Monday"));
-        assertEquals(MONDAY, stringToWeekdayCode("Mon"));
-        assertEquals(MONDAY, stringToWeekdayCode("monday"));
-        assertEquals(MONDAY, stringToWeekdayCode("MONDAY"));
-        assertEquals(MONDAY, stringToWeekdayCode("mon"));
-
-        assertEquals(TUESDAY, stringToWeekdayCode("Tuesday"));
-        assertEquals(TUESDAY, stringToWeekdayCode("Tue"));
-        assertEquals(TUESDAY, stringToWeekdayCode("tuesday"));
-        assertEquals(TUESDAY, stringToWeekdayCode("TUESDAY"));
-        assertEquals(TUESDAY, stringToWeekdayCode("tue"));
+        assertEquals(TUESDAY, stringToWeekdayEnum("Tuesday"));
+        assertEquals(TUESDAY, stringToWeekdayEnum("Tue"));
+        assertEquals(TUESDAY, stringToWeekdayEnum("tuesday"));
+        assertEquals(TUESDAY, stringToWeekdayEnum("TUESDAY"));
+        assertEquals(TUESDAY, stringToWeekdayEnum("tue"));
 //            assertEquals(TUESDAY, stringToWeekdayCode("tues"));
 
-        assertEquals(WEDNESDAY, stringToWeekdayCode("Wednesday"));
-        assertEquals(WEDNESDAY, stringToWeekdayCode("Wed"));
-        assertEquals(WEDNESDAY, stringToWeekdayCode("wednesday"));
-        assertEquals(WEDNESDAY, stringToWeekdayCode("WEDNESDAY"));
-        assertEquals(WEDNESDAY, stringToWeekdayCode("wed"));
+        assertEquals(WEDNESDAY, stringToWeekdayEnum("Wednesday"));
+        assertEquals(WEDNESDAY, stringToWeekdayEnum("Wed"));
+        assertEquals(WEDNESDAY, stringToWeekdayEnum("wednesday"));
+        assertEquals(WEDNESDAY, stringToWeekdayEnum("WEDNESDAY"));
+        assertEquals(WEDNESDAY, stringToWeekdayEnum("wed"));
 
-        assertEquals(THURSDAY, stringToWeekdayCode("Thursday"));
-        assertEquals(THURSDAY, stringToWeekdayCode("Thu"));
-        assertEquals(THURSDAY, stringToWeekdayCode("thursday"));
-        assertEquals(THURSDAY, stringToWeekdayCode("THURSDAY"));
-        assertEquals(THURSDAY, stringToWeekdayCode("thu"));
+        assertEquals(THURSDAY, stringToWeekdayEnum("Thursday"));
+        assertEquals(THURSDAY, stringToWeekdayEnum("Thu"));
+        assertEquals(THURSDAY, stringToWeekdayEnum("thursday"));
+        assertEquals(THURSDAY, stringToWeekdayEnum("THURSDAY"));
+        assertEquals(THURSDAY, stringToWeekdayEnum("thu"));
 //            assertEquals(THURSDAY, stringToWeekdayCode("thurs"));
 
-        assertEquals(FRIDAY, stringToWeekdayCode("Friday"));
-        assertEquals(FRIDAY, stringToWeekdayCode("Fri"));
-        assertEquals(FRIDAY, stringToWeekdayCode("friday"));
-        assertEquals(FRIDAY, stringToWeekdayCode("FRIDAY"));
-        assertEquals(FRIDAY, stringToWeekdayCode("fri"));
+        assertEquals(FRIDAY, stringToWeekdayEnum("Friday"));
+        assertEquals(FRIDAY, stringToWeekdayEnum("Fri"));
+        assertEquals(FRIDAY, stringToWeekdayEnum("friday"));
+        assertEquals(FRIDAY, stringToWeekdayEnum("FRIDAY"));
+        assertEquals(FRIDAY, stringToWeekdayEnum("fri"));
 
-        assertEquals(SATURDAY, stringToWeekdayCode("Saturday"));
-        assertEquals(SATURDAY, stringToWeekdayCode("Sat"));
-        assertEquals(SATURDAY, stringToWeekdayCode("saturday"));
-        assertEquals(SATURDAY, stringToWeekdayCode("SATURDAY"));
-        assertEquals(SATURDAY, stringToWeekdayCode("sat"));
+        assertEquals(SATURDAY, stringToWeekdayEnum("Saturday"));
+        assertEquals(SATURDAY, stringToWeekdayEnum("Sat"));
+        assertEquals(SATURDAY, stringToWeekdayEnum("saturday"));
+        assertEquals(SATURDAY, stringToWeekdayEnum("SATURDAY"));
+        assertEquals(SATURDAY, stringToWeekdayEnum("sat"));
 
-        assertEquals(SUNDAY, stringToWeekdayCode("Sunday"));
-        assertEquals(SUNDAY, stringToWeekdayCode("Sun"));
-        assertEquals(SUNDAY, stringToWeekdayCode("sunday"));
-        assertEquals(SUNDAY, stringToWeekdayCode("SUNDAY"));
-        assertEquals(SUNDAY, stringToWeekdayCode("sun"));
+        assertEquals(SUNDAY, stringToWeekdayEnum("Sunday"));
+        assertEquals(SUNDAY, stringToWeekdayEnum("Sun"));
+        assertEquals(SUNDAY, stringToWeekdayEnum("sunday"));
+        assertEquals(SUNDAY, stringToWeekdayEnum("SUNDAY"));
+        assertEquals(SUNDAY, stringToWeekdayEnum("sun"));
+
+        try {
+            stringToWeekdayEnum("Hello");
+            fail("실패해야함");
+        } catch (IllegalArgumentException e) {}
+
     }
 
     public void testWeekdayCodeToString() throws Exception {
-        assertEquals("Sunday", weekdayCodeToString(SUNDAY));
-        assertEquals("Monday", weekdayCodeToString(MONDAY));
-        assertEquals("Tuesday", weekdayCodeToString(TUESDAY));
-        assertEquals("Wednesday", weekdayCodeToString(WEDNESDAY));
-        assertEquals("Thursday", weekdayCodeToString(THURSDAY));
-        assertEquals("Friday", weekdayCodeToString(FRIDAY));
-        assertEquals("Saturday", weekdayCodeToString(SATURDAY));
+        assertEquals("Sunday", weekdayEnumToString(SUNDAY));
+        assertEquals("Monday", weekdayEnumToString(MONDAY));
+        assertEquals("Tuesday", weekdayEnumToString(TUESDAY));
+        assertEquals("Wednesday", weekdayEnumToString(WEDNESDAY));
+        assertEquals("Thursday", weekdayEnumToString(THURSDAY));
+        assertEquals("Friday", weekdayEnumToString(FRIDAY));
+        assertEquals("Saturday", weekdayEnumToString(SATURDAY));
     }
 
      public void testMonthCodeToString() throws Exception {
@@ -147,7 +146,7 @@ public class BobsDayDateTest extends TestCase {
         } catch (IllegalArgumentException e) {}
 
 
-        for (Month m : values()) {
+        for (Month m : Month.values()) {
             assertEquals(m, stringToMonthEnum(monthEnumToString(m, false)));
             assertEquals(m, stringToMonthEnum(monthEnumToString(m, true)));
         }
@@ -303,7 +302,7 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(29, DECEMBER, 2004), getPreviousDayOfWeek(WEDNESDAY, d(5, JANUARY, 2005)));
 
         try {
-            getPreviousDayOfWeek(-1, d(1, JANUARY, 2006));
+            getPreviousDayOfWeek(Day.fromInt(-1), d(1, JANUARY, 2006));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
@@ -315,7 +314,7 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(3, MARCH, 2004), getFollowingDayOfWeek(WEDNESDAY, d(28, FEBRUARY, 2004)));
 
         try {
-            getFollowingDayOfWeek(-1, d(1, JANUARY, 2006));
+            getFollowingDayOfWeek(Day.fromInt(-1), d(1, JANUARY, 2006));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
@@ -379,7 +378,7 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(22, APRIL, 2006), getNearestDayOfWeek(SATURDAY, d(22, APRIL, 2006)));
 
         try {
-            getNearestDayOfWeek(-1, d(1, JANUARY, 2006));
+            getNearestDayOfWeek(Day.fromInt(-1), d(1, JANUARY, 2006));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }

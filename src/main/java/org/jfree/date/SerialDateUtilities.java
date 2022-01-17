@@ -49,6 +49,7 @@ package org.jfree.date;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
+import static org.jfree.date.Day.*;
 import static org.jfree.date.Month.*;
 
 /**
@@ -112,28 +113,28 @@ public class SerialDateUtilities {
      *
      * @return an integer representing the day-of-the-week.
      */
-    public int stringToWeekday(final String s) {
+    public Day stringToWeekday(final String s) {
 
         if (s.equals(this.weekdays[Calendar.SATURDAY])) {
-            return DayDate.SATURDAY;
+            return SATURDAY;
         }
         else if (s.equals(this.weekdays[Calendar.SUNDAY])) {
-            return DayDate.SUNDAY;
+            return SUNDAY;
         }
         else if (s.equals(this.weekdays[Calendar.MONDAY])) {
-            return DayDate.MONDAY;
+            return MONDAY;
         }
         else if (s.equals(this.weekdays[Calendar.TUESDAY])) {
-            return DayDate.TUESDAY;
+            return TUESDAY;
         }
         else if (s.equals(this.weekdays[Calendar.WEDNESDAY])) {
-            return DayDate.WEDNESDAY;
+            return WEDNESDAY;
         }
         else if (s.equals(this.weekdays[Calendar.THURSDAY])) {
-            return DayDate.THURSDAY;
+            return THURSDAY;
         }
         else {
-            return DayDate.FRIDAY;
+            return FRIDAY;
         }
 
     }
