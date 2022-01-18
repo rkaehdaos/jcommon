@@ -114,15 +114,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-    /**
-     * Returns a string corresponding to the week-in-the-month code.
-     * <P>
-     * Need to find a better approach.
-     *
-     * @param weekInMonth  an Enum representing the week-in-the-month.
-     *
-     * @return a string corresponding to the week-in-the-month code.
-     */
     public static String weekInMonthToString(WeekInMonth weekInMonth) {
 
         switch (weekInMonth) {
