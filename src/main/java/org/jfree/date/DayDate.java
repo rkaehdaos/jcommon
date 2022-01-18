@@ -114,19 +114,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-    public static String relativeToString(WeekDayRange relative) {
-
-        switch (relative) {
-            case LAST:
-                return "Last";
-            case NEXT:
-                return "Next";
-            case NEAREST:
-                return "Nearest";
-            default:
-                throw new IllegalArgumentException("ERROR : Relative To String");
-        }
-    }
 
     /**
      * Factory method that returns an instance of some concrete subclass of 
