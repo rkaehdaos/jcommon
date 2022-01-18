@@ -32,10 +32,7 @@ public enum Day {
 
 
     public static String weekdayEnumToString(Day weekday) {
-
-        String[] weekdays = DayDate.DATE_FORMAT_SYMBOLS.getWeekdays();
-        return weekdays[weekday.index];
-
+        return weekday.toString();
     }
 
     public int toInt() { return index; }
