@@ -206,16 +206,6 @@ public class BobsDayDateTest extends TestCase {
 
     }
 
-    public void testIsValidWeekInMonthCode() throws Exception {
-        for (int w = 0; w <= 4; w++) {
-            assertTrue(isValidWeekInMonthCode(WeekInMonth.fromInt(w)));
-        }
-        try {
-            WeekInMonth.fromInt(5);
-            fail("실패해야 함");
-        } catch (IllegalArgumentException e) {}
-    }
-
     public void testIsLeapYear() throws Exception {
         assertFalse(isLeapYear(1900));
         assertFalse(isLeapYear(1901));

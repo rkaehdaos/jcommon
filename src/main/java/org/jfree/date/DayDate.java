@@ -72,19 +72,10 @@ public abstract class DayDate implements Comparable, Serializable {
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-
-    /**
-     * Converts the supplied string to a day of the week.
-     *
-     * @param s  a string representing the day of the week.
-     *
-     * @return <code>-1</code> if the string is not convertable, the day of
-     *         the week otherwise.
-     */
     public static Day stringToWeekdayEnum(String s) {
 
-        final String[] shortWeekdayNames 
-            = DATE_FORMAT_SYMBOLS.getShortWeekdays();
+        final String[] shortWeekdayNames
+                = DATE_FORMAT_SYMBOLS.getShortWeekdays();
         final String[] weekDayNames = DATE_FORMAT_SYMBOLS.getWeekdays();
 
         int result = -1;
@@ -103,15 +94,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     }
 
-    /**
-     * Returns a string representing the supplied day-of-the-week.
-     * <P>
-     * Need to find a better approach.
-     *
-     * @param weekday  the day of the week.
-     *
-     * @return a string representing the supplied day-of-the-week.
-     */
+
     public static String weekdayEnumToString(final Day weekday) {
 
         final String[] weekdays = DATE_FORMAT_SYMBOLS.getWeekdays();
@@ -236,31 +219,10 @@ public abstract class DayDate implements Comparable, Serializable {
                 }
             }
         }
-
         return Month.fromInt(result);
 
     }
 
-    /**
-     * Returns true if the supplied integer code represents a valid 
-     * week-in-the-month, and false otherwise.
-     *
-     * @param weekInMonth  the code being checked for validity.
-     * @return <code>true</code> if the supplied integer code represents a 
-     *         valid week-in-the-month.
-     */
-    public static boolean isValidWeekInMonthCode(final WeekInMonth weekInMonth) {
-
-        switch(weekInMonth) {
-            case FIRST:
-            case SECOND:
-            case THIRD:
-            case FOURTH:
-            case LAST: return true;
-            default: return false;
-        }
-
-    }
 
     /**
      * Determines whether or not the specified year is a leap year.
