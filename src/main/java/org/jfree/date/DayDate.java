@@ -69,9 +69,6 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
-    static int[] LAST_DAY_OF_MONTH =
-            {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
 
     public static String[] getMonths() {
         return dateFormatSymbols.getMonths();
@@ -86,28 +83,15 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
 
-    /**
-     * Returns the number of the last day of the month, taking into account 
-     * leap years.
-     *
-     * @param month  the month.
-     * @param yyyy  the year (in the range 1900 to 9999).
-     *
-     * @return the number of the last day of the month.
-     */
     public static int lastDayOfMonth(Month month, int yyyy) {
-
         int result = LAST_DAY_OF_MONTH[month.index];
         if (month != FEBRUARY) {
             return result;
-        }
-        else if (isLeapYear(yyyy)) {
+        } else if (isLeapYear(yyyy)) {
             return result + 1;
-        }
-        else {
+        } else {
             return result;
         }
-
     }
 
     /**

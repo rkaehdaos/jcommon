@@ -20,6 +20,8 @@ public enum Month {
     /** Date format symbols. */
     public static final DateFormatSymbols
             DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
+    static int[] LAST_DAY_OF_MONTH =
+            {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public final int index;
 
