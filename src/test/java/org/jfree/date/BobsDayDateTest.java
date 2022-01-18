@@ -417,20 +417,6 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(29, FEBRUARY, 2008), d.getEndOfCurrentMonth());
     }
 
-    public void testWeekInMonthToString() throws Exception {
-        assertEquals("FIRST", FIRST.toString());
-        assertEquals("SECOND", SECOND.toString());
-        assertEquals("THIRD", THIRD.toString());
-        assertEquals("FOURTH", FOURTH.toString());
-        assertEquals("LAST", LAST.toString());
-
-        try {
-            WeekInMonth.fromInt(-1).toString();
-            fail("Invalid week code should throw exception");
-        } catch (IllegalArgumentException e) {
-        }
-    }
-
     public void testRelativeToString() throws Exception {
         assertEquals("Last", relativeToString(WeekDayRange.LAST));
         assertEquals("Next", relativeToString(WeekDayRange.NEXT));
