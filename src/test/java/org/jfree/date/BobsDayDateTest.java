@@ -313,12 +313,12 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testGetFollowingDayOfWeek() throws Exception {
-        assertEquals(d(1, JANUARY, 2005), getFollowingDayOfWeek(SATURDAY, d(25, DECEMBER, 2004)));
-        assertEquals(d(1, JANUARY, 2005), getFollowingDayOfWeek(SATURDAY, d(26, DECEMBER, 2004)));
-        assertEquals(d(3, MARCH, 2004), getFollowingDayOfWeek(WEDNESDAY, d(28, FEBRUARY, 2004)));
+        assertEquals(d(1, JANUARY, 2005), SATURDAY.getFollowingDayOfWeek(d(25, DECEMBER, 2004)));
+        assertEquals(d(1, JANUARY, 2005), SATURDAY.getFollowingDayOfWeek(d(26, DECEMBER, 2004)));
+        assertEquals(d(3, MARCH, 2004), WEDNESDAY.getFollowingDayOfWeek(d(28, FEBRUARY, 2004)));
 
         try {
-            getFollowingDayOfWeek(Day.fromInt(-1), d(1, JANUARY, 2006));
+            Day.fromInt(-1).getFollowingDayOfWeek(d(1, JANUARY, 2006));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }

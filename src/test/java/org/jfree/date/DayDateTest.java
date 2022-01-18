@@ -134,8 +134,8 @@ public class DayDateTest extends TestCase {
      * Monday following Friday 9 November 2001 should be 12 November.
      */
     public void testMondayFollowingFriday9Nov2001() {
-        DayDate mondayAfter = DayDate.getFollowingDayOfWeek(
-            MONDAY, this.nov9Y2001
+        DayDate mondayAfter = MONDAY.getFollowingDayOfWeek(
+                this.nov9Y2001
         );
         assertEquals(12, mondayAfter.getDayOfMonth());
     }

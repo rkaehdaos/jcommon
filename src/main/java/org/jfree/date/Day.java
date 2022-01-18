@@ -35,6 +35,31 @@ public enum Day {
     }
 
     /**
+     * Returns the earliest date that falls on the specified day-of-the-week
+     * and is AFTER the base date.
+     *
+     * @param base  the base date.
+     *
+     * @return the earliest date that falls on the specified day-of-the-week
+     *         and is AFTER the base date.
+     */
+    public DayDate getFollowingDayOfWeek(DayDate base) {
+
+        int targetIndex = toInt();
+        // find the date...
+        int adjust;
+        int baseDOW = base.getDayOfWeek().toInt();
+        if (baseDOW >= targetIndex) {
+            adjust = 7 + Math.min(0, targetIndex - baseDOW);
+        }
+        else {
+            adjust = Math.max(0, targetIndex - baseDOW);
+        }
+
+        return base.plusDays(adjust);
+    }
+
+    /**
      * Returns the latest date that falls on the specified day-of-the-week and
      * is BEFORE the base date.
      *
