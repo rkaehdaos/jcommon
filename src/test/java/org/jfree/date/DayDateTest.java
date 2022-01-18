@@ -97,7 +97,7 @@ public class DayDateTest extends TestCase {
      * 9 Nov 2001 plus two months should be 9 Jan 2002.
      */
     public void testAddMonthsTo9Nov2001() {
-        final DayDate jan9Y2002 = this.nov9Y2001.addMonths(2);
+        final DayDate jan9Y2002 = this.nov9Y2001.plusMonths(2);
         final DayDate answer = DayDate.createInstance(9, JANUARY, 2002);
         assertEquals(answer, jan9Y2002);
     }
@@ -107,7 +107,7 @@ public class DayDateTest extends TestCase {
      */
     public void testAddMonthsTo5Oct2003() {
         final DayDate d1 = DayDate.createInstance(5, OCTOBER, 2003);
-        final DayDate d2 = d1.addMonths(2);
+        final DayDate d2 = d1.plusMonths(2);
         assertEquals(d2, DayDate.createInstance(5, DECEMBER, 2003));
     }
 
@@ -116,7 +116,7 @@ public class DayDateTest extends TestCase {
      */
     public void testAddMonthsTo1Jan2003() {
         final DayDate d1 = DayDate.createInstance(1, JANUARY, 2003);
-        final DayDate d2 = d1.addMonths(0);
+        final DayDate d2 = d1.plusMonths(0);
         assertEquals(d2, d1);
     }
 
@@ -289,7 +289,7 @@ public class DayDateTest extends TestCase {
      */
     public void test1096282() {
         DayDate d = DayDate.createInstance(29, FEBRUARY, 2004);
-        d = d.addYears(1);
+        d = d.plusYears(1);
         DayDate expected = DayDate.createInstance(28, FEBRUARY, 2005);
         assertTrue(d.isOn(expected));
     }
@@ -300,17 +300,17 @@ public class DayDateTest extends TestCase {
     public void testAddMonths() {
         DayDate d1 = DayDate.createInstance(31, MAY, 2004);
         
-        DayDate d2 = d1.addMonths(1);
+        DayDate d2 = d1.plusMonths(1);
         assertEquals(30, d2.getDayOfMonth());
         assertEquals(JUNE, d2.getMonth());
         assertEquals(2004, d2.getYear());
         
-        DayDate d3 = d1.addMonths(2);
+        DayDate d3 = d1.plusMonths(2);
         assertEquals(31, d3.getDayOfMonth());
         assertEquals(JULY, d3.getMonth());
         assertEquals(2004, d3.getYear());
         
-        DayDate d4 = d1.addMonths(1).addMonths(1);
+        DayDate d4 = d1.plusMonths(1).plusMonths(1);
         assertEquals(30, d4.getDayOfMonth());
         assertEquals(JULY, d4.getMonth());
         assertEquals(2004, d4.getYear());

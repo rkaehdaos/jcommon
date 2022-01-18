@@ -107,7 +107,7 @@ public abstract class DayDate implements Comparable, Serializable {
             adjust = -7 + Math.max(0, targetIndex - baseDOW);
         }
 
-        return base.addDays(adjust);
+        return base.plusDays(adjust);
 
     }
 
@@ -135,7 +135,7 @@ public abstract class DayDate implements Comparable, Serializable {
             adjust = Math.max(0, targetIndex - baseDOW);
         }
 
-        return base.addDays(adjust);
+        return base.plusDays(adjust);
     }
 
     /**
@@ -169,18 +169,11 @@ public abstract class DayDate implements Comparable, Serializable {
             adjust = 7 + adjust;
         }
 */
-        return base.addDays(adjust);
+        return base.plusDays(adjust);
 
     }
 
-    /**
-     * Creates a new date by adding the specified number of years to the base
-     * date.
-     *
-     * @param years  the number of years to add (can be negative).
-     * @return A new date.
-     */
-    public DayDate addYears(int years) {
+    public DayDate plusYears(int years) {
 
         int resultYear = getYear() + years;
         int lastDayOfMonthInResultYear = lastDayOfMonth(getMonth(), resultYear);
@@ -188,17 +181,7 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
     }
 
-    /**
-     * Creates a new date by adding the specified number of months to the base
-     * date.
-     * <P>
-     * If the base date is close to the end of the month, the day on the result
-     * may be adjusted slightly:  31 May + 1 month = 30 June.
-     *
-     * @param months  the number of months to add (can be negative).
-     * @return a new date.
-     */
-    public DayDate addMonths(int months) {
+    public DayDate plusMonths(int months) {
 
         int thisMonthAsOrdinal = 12 * getYear() + getMonth().index - 1;
         int resultMonthAsOrdinal = thisMonthAsOrdinal + months;
@@ -210,7 +193,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     }
 
-    public DayDate addDays(int days) {
+    public DayDate plusDays(int days) {
         return DayDateFactory.makeDate(toOrdinal() + days);
     }
 
