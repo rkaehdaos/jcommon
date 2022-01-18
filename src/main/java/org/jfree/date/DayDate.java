@@ -73,24 +73,6 @@ public abstract class DayDate implements Comparable, Serializable {
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    /** 
-     * Useful constant for specifying a day of the week relative to a fixed 
-     * date. 
-     */
-    public static final int PRECEDING = -1;
-
-    /** 
-     * Useful constant for specifying a day of the week relative to a fixed 
-     * date. 
-     */
-    public static final int NEAREST = 0;
-
-    /** 
-     * Useful constant for specifying a day of the week relative to a fixed 
-     * date. 
-     */
-    public static final int FOLLOWING = 1;
-
     /** A description for the date. */
     private String description;
 
@@ -548,24 +530,18 @@ public abstract class DayDate implements Comparable, Serializable {
         }
     }
 
-    /**
-     * Returns a string representing the supplied 'relative'.
-     * <P>
-     * Need to find a better approach.
-     *
-     * @param relative  a constant representing the 'relative'.
-     *
-     * @return a string representing the supplied 'relative'.
-     */
-    public static String relativeToString(final int relative) {
+    public static String relativeToString(final WeekDayRange relative) {
 
         switch (relative) {
-            case DayDate.PRECEDING : return "Preceding";
-            case DayDate.NEAREST : return "Nearest";
-            case DayDate.FOLLOWING : return "Following";
-            default : throw new IllegalArgumentException("ERROR : Relative To String");
+            case LAST:
+                return "Last";
+            case NEXT:
+                return "Next";
+            case NEAREST:
+                return "Nearest";
+            default:
+                throw new IllegalArgumentException("ERROR : Relative To String");
         }
-
     }
 
     /**
