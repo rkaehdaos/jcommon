@@ -79,34 +79,37 @@ public class BobsDayDateTest extends TestCase {
     }
 
      public void testMonthCodeToString() throws Exception {
-        assertEquals("January", monthEnumToString(JANUARY));
-        assertEquals("February", monthEnumToString(FEBRUARY));
-        assertEquals("March", monthEnumToString(MARCH));
-        assertEquals("April", monthEnumToString(APRIL));
-        assertEquals("May", monthEnumToString(MAY));
-        assertEquals("June", monthEnumToString(JUNE));
-        assertEquals("July", monthEnumToString(JULY));
-        assertEquals("August", monthEnumToString(AUGUST));
-        assertEquals("September", monthEnumToString(SEPTEMBER));
-        assertEquals("October", monthEnumToString(OCTOBER));
-        assertEquals("November", monthEnumToString(NOVEMBER));
-        assertEquals("December", monthEnumToString(DECEMBER));
+        assertEquals("January", JANUARY.toString());
+        assertEquals("February", FEBRUARY.toString());
+        assertEquals("March", MARCH.toString());
+        assertEquals("April",APRIL.toString());
+        assertEquals("May", MAY.toString());
+        assertEquals("June", JUNE.toString());
+        assertEquals("July", JULY.toString());
+        assertEquals("August", AUGUST.toString());
+        assertEquals("September", SEPTEMBER.toString());
+        assertEquals("October", OCTOBER.toString());
+        assertEquals("November", NOVEMBER.toString());
+        assertEquals("December", DECEMBER.toString());
 
-        assertEquals("Jan", monthEnumToString(JANUARY, true));
-        assertEquals("Feb", monthEnumToString(FEBRUARY, true));
-        assertEquals("Mar", monthEnumToString(MARCH, true));
-        assertEquals("Apr", monthEnumToString(APRIL, true));
-        assertEquals("May", monthEnumToString(MAY, true));
-        assertEquals("Jun", monthEnumToString(JUNE, true));
-        assertEquals("Jul", monthEnumToString(JULY, true));
-        assertEquals("Aug", monthEnumToString(AUGUST, true));
-        assertEquals("Sep", monthEnumToString(SEPTEMBER, true));
-        assertEquals("Oct", monthEnumToString(OCTOBER, true));
-        assertEquals("Nov", monthEnumToString(NOVEMBER, true));
-        assertEquals("Dec", monthEnumToString(DECEMBER, true));
+
+
+         assertEquals("Jan", JANUARY.toShortString());
+         assertEquals("Feb", FEBRUARY.toShortString());
+         assertEquals("Mar", MARCH.toShortString());
+         assertEquals("Apr",APRIL.toShortString());
+         assertEquals("May", MAY.toShortString());
+         assertEquals("Jun", JUNE.toShortString());
+         assertEquals("Jul", JULY.toShortString());
+         assertEquals("Aug", AUGUST.toShortString());
+         assertEquals("Sep", SEPTEMBER.toShortString());
+         assertEquals("Oct", OCTOBER.toShortString());
+         assertEquals("Nov", NOVEMBER.toShortString());
+         assertEquals("Dec", DECEMBER.toShortString());
+
 
         try {
-            monthEnumToString(Month.fromInt(-1));
+            Month.fromInt(-1).toString();
             fail("Invalid month code should throw exception");
         } catch (IllegalArgumentException e) {
         }
@@ -146,8 +149,8 @@ public class BobsDayDateTest extends TestCase {
 
 
         for (Month m : Month.values()) {
-            assertEquals(m, stringToMonthEnum(monthEnumToString(m, false)));
-            assertEquals(m, stringToMonthEnum(monthEnumToString(m, true)));
+            assertEquals(m, stringToMonthEnum(m.toString()));
+            assertEquals(m, stringToMonthEnum(m.toShortString()));
         }
 
         assertEquals(JANUARY, stringToMonthEnum("jan"));

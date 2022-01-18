@@ -466,7 +466,7 @@ public abstract class DayDate implements Comparable, Serializable {
      * @return  a string representation of the date.
      */
     public String toString() {
-        return getDayOfMonth() + "-" + monthEnumToString(getMonth())
+        return getDayOfMonth() + "-" + getMonth().toString()
                                + "-" + getYYYY();
     }
 

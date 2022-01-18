@@ -205,7 +205,7 @@ public class DayDateTest extends TestCase {
      */
     public void testMonthCodeToStringCode() {
 
-        final String test = monthEnumToString(DECEMBER);
+        final String test = DECEMBER.toString();
         assertEquals("December", test);
 
     }
