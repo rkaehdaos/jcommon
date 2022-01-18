@@ -73,13 +73,6 @@ public abstract class DayDate implements Comparable, Serializable {
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
-    public static String weekdayEnumToString(Day weekday) {
-
-        String[] weekdays = DATE_FORMAT_SYMBOLS.getWeekdays();
-        return weekdays[weekday.index];
-
-    }
-
     /**
      * Returns an array of month names.
      *

@@ -48,6 +48,13 @@ public enum Day {
         return fromInt(result);
     }
 
+    public static String weekdayEnumToString(Day weekday) {
+
+        String[] weekdays = DayDate.DATE_FORMAT_SYMBOLS.getWeekdays();
+        return weekdays[weekday.index];
+
+    }
+
     public int toInt() { return index; }
 
     public static Day parse(String s) {
