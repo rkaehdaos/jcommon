@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import static org.jfree.date.Day.*;
 import static org.jfree.date.DayDate.*;
 import static org.jfree.date.Month.*;
+import static org.jfree.date.WeekInMonth.*;
 
 public class BobsDayDateTest extends TestCase {
 
@@ -207,9 +208,12 @@ public class BobsDayDateTest extends TestCase {
 
     public void testIsValidWeekInMonthCode() throws Exception {
         for (int w = 0; w <= 4; w++) {
-            assertTrue(isValidWeekInMonthCode(w));
+            assertTrue(isValidWeekInMonthCode(WeekInMonth.fromInt(w)));
         }
-        assertFalse(isValidWeekInMonthCode(5));
+        try {
+            WeekInMonth.fromInt(5);
+            fail("실패해야 함");
+        } catch (IllegalArgumentException e) {}
     }
 
     public void testIsLeapYear() throws Exception {
@@ -402,14 +406,14 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testWeekInMonthToString() throws Exception {
-        assertEquals("First", weekInMonthToString(FIRST_WEEK_IN_MONTH));
-        assertEquals("Second", weekInMonthToString(SECOND_WEEK_IN_MONTH));
-        assertEquals("Third", weekInMonthToString(THIRD_WEEK_IN_MONTH));
-        assertEquals("Fourth", weekInMonthToString(FOURTH_WEEK_IN_MONTH));
-        assertEquals("Last", weekInMonthToString(LAST_WEEK_IN_MONTH));
+        assertEquals("First", weekInMonthToString(FIRST));
+        assertEquals("Second", weekInMonthToString(SECOND));
+        assertEquals("Third", weekInMonthToString(THIRD));
+        assertEquals("Fourth", weekInMonthToString(FOURTH));
+        assertEquals("Last", weekInMonthToString(LAST));
 
         try {
-            weekInMonthToString(-1);
+            weekInMonthToString(WeekInMonth.fromInt(-1));
             fail("Invalid week code should throw exception");
         } catch (IllegalArgumentException e) {
         }

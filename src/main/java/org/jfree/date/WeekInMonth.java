@@ -7,4 +7,15 @@ public enum WeekInMonth {
     WeekInMonth(int index) {
         this.index = index;
     }
+
+    public static WeekInMonth fromInt(int index) {
+        for (WeekInMonth w : WeekInMonth.values()) {
+            if (w.index == index)
+                return w;
+        }
+        throw new IllegalArgumentException(
+                String.format("Invalid arg : %d", index)
+        );
+
+    }
 }

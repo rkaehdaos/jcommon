@@ -73,13 +73,6 @@ public abstract class DayDate implements Comparable, Serializable {
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-
-    public static final int FIRST_WEEK_IN_MONTH = 1;
-    public static final int SECOND_WEEK_IN_MONTH = 2;
-    public static final int THIRD_WEEK_IN_MONTH = 3;
-    public static final int FOURTH_WEEK_IN_MONTH = 4;
-    public static final int LAST_WEEK_IN_MONTH = 0;
-
     /** Useful range constant. */
     public static final int INCLUDE_NONE = 0;
 
@@ -291,18 +284,18 @@ public abstract class DayDate implements Comparable, Serializable {
      * Returns true if the supplied integer code represents a valid 
      * week-in-the-month, and false otherwise.
      *
-     * @param code  the code being checked for validity.
+     * @param weekInMonth  the code being checked for validity.
      * @return <code>true</code> if the supplied integer code represents a 
      *         valid week-in-the-month.
      */
-    public static boolean isValidWeekInMonthCode(final int code) {
+    public static boolean isValidWeekInMonthCode(final WeekInMonth weekInMonth) {
 
-        switch(code) {
-            case FIRST_WEEK_IN_MONTH: 
-            case SECOND_WEEK_IN_MONTH: 
-            case THIRD_WEEK_IN_MONTH: 
-            case FOURTH_WEEK_IN_MONTH: 
-            case LAST_WEEK_IN_MONTH: return true;
+        switch(weekInMonth) {
+            case FIRST:
+            case SECOND:
+            case THIRD:
+            case FOURTH:
+            case LAST: return true;
             default: return false;
         }
 
@@ -550,22 +543,21 @@ public abstract class DayDate implements Comparable, Serializable {
      * <P>
      * Need to find a better approach.
      *
-     * @param count  an integer code representing the week-in-the-month.
+     * @param weekInMonth  an Enum representing the week-in-the-month.
      *
      * @return a string corresponding to the week-in-the-month code.
      */
-    public static String weekInMonthToString(final int count) {
+    public static String weekInMonthToString(final WeekInMonth weekInMonth) {
 
-        switch (count) {
-            case DayDate.FIRST_WEEK_IN_MONTH : return "First";
-            case DayDate.SECOND_WEEK_IN_MONTH : return "Second";
-            case DayDate.THIRD_WEEK_IN_MONTH : return "Third";
-            case DayDate.FOURTH_WEEK_IN_MONTH : return "Fourth";
-            case DayDate.LAST_WEEK_IN_MONTH : return "Last";
+        switch (weekInMonth) {
+            case FIRST:  return "First";
+            case SECOND: return "Second";
+            case THIRD:  return "Third";
+            case FOURTH: return "Fourth";
+            case LAST: return "Last";
             default :
                 throw new IllegalArgumentException("SerialDate.weekInMonthToString(): invalid code.");
         }
-
     }
 
     /**
