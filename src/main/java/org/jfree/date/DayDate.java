@@ -84,30 +84,6 @@ public abstract class DayDate implements Comparable, Serializable {
 
 
     /**
-     * Creates a new date by adding the specified number of years to the base 
-     * date.
-     *
-     * @param years  the number of years to add (can be negative).
-     * @param base  the base date.
-     *
-     * @return A new date.
-     */
-    public static DayDate addYears(int years, DayDate base) {
-
-        int baseY = base.getYear();
-        Month baseM = base.getMonth();
-        int baseD = base.getDayOfMonth();
-
-        int targetY = baseY + years;
-        int targetD = Math.min(
-            baseD, lastDayOfMonth(baseM, targetY)
-        );
-
-        return DayDate.createInstance(targetD, baseM, targetY);
-
-    }
-
-    /**
      * Returns the latest date that falls on the specified day-of-the-week and 
      * is BEFORE the base date.
      *
@@ -194,6 +170,28 @@ public abstract class DayDate implements Comparable, Serializable {
         }
 */
         return base.addDays(adjust);
+
+    }
+
+    /**
+     * Creates a new date by adding the specified number of years to the base
+     * date.
+     *
+     * @param years  the number of years to add (can be negative).
+     * @return A new date.
+     */
+    public DayDate addYears(int years) {
+
+        int baseY = getYear();
+        Month baseM = getMonth();
+        int baseD = getDayOfMonth();
+
+        int targetY = baseY + years;
+        int targetD = Math.min(
+            baseD, lastDayOfMonth(baseM, targetY)
+        );
+
+        return DayDate.createInstance(targetD, baseM, targetY);
 
     }
 

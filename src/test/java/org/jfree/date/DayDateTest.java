@@ -289,7 +289,7 @@ public class DayDateTest extends TestCase {
      */
     public void test1096282() {
         DayDate d = DayDate.createInstance(29, FEBRUARY, 2004);
-        d = DayDate.addYears(1, d);
+        d = d.addYears(1);
         DayDate expected = DayDate.createInstance(28, FEBRUARY, 2005);
         assertTrue(d.isOn(expected));
     }

@@ -284,10 +284,10 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testAddYears() throws Exception {
-        assertEquals(d(1, JANUARY, 1901), addYears(1, d(1, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1905), addYears(1, d(29, FEBRUARY, 1904)));
-        assertEquals(d(28, FEBRUARY, 1905), addYears(1, d(28, FEBRUARY, 1904)));
-        assertEquals(d(28, FEBRUARY, 1904), addYears(1, d(28, FEBRUARY, 1903)));
+        assertEquals(d(1, JANUARY, 1901), d(1, JANUARY, 1900).addYears(1));
+        assertEquals(d(28, FEBRUARY, 1905), d(29, FEBRUARY, 1904).addYears(1));
+        assertEquals(d(28, FEBRUARY, 1905), d(28, FEBRUARY, 1904).addYears(1));
+        assertEquals(d(28, FEBRUARY, 1904), d(28, FEBRUARY, 1903).addYears(1));
     }
 
     public void testGetPreviousDayOfWeek() throws Exception {
