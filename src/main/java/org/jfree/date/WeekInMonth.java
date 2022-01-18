@@ -19,7 +19,7 @@ public enum WeekInMonth {
 
     }
 
-    public static String weekInMonthToString(WeekInMonth weekInMonth) {
+    public static String toString(WeekInMonth weekInMonth) {
 
         switch (weekInMonth) {
             case FIRST:  return "First";
