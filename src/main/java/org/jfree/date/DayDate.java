@@ -84,32 +84,6 @@ public abstract class DayDate implements Comparable, Serializable {
 
 
     /**
-     * Creates a new date by adding the specified number of months to the base 
-     * date.
-     * <P>
-     * If the base date is close to the end of the month, the day on the result
-     * may be adjusted slightly:  31 May + 1 month = 30 June.
-     *
-     * @param months  the number of months to add (can be negative).
-     * @param base  the base date.
-     *
-     * @return a new date.
-     */
-    public static DayDate addMonths(int months,
-                                    DayDate base) {
-
-        int yy = (12 * base.getYYYY() + base.getMonth().index + months - 1)
-                       / 12;
-        int mm = (12 * base.getYYYY() + base.getMonth().index + months - 1)
-                       % 12 + 1;
-        int dd = Math.min(
-            base.getDayOfMonth(), lastDayOfMonth(Month.fromInt(mm), yy)
-        );
-        return DayDate.createInstance(dd, Month.fromInt(mm), yy);
-
-    }
-
-    /**
      * Creates a new date by adding the specified number of years to the base 
      * date.
      *
@@ -220,6 +194,29 @@ public abstract class DayDate implements Comparable, Serializable {
         }
 */
         return base.addDays(adjust);
+
+    }
+
+    /**
+     * Creates a new date by adding the specified number of months to the base
+     * date.
+     * <P>
+     * If the base date is close to the end of the month, the day on the result
+     * may be adjusted slightly:  31 May + 1 month = 30 June.
+     *
+     * @param months  the number of months to add (can be negative).
+     * @return a new date.
+     */
+    public DayDate addMonths(int months) {
+
+        int yy = (12 * getYYYY() + getMonth().index + months - 1)
+                       / 12;
+        int mm = (12 * getYYYY() + getMonth().index + months - 1)
+                       % 12 + 1;
+        int dd = Math.min(
+            getDayOfMonth(), lastDayOfMonth(Month.fromInt(mm), yy)
+        );
+        return DayDate.createInstance(dd, Month.fromInt(mm), yy);
 
     }
 

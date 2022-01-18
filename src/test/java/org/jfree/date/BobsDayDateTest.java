@@ -269,17 +269,17 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testAddMonths() throws Exception {
-        assertEquals(d(1, FEBRUARY, 1900), addMonths(1, d(1, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(31, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(30, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(29, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(28, JANUARY, 1900)));
-        assertEquals(d(27, FEBRUARY, 1900), addMonths(1, d(27, JANUARY, 1900)));
+        assertEquals(d(1, FEBRUARY, 1900), d(1, JANUARY, 1900).addMonths(1));
+        assertEquals(d(28, FEBRUARY, 1900), d(31, JANUARY, 1900).addMonths(1));
+        assertEquals(d(28, FEBRUARY, 1900), d(30, JANUARY, 1900).addMonths(1));
+        assertEquals(d(28, FEBRUARY, 1900), d(29, JANUARY, 1900).addMonths(1));
+        assertEquals(d(28, FEBRUARY, 1900), d(28, JANUARY, 1900).addMonths(1));
+        assertEquals(d(27, FEBRUARY, 1900), d(27, JANUARY, 1900).addMonths(1));
 
-        assertEquals(d(30, JUNE, 1900), addMonths(5, d(31, JANUARY, 1900)));
-        assertEquals(d(30, JUNE, 1901), addMonths(17, d(31, JANUARY, 1900)));
+        assertEquals(d(30, JUNE, 1900), d(31, JANUARY, 1900).addMonths(5));
+        assertEquals(d(30, JUNE, 1901), d(31, JANUARY, 1900).addMonths(17));
 
-        assertEquals(d(29, FEBRUARY, 1904), addMonths(49, d(31, JANUARY, 1900)));
+        assertEquals(d(29, FEBRUARY, 1904), d(31, JANUARY, 1900).addMonths(49));
 
     }
 
