@@ -350,9 +350,9 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public abstract boolean isInRange(DayDate d1, DayDate d2, DateInterval include);
 
-    public DayDate getNearestDayOfWeek(Day day) {
+    public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
-        int targetDowIndex = day.toInt();
+        int targetDowIndex = targetDayOfWeek.toInt();
         // find the date...
         int baseDOW = getDayOfWeek().toInt();
         int delta = targetDowIndex - baseDOW;
@@ -374,9 +374,9 @@ public abstract class DayDate implements Comparable, Serializable {
 
     }
 
-    public DayDate getFollowingDayOfWeek(Day day) {
+    public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
 
-        int targetIndex = day.toInt();
+        int targetIndex = targetDayOfWeek.toInt();
         // find the date...
         int adjust;
         int baseDOW = getDayOfWeek().toInt();
@@ -390,9 +390,9 @@ public abstract class DayDate implements Comparable, Serializable {
         return plusDays(adjust);
     }
 
-    public DayDate getPreviousDayOfWeek(Day day) {
+    public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
 
-        int targetIndex = day.toInt();
+        int targetIndex = targetDayOfWeek.toInt();
         // find the date...
         int adjust;
         int baseDOW = getDayOfWeek().toInt();
