@@ -2,6 +2,7 @@ package org.jfree.date;
 
 import junit.framework.TestCase;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.jfree.date.Day.*;
@@ -301,6 +302,14 @@ public class BobsDayDateTest extends TestCase {
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
+
+        DayDate dayDate = DayDateFactory.makeDate(new Date());
+
+        assertEquals(d(24, FEBRUARY, 2006), dayDate.getPreviousDayOfWeek(FRIDAY, d(1, MARCH, 2006)));
+        assertEquals(d(22, FEBRUARY, 2006), dayDate.getPreviousDayOfWeek(WEDNESDAY, d(1, MARCH, 2006)));
+        assertEquals(d(29, FEBRUARY, 2004), dayDate.getPreviousDayOfWeek(SUNDAY, d(3, MARCH, 2004)));
+        assertEquals(d(29, DECEMBER, 2004), dayDate.getPreviousDayOfWeek(WEDNESDAY, d(5, JANUARY, 2005)));
+
     }
 
     public void testGetFollowingDayOfWeek() throws Exception {
