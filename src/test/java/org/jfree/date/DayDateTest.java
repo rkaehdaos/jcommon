@@ -189,13 +189,13 @@ public class DayDateTest extends TestCase {
      */
     public void testStringToMonthCode() {
 
-        Month m = stringToMonthEnum("January");
+        Month m = Month.parse("January");
         assertEquals(JANUARY, m);
 
-        m = stringToMonthEnum(" January ");
+        m = Month.parse(" January ");
         assertEquals(JANUARY, m);
 
-        m = stringToMonthEnum("Jan");
+        m = Month.parse("Jan");
         assertEquals(JANUARY, m);
 
     }
