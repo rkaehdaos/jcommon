@@ -170,19 +170,15 @@ public class DayDateTest extends TestCase {
 
     }
 
-    /**
-     * Test the conversion of a string to a weekday.  Note that this test will fail if the 
-     * default locale doesn't use English weekday names...devise a better test!
-     */
-    public void testStringToWeekday() {
+    public void testDayParse() {
 
-        Day weekday = stringToWeekdayEnum("Wednesday");
+        Day weekday = Day.parse("Wednesday");
         assertEquals(WEDNESDAY, weekday);
 
-        weekday = stringToWeekdayEnum(" Wednesday ");
+        weekday = Day.parse(" Wednesday ");
         assertEquals(WEDNESDAY, weekday);
 
-        weekday = stringToWeekdayEnum("Wed");
+        weekday = Day.parse("Wed");
         assertEquals(WEDNESDAY, weekday);
 
     }

@@ -17,54 +17,54 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(13, getMonths(true).length);
     }
 
-    public void testStringToWeekdayEnum() throws Exception {
+    public void testDayParse() throws Exception {
 
-        assertEquals(MONDAY, stringToWeekdayEnum("Monday"));
-        assertEquals(MONDAY, stringToWeekdayEnum("Mon"));
-        assertEquals(MONDAY, stringToWeekdayEnum("monday"));
-        assertEquals(MONDAY, stringToWeekdayEnum("MONDAY"));
-        assertEquals(MONDAY, stringToWeekdayEnum("mon"));
+        assertEquals(MONDAY, Day.parse("Monday"));
+        assertEquals(MONDAY, Day.parse("Mon"));
+        assertEquals(MONDAY, Day.parse("monday"));
+        assertEquals(MONDAY, Day.parse("MONDAY"));
+        assertEquals(MONDAY, Day.parse("mon"));
 
-        assertEquals(TUESDAY, stringToWeekdayEnum("Tuesday"));
-        assertEquals(TUESDAY, stringToWeekdayEnum("Tue"));
-        assertEquals(TUESDAY, stringToWeekdayEnum("tuesday"));
-        assertEquals(TUESDAY, stringToWeekdayEnum("TUESDAY"));
-        assertEquals(TUESDAY, stringToWeekdayEnum("tue"));
+        assertEquals(TUESDAY, Day.parse("Tuesday"));
+        assertEquals(TUESDAY, Day.parse("Tue"));
+        assertEquals(TUESDAY, Day.parse("tuesday"));
+        assertEquals(TUESDAY, Day.parse("TUESDAY"));
+        assertEquals(TUESDAY, Day.parse("tue"));
 //            assertEquals(TUESDAY, stringToWeekdayCode("tues"));
 
-        assertEquals(WEDNESDAY, stringToWeekdayEnum("Wednesday"));
-        assertEquals(WEDNESDAY, stringToWeekdayEnum("Wed"));
-        assertEquals(WEDNESDAY, stringToWeekdayEnum("wednesday"));
-        assertEquals(WEDNESDAY, stringToWeekdayEnum("WEDNESDAY"));
-        assertEquals(WEDNESDAY, stringToWeekdayEnum("wed"));
+        assertEquals(WEDNESDAY, Day.parse("Wednesday"));
+        assertEquals(WEDNESDAY, Day.parse("Wed"));
+        assertEquals(WEDNESDAY, Day.parse("wednesday"));
+        assertEquals(WEDNESDAY, Day.parse("WEDNESDAY"));
+        assertEquals(WEDNESDAY, Day.parse("wed"));
 
-        assertEquals(THURSDAY, stringToWeekdayEnum("Thursday"));
-        assertEquals(THURSDAY, stringToWeekdayEnum("Thu"));
-        assertEquals(THURSDAY, stringToWeekdayEnum("thursday"));
-        assertEquals(THURSDAY, stringToWeekdayEnum("THURSDAY"));
-        assertEquals(THURSDAY, stringToWeekdayEnum("thu"));
+        assertEquals(THURSDAY, Day.parse("Thursday"));
+        assertEquals(THURSDAY, Day.parse("Thu"));
+        assertEquals(THURSDAY, Day.parse("thursday"));
+        assertEquals(THURSDAY, Day.parse("THURSDAY"));
+        assertEquals(THURSDAY, Day.parse("thu"));
 //            assertEquals(THURSDAY, stringToWeekdayCode("thurs"));
 
-        assertEquals(FRIDAY, stringToWeekdayEnum("Friday"));
-        assertEquals(FRIDAY, stringToWeekdayEnum("Fri"));
-        assertEquals(FRIDAY, stringToWeekdayEnum("friday"));
-        assertEquals(FRIDAY, stringToWeekdayEnum("FRIDAY"));
-        assertEquals(FRIDAY, stringToWeekdayEnum("fri"));
+        assertEquals(FRIDAY, Day.parse("Friday"));
+        assertEquals(FRIDAY, Day.parse("Fri"));
+        assertEquals(FRIDAY, Day.parse("friday"));
+        assertEquals(FRIDAY, Day.parse("FRIDAY"));
+        assertEquals(FRIDAY, Day.parse("fri"));
 
-        assertEquals(SATURDAY, stringToWeekdayEnum("Saturday"));
-        assertEquals(SATURDAY, stringToWeekdayEnum("Sat"));
-        assertEquals(SATURDAY, stringToWeekdayEnum("saturday"));
-        assertEquals(SATURDAY, stringToWeekdayEnum("SATURDAY"));
-        assertEquals(SATURDAY, stringToWeekdayEnum("sat"));
+        assertEquals(SATURDAY, Day.parse("Saturday"));
+        assertEquals(SATURDAY, Day.parse("Sat"));
+        assertEquals(SATURDAY, Day.parse("saturday"));
+        assertEquals(SATURDAY, Day.parse("SATURDAY"));
+        assertEquals(SATURDAY, Day.parse("sat"));
 
-        assertEquals(SUNDAY, stringToWeekdayEnum("Sunday"));
-        assertEquals(SUNDAY, stringToWeekdayEnum("Sun"));
-        assertEquals(SUNDAY, stringToWeekdayEnum("sunday"));
-        assertEquals(SUNDAY, stringToWeekdayEnum("SUNDAY"));
-        assertEquals(SUNDAY, stringToWeekdayEnum("sun"));
+        assertEquals(SUNDAY, Day.parse("Sunday"));
+        assertEquals(SUNDAY, Day.parse("Sun"));
+        assertEquals(SUNDAY, Day.parse("sunday"));
+        assertEquals(SUNDAY, Day.parse("SUNDAY"));
+        assertEquals(SUNDAY, Day.parse("sun"));
 
         try {
-            stringToWeekdayEnum("Hello");
+            Day.parse("Hello");
             fail("실패해야함");
         } catch (IllegalArgumentException e) {}
 
