@@ -352,26 +352,13 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
-        int targetDowIndex = targetDayOfWeek.toInt();
-        // find the date...
-        int baseDOW = getDayOfWeek().toInt();
-        int delta = targetDowIndex - baseDOW;
-        int positiveDelta = delta + 7;
-
-//        int adjust = -Math.abs(targetDOW - baseDOW);
-        int adjust = positiveDelta % 7;
-        if (adjust>3)
-            adjust -= 7;
-/*
-        if (adjust >= 4) {
-            adjust = 7 - adjust;
-        }
-        if (adjust <= -4) {
-            adjust = 7 + adjust;
-        }
-*/
-        return plusDays(adjust);
-
+        int offsetToThisWeeksTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        int offsetToFutureTarget = (offsetToThisWeeksTarget + 7) % 7;
+        int offsetToPreviousTarget = offsetToFutureTarget - 7;
+        if (offsetToFutureTarget > 3) {
+            return plusDays(offsetToPreviousTarget);
+        } else
+            return plusDays(offsetToFutureTarget);
     }
 
     public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
