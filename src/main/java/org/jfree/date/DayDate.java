@@ -73,12 +73,6 @@ public abstract class DayDate implements Comparable, Serializable {
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-
-//    public static final int INCLUDE_NONE = 0;
-//    public static final int INCLUDE_FIRST = 1;
-//    public static final int INCLUDE_SECOND = 2;
-//    public static final int INCLUDE_BOTH = 3;
-
     /** 
      * Useful constant for specifying a day of the week relative to a fixed 
      * date. 
