@@ -418,11 +418,11 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testWeekInMonthToString() throws Exception {
-        assertEquals("First", FIRST.toString());
-        assertEquals("Second", SECOND.toString());
-        assertEquals("Third", THIRD.toString());
-        assertEquals("Fourth", FOURTH.toString());
-        assertEquals("Last", LAST.toString());
+        assertEquals("FIRST", FIRST.toString());
+        assertEquals("SECOND", SECOND.toString());
+        assertEquals("THIRD", THIRD.toString());
+        assertEquals("FOURTH", FOURTH.toString());
+        assertEquals("LAST", LAST.toString());
 
         try {
             WeekInMonth.fromInt(-1).toString();
