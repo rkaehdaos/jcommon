@@ -413,10 +413,6 @@ public abstract class DayDate implements Comparable, Serializable {
     public abstract boolean isInRange(DayDate d1, DayDate d2, DateInterval include);
 
 
-    public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
-
-        return getFollowingDayOfWeek(targetDayOfWeek, this);
-    }
 
     public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
