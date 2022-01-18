@@ -48,6 +48,27 @@ public enum Month {
 
     }
 
+    public static String monthEnumToString(Month month) {
+
+        return monthEnumToString(month, false);
+
+    }
+
+    public static String monthEnumToString(Month month, boolean shortened) {
+
+        String[] months;
+
+        if (shortened) {
+            months = DayDate.dateFormatSymbols.getShortMonths();
+        }
+        else {
+            months = DayDate.dateFormatSymbols.getMonths();
+        }
+
+        return months[month.index - 1];
+
+    }
+
     private boolean matches(String s) {
         return s.equalsIgnoreCase(toString()) ||
                 s.equalsIgnoreCase(toShortString());
