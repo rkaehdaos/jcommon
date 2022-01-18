@@ -189,7 +189,7 @@ public class RelativeDayOfWeekRule extends AnnualDateRule {
                             base);
                     break;
                 case NEAREST:
-                    result = DayDate.getNearestDayOfWeek(this.dayOfWeek,
+                    result = this.dayOfWeek.getNearestDayOfWeek(
                             base);
                     break;
                 case NEXT:

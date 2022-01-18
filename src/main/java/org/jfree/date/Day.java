@@ -35,6 +35,39 @@ public enum Day {
     }
 
     /**
+     * Returns the date that falls on the specified day-of-the-week and is
+     * CLOSEST to the base date.
+     *
+     * @param base  the base date.
+     *
+     * @return the date that falls on the specified day-of-the-week and is
+     *         CLOSEST to the base date.
+     */
+    public DayDate getNearestDayOfWeek(DayDate base) {
+
+        int targetDowIndex = toInt();
+        // find the date...
+        int baseDOW = base.getDayOfWeek().toInt();
+        int delta = targetDowIndex - baseDOW;
+        int positiveDelta = delta + 7;
+
+//        int adjust = -Math.abs(targetDOW - baseDOW);
+        int adjust = positiveDelta % 7;
+        if (adjust>3)
+            adjust -= 7;
+/*
+        if (adjust >= 4) {
+            adjust = 7 - adjust;
+        }
+        if (adjust <= -4) {
+            adjust = 7 + adjust;
+        }
+*/
+        return base.plusDays(adjust);
+
+    }
+
+    /**
      * Returns the earliest date that falls on the specified day-of-the-week
      * and is AFTER the base date.
      *

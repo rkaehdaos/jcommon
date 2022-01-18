@@ -83,41 +83,6 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
 
-    /**
-     * Returns the date that falls on the specified day-of-the-week and is
-     * CLOSEST to the base date.
-     *
-     * @param targetDOW  a code for the target day-of-the-week.
-     * @param base  the base date.
-     *
-     * @return the date that falls on the specified day-of-the-week and is 
-     *         CLOSEST to the base date.
-     */
-    public static DayDate getNearestDayOfWeek(Day targetDOW,
-                                              DayDate base) {
-
-        int targetDowIndex = targetDOW.toInt();
-        // find the date...
-        int baseDOW = base.getDayOfWeek().toInt();
-        int delta = targetDowIndex - baseDOW;
-        int positiveDelta = delta + 7;
-
-//        int adjust = -Math.abs(targetDOW - baseDOW);
-        int adjust = positiveDelta % 7;
-        if (adjust>3)
-            adjust -= 7;
-/*
-        if (adjust >= 4) {
-            adjust = 7 - adjust;
-        }
-        if (adjust <= -4) {
-            adjust = 7 + adjust;
-        }
-*/
-        return base.plusDays(adjust);
-
-    }
-
     public DayDate plusYears(int years) {
 
         int resultYear = getYear() + years;

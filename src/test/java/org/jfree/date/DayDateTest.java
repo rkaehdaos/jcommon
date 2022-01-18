@@ -144,8 +144,8 @@ public class DayDateTest extends TestCase {
      * Monday nearest Friday 9 November 2001 should be 12 November.
      */
     public void testMondayNearestFriday9Nov2001() {
-        DayDate mondayNearest = DayDate.getNearestDayOfWeek(
-            MONDAY, this.nov9Y2001
+        DayDate mondayNearest = MONDAY.getNearestDayOfWeek(
+                this.nov9Y2001
         );
         assertEquals(12, mondayNearest.getDayOfMonth());
     }
@@ -155,7 +155,7 @@ public class DayDateTest extends TestCase {
      */
     public void testMondayNearest22Jan1970() {
         DayDate jan22Y1970 = DayDate.createInstance(22, JANUARY, 1970);
-        DayDate mondayNearest = DayDate.getNearestDayOfWeek(MONDAY, jan22Y1970);
+        DayDate mondayNearest = MONDAY.getNearestDayOfWeek(jan22Y1970);
         assertEquals(19, mondayNearest.getDayOfMonth());
     }
 
