@@ -66,15 +66,12 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final DateFormatSymbols
             DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
-
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    /** A description for the date. */
-    private String description;
 
     /**
      * Default constructor.
@@ -604,27 +601,6 @@ public abstract class DayDate implements Comparable, Serializable {
      * @return this as <code>java.util.Date</code>.
      */
     public abstract java.util.Date toDate();
-
-    /**
-     * Returns the description that is attached to the date.  It is not 
-     * required that a date have a description, but for some applications it 
-     * is useful.
-     *
-     * @return The description (possibly <code>null</code>).
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
-     * Sets the description for the date.
-     *
-     * @param description  the description for this date (<code>null</code> 
-     *                     permitted).
-     */
-    public void setDescription(final String description) {
-        this.description = description;
-    }
 
     /**
      * Converts the date to a string.
