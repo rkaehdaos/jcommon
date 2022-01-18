@@ -50,6 +50,17 @@ public enum Month {
 
     }
 
+    public static int lastDayOfMonth(Month month, int yyyy) {
+        int result = LAST_DAY_OF_MONTH[month.index];
+        if (month != FEBRUARY) {
+            return result;
+        } else if (DayDate.isLeapYear(yyyy)) {
+            return result + 1;
+        } else {
+            return result;
+        }
+    }
+
     private boolean matches(String s) {
         return s.equalsIgnoreCase(toString()) ||
                 s.equalsIgnoreCase(toShortString());

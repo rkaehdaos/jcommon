@@ -137,7 +137,7 @@ public class SpreadsheetDate extends DayDate {
             );
         }
 
-        if ((day >= 1) && (day <= DayDate.lastDayOfMonth(month, year))) {
+        if ((day >= 1) && (day <= Month.lastDayOfMonth(month, year))) {
             this.day = day;
         }
         else {

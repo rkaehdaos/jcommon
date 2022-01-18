@@ -83,17 +83,6 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
 
-    public static int lastDayOfMonth(Month month, int yyyy) {
-        int result = LAST_DAY_OF_MONTH[month.index];
-        if (month != FEBRUARY) {
-            return result;
-        } else if (isLeapYear(yyyy)) {
-            return result + 1;
-        } else {
-            return result;
-        }
-    }
-
     /**
      * Creates a new date by adding the specified number of days to the base 
      * date.
@@ -130,7 +119,7 @@ public abstract class DayDate implements Comparable, Serializable {
         int mm = (12 * base.getYYYY() + base.getMonth().index + months - 1)
                        % 12 + 1;
         int dd = Math.min(
-            base.getDayOfMonth(), DayDate.lastDayOfMonth(Month.fromInt(mm), yy)
+            base.getDayOfMonth(), lastDayOfMonth(Month.fromInt(mm), yy)
         );
         return DayDate.createInstance(dd, Month.fromInt(mm), yy);
 
@@ -153,7 +142,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
         int targetY = baseY + years;
         int targetD = Math.min(
-            baseD, DayDate.lastDayOfMonth(baseM, targetY)
+            baseD, lastDayOfMonth(baseM, targetY)
         );
 
         return DayDate.createInstance(targetD, baseM, targetY);
@@ -258,7 +247,7 @@ public abstract class DayDate implements Comparable, Serializable {
      * @return a new serial date.
      */
     public DayDate getEndOfCurrentMonth(DayDate base) {
-        int last = DayDate.lastDayOfMonth(
+        int last = lastDayOfMonth(
             base.getMonth(), base.getYYYY()
         );
         return DayDate.createInstance(last, base.getMonth(), base.getYYYY());
