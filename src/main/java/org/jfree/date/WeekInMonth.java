@@ -18,4 +18,17 @@ public enum WeekInMonth {
         );
 
     }
+
+    public static String weekInMonthToString(WeekInMonth weekInMonth) {
+
+        switch (weekInMonth) {
+            case FIRST:  return "First";
+            case SECOND: return "Second";
+            case THIRD:  return "Third";
+            case FOURTH: return "Fourth";
+            case LAST: return "Last";
+            default :
+                throw new IllegalArgumentException("SerialDate.weekInMonthToString(): invalid code.");
+        }
+    }
 }

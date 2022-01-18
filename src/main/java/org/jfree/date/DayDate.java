@@ -114,19 +114,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-    public static String weekInMonthToString(WeekInMonth weekInMonth) {
-
-        switch (weekInMonth) {
-            case FIRST:  return "First";
-            case SECOND: return "Second";
-            case THIRD:  return "Third";
-            case FOURTH: return "Fourth";
-            case LAST: return "Last";
-            default :
-                throw new IllegalArgumentException("SerialDate.weekInMonthToString(): invalid code.");
-        }
-    }
-
     public static String relativeToString(WeekDayRange relative) {
 
         switch (relative) {
