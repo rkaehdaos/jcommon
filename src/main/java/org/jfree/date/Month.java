@@ -48,6 +48,40 @@ public enum Month {
 
     }
 
+    public static Month stringToMonthEnum(String s) {
+
+        String[] shortMonthNames = DayDate.dateFormatSymbols.getShortMonths();
+        String[] monthNames = DayDate.dateFormatSymbols.getMonths();
+
+        int result = -1;
+        s = s.trim();
+
+        // first try parsing the string as an integer (1-12)...
+        try {
+            result = Integer.parseInt(s);
+        }
+        catch (NumberFormatException e) {
+            // suppress
+        }
+
+        // now search through the month names...
+        if ((result < 1) || (result > 12)) {
+            result = -1;
+            for (int i = 0; i < monthNames.length; i++) {
+                if (s.equalsIgnoreCase(shortMonthNames[i])) {
+                    result = i + 1;
+                    break;
+                }
+                if (s.equalsIgnoreCase(monthNames[i])) {
+                    result = i + 1;
+                    break;
+                }
+            }
+        }
+        return Month.fromInt(result);
+
+    }
+
     private boolean matches(String s) {
         return s.equalsIgnoreCase(toString()) ||
                 s.equalsIgnoreCase(toShortString());
