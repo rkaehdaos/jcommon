@@ -80,18 +80,14 @@ public abstract class DayDate implements Comparable, Serializable {
 
         int result = -1;
         s = s.trim();
+
         for (int i = 0; i < weekDayNames.length; i++) {
-            if (s.equalsIgnoreCase(shortWeekdayNames[i])) {
-                result = i;
-                break;
-            }
-            if (s.equalsIgnoreCase(weekDayNames[i])) {
+            if (s.equalsIgnoreCase(shortWeekdayNames[i])||s.equalsIgnoreCase(weekDayNames[i])) {
                 result = i;
                 break;
             }
         }
         return Day.fromInt(result);
-
     }
 
 
