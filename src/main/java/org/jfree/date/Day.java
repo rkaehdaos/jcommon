@@ -34,6 +34,32 @@ public enum Day {
         return weekday.toString();
     }
 
+    /**
+     * Returns the latest date that falls on the specified day-of-the-week and
+     * is BEFORE the base date.
+     *
+     * @param base  the base date.
+     *
+     * @return the latest date that falls on the specified day-of-the-week and
+     *         is BEFORE the base date.
+     */
+    public DayDate getPreviousDayOfWeek(DayDate base) {
+
+        int targetIndex = toInt();
+        // find the date...
+        int adjust;
+        int baseDOW = base.getDayOfWeek().toInt();
+        if (baseDOW > targetIndex) {
+            adjust = Math.min(0, targetIndex - baseDOW);
+        }
+        else {
+            adjust = -7 + Math.max(0, targetIndex - baseDOW);
+        }
+
+        return base.plusDays(adjust);
+
+    }
+
     public int toInt() { return index; }
 
     public static Day parse(String s) {

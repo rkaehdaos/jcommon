@@ -84,34 +84,6 @@ public abstract class DayDate implements Comparable, Serializable {
 
 
     /**
-     * Returns the latest date that falls on the specified day-of-the-week and 
-     * is BEFORE the base date.
-     *
-     * @param targetWeekday  a code for the target day-of-the-week.
-     * @param base  the base date.
-     *
-     * @return the latest date that falls on the specified day-of-the-week and 
-     *         is BEFORE the base date.
-     */
-    public static DayDate getPreviousDayOfWeek(Day targetWeekday,
-                                               DayDate base) {
-
-        int targetIndex = targetWeekday.toInt();
-        // find the date...
-        int adjust;
-        int baseDOW = base.getDayOfWeek().toInt();
-        if (baseDOW > targetIndex) {
-            adjust = Math.min(0, targetIndex - baseDOW);
-        }
-        else {
-            adjust = -7 + Math.max(0, targetIndex - baseDOW);
-        }
-
-        return base.plusDays(adjust);
-
-    }
-
-    /**
      * Returns the earliest date that falls on the specified day-of-the-week
      * and is AFTER the base date.
      *
@@ -451,7 +423,7 @@ public abstract class DayDate implements Comparable, Serializable {
      *         is BEFORE this date.
      */
     public DayDate getPreviousDayOfWeek(int targetDOW) {
-        return getPreviousDayOfWeek(Day.fromInt(targetDOW), this);
+        return Day.fromInt(targetDOW).getPreviousDayOfWeek(this);
     }
 
     /**

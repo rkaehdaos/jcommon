@@ -292,23 +292,23 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testGetPreviousDayOfWeek() throws Exception {
-        assertEquals(d(24, FEBRUARY, 2006), getPreviousDayOfWeek(FRIDAY, d(1, MARCH, 2006)));
-        assertEquals(d(22, FEBRUARY, 2006), getPreviousDayOfWeek(WEDNESDAY, d(1, MARCH, 2006)));
-        assertEquals(d(29, FEBRUARY, 2004), getPreviousDayOfWeek(SUNDAY, d(3, MARCH, 2004)));
-        assertEquals(d(29, DECEMBER, 2004), getPreviousDayOfWeek(WEDNESDAY, d(5, JANUARY, 2005)));
+        assertEquals(d(24, FEBRUARY, 2006), FRIDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
+        assertEquals(d(22, FEBRUARY, 2006), WEDNESDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
+        assertEquals(d(29, FEBRUARY, 2004), SUNDAY.getPreviousDayOfWeek(d(3, MARCH, 2004)));
+        assertEquals(d(29, DECEMBER, 2004), WEDNESDAY.getPreviousDayOfWeek(d(5, JANUARY, 2005)));
 
         try {
-            getPreviousDayOfWeek(Day.fromInt(-1), d(1, JANUARY, 2006));
+            Day.fromInt(-1).getPreviousDayOfWeek(d(1, JANUARY, 2006));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
 
         DayDate dayDate = DayDateFactory.makeDate(new Date());
 
-        assertEquals(d(24, FEBRUARY, 2006), dayDate.getPreviousDayOfWeek(FRIDAY, d(1, MARCH, 2006)));
-        assertEquals(d(22, FEBRUARY, 2006), dayDate.getPreviousDayOfWeek(WEDNESDAY, d(1, MARCH, 2006)));
-        assertEquals(d(29, FEBRUARY, 2004), dayDate.getPreviousDayOfWeek(SUNDAY, d(3, MARCH, 2004)));
-        assertEquals(d(29, DECEMBER, 2004), dayDate.getPreviousDayOfWeek(WEDNESDAY, d(5, JANUARY, 2005)));
+        assertEquals(d(24, FEBRUARY, 2006), FRIDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
+        assertEquals(d(22, FEBRUARY, 2006), WEDNESDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
+        assertEquals(d(29, FEBRUARY, 2004), SUNDAY.getPreviousDayOfWeek(d(3, MARCH, 2004)));
+        assertEquals(d(29, DECEMBER, 2004), WEDNESDAY.getPreviousDayOfWeek(d(5, JANUARY, 2005)));
 
     }
 
