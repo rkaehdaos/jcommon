@@ -30,6 +30,24 @@ public enum Day {
         );
     }
 
+    public static Day stringToWeekdayEnum(String s) {
+
+        String[] shortWeekdayNames
+                = DayDate.DATE_FORMAT_SYMBOLS.getShortWeekdays();
+        String[] weekDayNames = DayDate.DATE_FORMAT_SYMBOLS.getWeekdays();
+
+        int result = -1;
+        s = s.trim();
+
+        for (Day day : values()) {
+            if (s.equalsIgnoreCase(shortWeekdayNames[day.index])||s.equalsIgnoreCase(weekDayNames[day.index])) {
+                result = day.index;
+                break;
+            }
+        }
+        return fromInt(result);
+    }
+
     public int toInt() { return index; }
 
     public static Day parse(String s) {

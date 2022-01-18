@@ -72,24 +72,6 @@ public abstract class DayDate implements Comparable, Serializable {
     static int[] LAST_DAY_OF_MONTH =
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    public static Day stringToWeekdayEnum(String s) {
-
-        String[] shortWeekdayNames
-                = DATE_FORMAT_SYMBOLS.getShortWeekdays();
-        String[] weekDayNames = DATE_FORMAT_SYMBOLS.getWeekdays();
-
-        int result = -1;
-        s = s.trim();
-
-        for (Day day : Day.values()) {
-            if (s.equalsIgnoreCase(shortWeekdayNames[day.index])||s.equalsIgnoreCase(weekDayNames[day.index])) {
-                result = day.index;
-                break;
-            }
-        }
-        return Day.fromInt(result);
-    }
-
 
     public static String weekdayEnumToString(Day weekday) {
 

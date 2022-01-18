@@ -176,13 +176,13 @@ public class DayDateTest extends TestCase {
      */
     public void testStringToWeekday() {
 
-        Day weekday = DayDate.stringToWeekdayEnum("Wednesday");
+        Day weekday = stringToWeekdayEnum("Wednesday");
         assertEquals(WEDNESDAY, weekday);
 
-        weekday = DayDate.stringToWeekdayEnum(" Wednesday ");
+        weekday = stringToWeekdayEnum(" Wednesday ");
         assertEquals(WEDNESDAY, weekday);
 
-        weekday = DayDate.stringToWeekdayEnum("Wed");
+        weekday = stringToWeekdayEnum("Wed");
         assertEquals(WEDNESDAY, weekday);
 
     }
