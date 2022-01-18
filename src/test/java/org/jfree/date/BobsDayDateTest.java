@@ -418,14 +418,14 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testWeekInMonthToString() throws Exception {
-        assertEquals("First", WeekInMonth.toString(FIRST));
-        assertEquals("Second", WeekInMonth.toString(SECOND));
-        assertEquals("Third", WeekInMonth.toString(THIRD));
-        assertEquals("Fourth", WeekInMonth.toString(FOURTH));
-        assertEquals("Last", WeekInMonth.toString(LAST));
+        assertEquals("First", FIRST.toString());
+        assertEquals("Second", SECOND.toString());
+        assertEquals("Third", THIRD.toString());
+        assertEquals("Fourth", FOURTH.toString());
+        assertEquals("Last", LAST.toString());
 
         try {
-            WeekInMonth.toString(WeekInMonth.fromInt(-1));
+            WeekInMonth.fromInt(-1).toString();
             fail("Invalid week code should throw exception");
         } catch (IllegalArgumentException e) {
         }

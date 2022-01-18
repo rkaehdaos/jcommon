@@ -19,9 +19,9 @@ public enum WeekInMonth {
 
     }
 
-    public static String toString(WeekInMonth weekInMonth) {
+    public String toString() {
 
-        switch (weekInMonth) {
+        switch (this) {
             case FIRST:  return "First";
             case SECOND: return "Second";
             case THIRD:  return "Third";
