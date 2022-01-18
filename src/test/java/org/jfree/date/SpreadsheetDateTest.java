@@ -321,6 +321,4 @@ public class SpreadsheetDateTest extends TestCase {
 
     }
 
-
-
 }
