@@ -30,7 +30,6 @@ public enum Day {
         );
     }
 
-
     public static String weekdayEnumToString(Day weekday) {
         return weekday.toString();
     }

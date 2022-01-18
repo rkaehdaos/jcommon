@@ -13,8 +13,6 @@ public class BobsDayDateTest extends TestCase {
 
     public void testGetMonths() throws Exception {
         assertEquals(13, getMonths().length);
-        assertEquals(13, getMonths(false).length);
-        assertEquals(13, getMonths(true).length);
     }
 
     public void testDayParse() throws Exception {

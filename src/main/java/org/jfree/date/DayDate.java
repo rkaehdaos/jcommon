@@ -63,8 +63,8 @@ import static org.jfree.date.Month.*;
  */
 public abstract class DayDate implements Comparable, Serializable {
 
-    public static final DateFormatSymbols
-            DATE_FORMAT_SYMBOLS = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
+    public static DateFormatSymbols
+            dateFormatSymbols = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
@@ -73,35 +73,11 @@ public abstract class DayDate implements Comparable, Serializable {
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
-    /**
-     * Returns an array of month names.
-     *
-     * @return an array of month names.
-     */
     public static String[] getMonths() {
-
-        return getMonths(false);
-
-    }
-
-    /**
-     * Returns an array of month names.
-     *
-     * @param shortened  a flag indicating that shortened month names should 
-     *                   be returned.
-     *
-     * @return an array of month names.
-     */
-    public static String[] getMonths(boolean shortened) {
-
-        if (shortened) {
-            return DATE_FORMAT_SYMBOLS.getShortMonths();
-        }
-        else {
-            return DATE_FORMAT_SYMBOLS.getMonths();
-        }
+        return dateFormatSymbols.getMonths();
 
     }
+
 
     /**
      * Returns a string representing the supplied month.
@@ -136,10 +112,10 @@ public abstract class DayDate implements Comparable, Serializable {
         String[] months;
 
         if (shortened) {
-            months = DATE_FORMAT_SYMBOLS.getShortMonths();
+            months = dateFormatSymbols.getShortMonths();
         }
         else {
-            months = DATE_FORMAT_SYMBOLS.getMonths();
+            months = dateFormatSymbols.getMonths();
         }
 
         return months[month.index - 1];
@@ -160,8 +136,8 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public static Month stringToMonthEnum(String s) {
 
-        String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
-        String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
+        String[] shortMonthNames = dateFormatSymbols.getShortMonths();
+        String[] monthNames = dateFormatSymbols.getMonths();
 
         int result = -1;
         s = s.trim();
