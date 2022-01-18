@@ -73,17 +73,11 @@ public abstract class DayDate implements Comparable, Serializable {
     static final int[] LAST_DAY_OF_MONTH =
         {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    /** Useful range constant. */
-    public static final int INCLUDE_NONE = 0;
 
-    /** Useful range constant. */
-    public static final int INCLUDE_FIRST = 1;
-
-    /** Useful range constant. */
-    public static final int INCLUDE_SECOND = 2;
-
-    /** Useful range constant. */
-    public static final int INCLUDE_BOTH = 3;
+//    public static final int INCLUDE_NONE = 0;
+//    public static final int INCLUDE_FIRST = 1;
+//    public static final int INCLUDE_SECOND = 2;
+//    public static final int INCLUDE_BOTH = 3;
 
     /** 
      * Useful constant for specifying a day of the week relative to a fixed 
@@ -793,7 +787,7 @@ public abstract class DayDate implements Comparable, Serializable {
      * @return A boolean.
      */
     public abstract boolean isInRange(DayDate d1, DayDate d2,
-                                      int include);
+                                      DateInterval include);
 
     /**
      * Returns the latest date that falls on the specified day-of-the-week and
