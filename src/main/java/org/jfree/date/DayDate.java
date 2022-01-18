@@ -94,7 +94,7 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public static DayDate addYears(int years, DayDate base) {
 
-        int baseY = base.getYYYY();
+        int baseY = base.getYear();
         Month baseM = base.getMonth();
         int baseD = base.getDayOfMonth();
 
@@ -209,9 +209,9 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public DayDate addMonths(int months) {
 
-        int yy = (12 * getYYYY() + getMonth().index + months - 1)
+        int yy = (12 * getYear() + getMonth().index + months - 1)
                        / 12;
-        int mm = (12 * getYYYY() + getMonth().index + months - 1)
+        int mm = (12 * getYear() + getMonth().index + months - 1)
                        % 12 + 1;
         int dd = Math.min(
             getDayOfMonth(), lastDayOfMonth(Month.fromInt(mm), yy)
@@ -233,9 +233,9 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public DayDate getEndOfCurrentMonth(DayDate base) {
         int last = lastDayOfMonth(
-            base.getMonth(), base.getYYYY()
+            base.getMonth(), base.getYear()
         );
-        return DayDate.createInstance(last, base.getMonth(), base.getYYYY());
+        return DayDate.createInstance(last, base.getMonth(), base.getYear());
     }
 
     /**
@@ -342,7 +342,7 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public String toString() {
         return getDayOfMonth() + "-" + getMonth().toString()
-                               + "-" + getYYYY();
+                               + "-" + getYear();
     }
 
     /**
@@ -350,7 +350,7 @@ public abstract class DayDate implements Comparable, Serializable {
      *
      * @return the year.
      */
-    public abstract int getYYYY();
+    public abstract int getYear();
 
     /**
      * Returns the month (January = 1, February = 2, March = 3).

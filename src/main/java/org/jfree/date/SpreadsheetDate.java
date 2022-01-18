@@ -240,7 +240,7 @@ public class SpreadsheetDate extends DayDate {
     @Override
     public Date toDate() {
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYYYY(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
+        calendar.set(getYear(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
         return calendar.getTime();
     }
 
@@ -250,7 +250,7 @@ public class SpreadsheetDate extends DayDate {
      * @return The year.
      */
     @Override
-    public int getYYYY() {
+    public int getYear() {
         return this.year;
     }
 

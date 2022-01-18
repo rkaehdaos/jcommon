@@ -200,7 +200,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("monthSelectionChanged")) {
             final JComboBox c = (JComboBox) e.getSource();
             this.date = DayDate.createInstance(
-                this.date.getDayOfMonth(), Month.fromInt(c.getSelectedIndex() + 1), this.date.getYYYY()
+                this.date.getDayOfMonth(), Month.fromInt(c.getSelectedIndex() + 1), this.date.getYear()
             );
             refreshButtons();
         }
@@ -290,7 +290,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      */
     protected DayDate getFirstVisibleDate() {
 
-        DayDate result = DayDate.createInstance(1, this.date.getMonth(), this.date.getYYYY());
+        DayDate result = DayDate.createInstance(1, this.date.getMonth(), this.date.getYear());
         result = result.addDays(-1);
         while (result.getDayOfWeek() != getFirstDayOfWeek()) {
             result = result.addDays(-1);
@@ -331,11 +331,11 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
         if (!this.refreshing) {
             this.refreshing = true;
             this.yearSelector.removeAllItems();
-            final Vector v = getYears(this.date.getYYYY());
+            final Vector v = getYears(this.date.getYear());
             for (Enumeration e = v.elements(); e.hasMoreElements();) {
                 this.yearSelector.addItem(e.nextElement());
             }
-            this.yearSelector.setSelectedItem(new Integer(this.date.getYYYY()));
+            this.yearSelector.setSelectedItem(new Integer(this.date.getYear()));
             this.refreshing = false;
         }
     }
