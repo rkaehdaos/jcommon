@@ -292,97 +292,97 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testGetPreviousDayOfWeek() throws Exception {
-        assertEquals(d(24, FEBRUARY, 2006), FRIDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
-        assertEquals(d(22, FEBRUARY, 2006), WEDNESDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
-        assertEquals(d(29, FEBRUARY, 2004), SUNDAY.getPreviousDayOfWeek(d(3, MARCH, 2004)));
-        assertEquals(d(29, DECEMBER, 2004), WEDNESDAY.getPreviousDayOfWeek(d(5, JANUARY, 2005)));
+        assertEquals(d(24, FEBRUARY, 2006), d(1, MARCH, 2006).getPreviousDayOfWeek(FRIDAY));
+        assertEquals(d(22, FEBRUARY, 2006), d(1, MARCH, 2006).getPreviousDayOfWeek(WEDNESDAY));
+        assertEquals(d(29, FEBRUARY, 2004), d(3, MARCH, 2004).getPreviousDayOfWeek(SUNDAY));
+        assertEquals(d(29, DECEMBER, 2004), d(5, JANUARY, 2005).getPreviousDayOfWeek(WEDNESDAY));
 
         try {
-            Day.fromInt(-1).getPreviousDayOfWeek(d(1, JANUARY, 2006));
+            d(1, JANUARY, 2006).getPreviousDayOfWeek(Day.fromInt(-1));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
 
         DayDate dayDate = DayDateFactory.makeDate(new Date());
 
-        assertEquals(d(24, FEBRUARY, 2006), FRIDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
-        assertEquals(d(22, FEBRUARY, 2006), WEDNESDAY.getPreviousDayOfWeek(d(1, MARCH, 2006)));
-        assertEquals(d(29, FEBRUARY, 2004), SUNDAY.getPreviousDayOfWeek(d(3, MARCH, 2004)));
-        assertEquals(d(29, DECEMBER, 2004), WEDNESDAY.getPreviousDayOfWeek(d(5, JANUARY, 2005)));
+        assertEquals(d(24, FEBRUARY, 2006), d(1, MARCH, 2006).getPreviousDayOfWeek(FRIDAY));
+        assertEquals(d(22, FEBRUARY, 2006), d(1, MARCH, 2006).getPreviousDayOfWeek(WEDNESDAY));
+        assertEquals(d(29, FEBRUARY, 2004), d(3, MARCH, 2004).getPreviousDayOfWeek(SUNDAY));
+        assertEquals(d(29, DECEMBER, 2004), d(5, JANUARY, 2005).getPreviousDayOfWeek(WEDNESDAY));
 
     }
 
     public void testGetFollowingDayOfWeek() throws Exception {
-        assertEquals(d(1, JANUARY, 2005), SATURDAY.getFollowingDayOfWeek(d(25, DECEMBER, 2004)));
-        assertEquals(d(1, JANUARY, 2005), SATURDAY.getFollowingDayOfWeek(d(26, DECEMBER, 2004)));
-        assertEquals(d(3, MARCH, 2004), WEDNESDAY.getFollowingDayOfWeek(d(28, FEBRUARY, 2004)));
+        assertEquals(d(1, JANUARY, 2005), d(25, DECEMBER, 2004).getFollowingDayOfWeek(SATURDAY));
+        assertEquals(d(1, JANUARY, 2005), d(26, DECEMBER, 2004).getFollowingDayOfWeek(SATURDAY));
+        assertEquals(d(3, MARCH, 2004), d(28, FEBRUARY, 2004).getFollowingDayOfWeek(WEDNESDAY));
 
         try {
-            Day.fromInt(-1).getFollowingDayOfWeek(d(1, JANUARY, 2006));
+            d(1, JANUARY, 2006).getFollowingDayOfWeek(Day.fromInt(-1));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }
     }
 
     public void testGetNearestDayOfWeek() throws Exception {
-        assertEquals(d(16, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(16, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(16, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(16, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(23, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(23, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(23, APRIL, 2006), SUNDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(16, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(16, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(16, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(16, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(23, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(23, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
+        assertEquals(d(23, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(SUNDAY));
 
-        assertEquals(d(17, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(17, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(17, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(17, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(17, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(24, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(24, APRIL, 2006), MONDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(17, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(17, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(17, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(17, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(17, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(24, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(MONDAY));
+        assertEquals(d(24, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(MONDAY));
 
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(18, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(25, APRIL, 2006), TUESDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(18, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(18, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(18, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(18, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(18, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(18, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
+        assertEquals(d(25, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(TUESDAY));
 
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(19, APRIL, 2006), WEDNESDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(19, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
+        assertEquals(d(19, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(WEDNESDAY));
 
-        assertEquals(d(13, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(20, APRIL, 2006), THURSDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(13, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
+        assertEquals(d(20, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(THURSDAY));
 
-        assertEquals(d(14, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(14, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(21, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(21, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(21, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(21, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(21, APRIL, 2006), FRIDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(14, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(14, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(21, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(21, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(21, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(21, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
+        assertEquals(d(21, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(FRIDAY));
 
-        assertEquals(d(15, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(16, APRIL, 2006)));
-        assertEquals(d(15, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(17, APRIL, 2006)));
-        assertEquals(d(15, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(18, APRIL, 2006)));
-        assertEquals(d(22, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(19, APRIL, 2006)));
-        assertEquals(d(22, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(20, APRIL, 2006)));
-        assertEquals(d(22, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(21, APRIL, 2006)));
-        assertEquals(d(22, APRIL, 2006), SATURDAY.getNearestDayOfWeek(d(22, APRIL, 2006)));
+        assertEquals(d(15, APRIL, 2006), d(16, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(15, APRIL, 2006), d(17, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(15, APRIL, 2006), d(18, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(22, APRIL, 2006), d(19, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(22, APRIL, 2006), d(20, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(22, APRIL, 2006), d(21, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
+        assertEquals(d(22, APRIL, 2006), d(22, APRIL, 2006).getNearestDayOfWeek(SATURDAY));
 
         try {
-            Day.fromInt(-1).getNearestDayOfWeek(d(1, JANUARY, 2006));
+            d(1, JANUARY, 2006).getNearestDayOfWeek(Day.fromInt(-1));
             fail("Invalid day of week code should throw exception");
         } catch (IllegalArgumentException e) {
         }

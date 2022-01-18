@@ -124,9 +124,8 @@ public class DayDateTest extends TestCase {
      * Monday preceding Friday 9 November 2001 should be 5 November.
      */
     public void testMondayPrecedingFriday9Nov2001() {
-        DayDate mondayBefore = MONDAY.getPreviousDayOfWeek(
-                this.nov9Y2001
-        );
+        DayDate mondayBefore = this.nov9Y2001.getPreviousDayOfWeek(
+                MONDAY);
         assertEquals(5, mondayBefore.getDayOfMonth());
     }
 
@@ -134,9 +133,8 @@ public class DayDateTest extends TestCase {
      * Monday following Friday 9 November 2001 should be 12 November.
      */
     public void testMondayFollowingFriday9Nov2001() {
-        DayDate mondayAfter = MONDAY.getFollowingDayOfWeek(
-                this.nov9Y2001
-        );
+        DayDate mondayAfter = this.nov9Y2001.getFollowingDayOfWeek(
+                MONDAY);
         assertEquals(12, mondayAfter.getDayOfMonth());
     }
 
@@ -144,9 +142,8 @@ public class DayDateTest extends TestCase {
      * Monday nearest Friday 9 November 2001 should be 12 November.
      */
     public void testMondayNearestFriday9Nov2001() {
-        DayDate mondayNearest = MONDAY.getNearestDayOfWeek(
-                this.nov9Y2001
-        );
+        DayDate mondayNearest = this.nov9Y2001.getNearestDayOfWeek(
+                MONDAY);
         assertEquals(12, mondayNearest.getDayOfMonth());
     }
 
@@ -155,7 +152,7 @@ public class DayDateTest extends TestCase {
      */
     public void testMondayNearest22Jan1970() {
         DayDate jan22Y1970 = DayDate.createInstance(22, JANUARY, 1970);
-        DayDate mondayNearest = MONDAY.getNearestDayOfWeek(jan22Y1970);
+        DayDate mondayNearest = jan22Y1970.getNearestDayOfWeek(MONDAY);
         assertEquals(19, mondayNearest.getDayOfMonth());
     }
 
