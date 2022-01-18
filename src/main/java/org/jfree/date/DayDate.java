@@ -209,14 +209,13 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public DayDate addMonths(int months) {
 
-        int yy = (12 * getYear() + getMonth().index - 1 + months)
-                / 12;
-        int mm = (12 * getYear() + getMonth().index - 1 + months)
-                % 12 + 1;
-        int dd = Math.min(
-            getDayOfMonth(), lastDayOfMonth(Month.fromInt(mm), yy)
-        );
-        return DayDate.createInstance(dd, Month.fromInt(mm), yy);
+        int thisMonthAsOrdinal = 12 * getYear() + getMonth().index - 1;
+        int resultMonthAsOrdinal = thisMonthAsOrdinal + months;
+        int resultYear = resultMonthAsOrdinal / 12;
+        Month resultMonth = Month.fromInt(resultMonthAsOrdinal % 12 + 1);
+        int lastDayOfResultMonth = lastDayOfMonth(resultMonth, resultYear);
+        int resultDay = Math.min(getDayOfMonth(), lastDayOfResultMonth);
+        return DayDate.createInstance(resultDay, resultMonth, resultYear);
 
     }
 
