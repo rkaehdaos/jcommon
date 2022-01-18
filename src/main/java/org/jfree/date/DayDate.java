@@ -224,10 +224,7 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
     public DayDate addDays(int days) {
-
-        int serialDayNumber = toOrdinal() + days;
-        return DayDate.createInstance(serialDayNumber);
-
+        return DayDateFactory.makeDate(toOrdinal() + days);
     }
 
     /**
