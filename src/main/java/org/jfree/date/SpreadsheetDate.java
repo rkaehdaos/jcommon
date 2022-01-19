@@ -138,7 +138,7 @@ public class SpreadsheetDate extends DayDate {
         if (underestimatedYear == overestimatedYear) {
             this.year = underestimatedYear;
         } else {
-            int ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
+            int ss1 = firstOrdinalOfYear(underestimatedYear);
             while (ss1 <= this.ordinalDay) {
                 underestimatedYear = underestimatedYear + 1;
                 ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
@@ -165,6 +165,10 @@ public class SpreadsheetDate extends DayDate {
         this.day = this.ordinalDay - ss2
                 - daysToEndOfPrecedingMonth[this.month.toInt()] + 1;
 
+    }
+
+    private int firstOrdinalOfYear(int underestimatedYear) {
+        return calcOrdinal(1, Month.JANUARY, underestimatedYear);
     }
 
     public static DayDate createInstance(Date date) {
