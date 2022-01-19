@@ -63,13 +63,8 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
-
-    public DayDate plusYears(int years) {
-
-        int resultYear = getYear() + years;
-        int lastDayOfMonthInResultYear = DateUtil.lastDayOfMonth(getMonth(), resultYear);
-        int resultDay = Math.min(getDayOfMonth(), lastDayOfMonthInResultYear);
-        return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
+    public DayDate plusDays(int days) {
+        return DayDateFactory.makeDate(getOrdinalDay() + days);
     }
 
     public DayDate plusMonths(int months) {
@@ -84,8 +79,12 @@ public abstract class DayDate implements Comparable, Serializable {
 
     }
 
-    public DayDate plusDays(int days) {
-        return DayDateFactory.makeDate(getOrdinalDay() + days);
+    public DayDate plusYears(int years) {
+
+        int resultYear = getYear() + years;
+        int lastDayOfMonthInResultYear = DateUtil.lastDayOfMonth(getMonth(), resultYear);
+        int resultDay = Math.min(getDayOfMonth(), lastDayOfMonthInResultYear);
+        return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
     }
 
     public DayDate getEndOfCurrentMonth() {
