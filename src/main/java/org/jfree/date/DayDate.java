@@ -146,7 +146,9 @@ public abstract class DayDate implements Comparable, Serializable {
         return Day.fromInt((getOrdinalDay() + startingOffset) % 7 + 1);
     }
 
-    public abstract int compare(DayDate other);
+    public int compare(DayDate other) {
+        return getOrdinalDay() - other.getOrdinalDay();
+    }
 
     public abstract boolean isOn(DayDate other);
 

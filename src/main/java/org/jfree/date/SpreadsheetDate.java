@@ -299,20 +299,6 @@ public class SpreadsheetDate extends DayDate {
     }
 
     /**
-     * Returns the difference (in days) between this date and the specified 
-     * 'other' date.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return The difference (in days) between this date and the specified 
-     *         'other' date.
-     */
-    @Override
-    public int compare(final DayDate other) {
-        return this.serial - other.getOrdinalDay();
-    }
-
-    /**
      * Implements the method required by the Comparable interface.
      * 
      * @param other  the other object (usually another SerialDate).
