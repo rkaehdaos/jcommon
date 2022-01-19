@@ -169,12 +169,15 @@ public abstract class DayDate implements Comparable, Serializable {
     public abstract int toOrdinal();
 
     /**
-     * Returns a java.util.Date.  Since java.util.Date has more precision than
-     * SerialDate, we need to define a convention for the 'time of day'.
+     * Returns a <code>java.util.Date</code> equivalent to this date.
      *
-     * @return this as <code>java.util.Date</code>.
+     * @return The date.
      */
-    public abstract java.util.Date toDate();
+    public Date toDate() {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(getYear(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
+        return calendar.getTime();
+    }
 
     /**
      * Converts the date to a string.
