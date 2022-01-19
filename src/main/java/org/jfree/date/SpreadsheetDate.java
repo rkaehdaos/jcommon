@@ -150,10 +150,9 @@ public class SpreadsheetDate extends DayDate {
     private Month huntForMonthContaing(int firstOrdinalOfYear) {
         int daysIntoThisYear = ordinalDay - firstOrdinalOfYear;
         int aMonth = 1;
-        while (true) {
-            if (!(+ daysBeforeThisMonth(aMonth) < daysIntoThisYear)) break;
-            aMonth += 1;
-        }
+        while (daysBeforeThisMonth(aMonth) < daysIntoThisYear)
+            aMonth ++;
+
         return Month.fromInt(aMonth - 1);
     }
 
