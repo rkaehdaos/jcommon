@@ -145,15 +145,27 @@ public class SpreadsheetDate extends DayDate {
             daysToEndOfPrecedingMonth
                     = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
         }
-        int mm = 1;
 
-        while (firstOrdinalOfYear + daysToEndOfPrecedingMonth[mm] - 1 < ordinalDay) {
-            mm += 1;
-        }
-        month = Month.fromInt(mm - 1);
+        month = huntForMonthContaing(firstOrdinalOfYear);
+
         day = ordinalDay - firstOrdinalOfYear
                 - daysToEndOfPrecedingMonth[month.toInt()] + 1;
 
+    }
+
+    private Month huntForMonthContaing(int firstOrdinalOfYear) {
+        int mm = 1;
+        int[] daysToEndOfPrecedingMonth
+                = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
+
+        if (DateUtil.isLeapYear(year)) {
+            daysToEndOfPrecedingMonth
+                    = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
+        }
+        while (firstOrdinalOfYear + daysToEndOfPrecedingMonth[mm] - 1 < ordinalDay) {
+            mm += 1;
+        }
+        return Month.fromInt(mm - 1);
     }
 
     private int huntForYearContaining(int startingYear) {
