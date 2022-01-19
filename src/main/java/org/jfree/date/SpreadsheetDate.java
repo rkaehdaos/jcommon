@@ -157,7 +157,7 @@ public class SpreadsheetDate extends DayDate {
             daysToEndOfPrecedingMonth
                     = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
         }
-        while (firstOrdinalOfYear + daysToEndOfPrecedingMonth[mm] - 1 < ordinalDay) {
+        while (firstOrdinalOfYear + daysBeforeThisMonth(mm) < ordinalDay) {
             mm += 1;
         }
         return Month.fromInt(mm - 1);
