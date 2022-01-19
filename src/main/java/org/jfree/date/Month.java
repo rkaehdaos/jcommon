@@ -10,7 +10,7 @@ public enum Month {
     JULY(7), AUGUST(8), SEPTEMBER(9),
     OCTOBER(10), NOVEMBER(11), DECEMBER(12);
 
-    public static DateFormatSymbols dateFormatSymbols =
+    private static DateFormatSymbols dateFormatSymbols =
             new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
     private static final int[] LAST_DAY_OF_MONTH =
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -51,7 +51,6 @@ public enum Month {
                 s.equalsIgnoreCase(toShortString());
     }
 
-
     @Override
     public String toString() {
         return dateFormatSymbols.getMonths()[index - 1];
@@ -61,8 +60,7 @@ public enum Month {
         return dateFormatSymbols.getShortMonths()[index - 1];
     }
 
-    public int toInt(){
+    public int toInt() {
         return index;
     }
-
 }
