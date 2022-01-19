@@ -176,7 +176,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
     public void setDate(final DayDate date) {
 
         this.date = date;
-        this.monthSelector.setSelectedIndex(date.getMonth().index - 1);
+        this.monthSelector.setSelectedIndex(date.getMonth().toInt() - 1);
         refreshYearSelector();
         refreshButtons();
 

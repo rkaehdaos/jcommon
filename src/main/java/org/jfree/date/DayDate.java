@@ -69,7 +69,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public DayDate plusMonths(int months) {
 
-        int thisMonthAsOrdinal = 12 * getYear() + getMonth().index - 1;
+        int thisMonthAsOrdinal = 12 * getYear() + getMonth().toInt() - 1;
         int resultMonthAsOrdinal = thisMonthAsOrdinal + months;
         int resultYear = resultMonthAsOrdinal / 12;
         Month resultMonth = Month.fromInt(resultMonthAsOrdinal % 12 + 1);
@@ -198,7 +198,7 @@ public abstract class DayDate implements Comparable, Serializable {
      */
     public Date toDate() {
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYear(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
+        calendar.set(getYear(), getMonth().toInt() - 1, getDayOfMonth(), 0, 0, 0);
         return calendar.getTime();
     }
 
