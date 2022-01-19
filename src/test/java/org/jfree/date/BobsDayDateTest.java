@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.jfree.date.Day.*;
-import static org.jfree.date.DayDate.*;
 import static org.jfree.date.Month.*;
 
 public class BobsDayDateTest extends TestCase {
@@ -417,7 +416,7 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testCreateInstanceFromDDMMYYY() throws Exception {
-        DayDate date = createInstance(1, JANUARY, 1900);
+        DayDate date = DayDateFactory.makeDate(1, JANUARY, 1900);
         assertEquals(1, date.getDayOfMonth());
         assertEquals(JANUARY, date.getMonth());
         assertEquals(1900, date.getYear());
@@ -425,13 +424,13 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testCreateInstanceFromSerial() throws Exception {
-        assertEquals(d(1, JANUARY, 1900), createInstance(2));
-        assertEquals(d(1, JANUARY, 1901), createInstance(367));
+        assertEquals(d(1, JANUARY, 1900), DayDateFactory.makeDate(2));
+        assertEquals(d(1, JANUARY, 1901), DayDateFactory.makeDate(367));
     }
 
     public void testCreateInstanceFromJavaDate() throws Exception {
-        assertEquals(d(1, JANUARY, 1900), createInstance(new GregorianCalendar(1900, 0, 1).getTime()));
-        assertEquals(d(1, JANUARY, 2006), createInstance(new GregorianCalendar(2006, 0, 1).getTime()));
+        assertEquals(d(1, JANUARY, 1900), DayDateFactory.makeDate(new GregorianCalendar(1900, 0, 1).getTime()));
+        assertEquals(d(1, JANUARY, 2006), DayDateFactory.makeDate(new GregorianCalendar(2006, 0, 1).getTime()));
     }
 
     public void testDaysSince() throws Exception {

@@ -50,7 +50,7 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 import static org.jfree.date.Day.*;
-import static org.jfree.date.Month.*;
+import static org.jfree.date.Month.FEBRUARY;
 
 /**
  * A utility class that provides a number of useful methods (some static).
@@ -375,7 +375,7 @@ public class SerialDateUtilities {
             y2 = end.getYear();
             for (year = y1; year == y2; year++) {
                 if (DateUtil.isLeapYear(year)) {
-                    feb29 = DayDate.createInstance(29, FEBRUARY, year);
+                    feb29 = DayDateFactory.makeDate(29, FEBRUARY, year);
                     if (feb29.isInRange(start, end, DateInterval.CLOSED_RIGHT)) {
                         count++;
                     }

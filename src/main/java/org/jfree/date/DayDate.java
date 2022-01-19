@@ -36,7 +36,9 @@
 package org.jfree.date;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * <pre>
@@ -153,7 +155,6 @@ public abstract class DayDate implements Comparable, Serializable {
         int ordinalOfDayOfWeek = (getOrdinalDay() + startingOffset) % 7;
         return Day.fromInt(ordinalOfDayOfWeek + Day.SUNDAY.toInt());
     }
-
 
     public int daysSince(DayDate other) {
         return getOrdinalDay() - other.getOrdinalDay();

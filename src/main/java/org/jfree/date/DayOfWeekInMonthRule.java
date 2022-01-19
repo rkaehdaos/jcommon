@@ -46,7 +46,8 @@ package org.jfree.date;
 
 import static org.jfree.date.Day.MONDAY;
 import static org.jfree.date.Month.JANUARY;
-import static org.jfree.date.WeekInMonth.*;
+import static org.jfree.date.WeekInMonth.FIRST;
+import static org.jfree.date.WeekInMonth.LAST;
 
 /**
  * An annual date rule that specifies the nth day of the week in a given month
@@ -146,7 +147,7 @@ public class DayOfWeekInMonthRule extends AnnualDateRule {
         DayDate result;
         if (this.weekInMonth != LAST) {
             // start at the beginning of the month
-            result = DayDate.createInstance(1, this.month, year);
+            result = DayDateFactory.makeDate(1, this.month, year);
             while (result.getDayOfWeek() != this.dayOfWeek) {
                 result = result.plusDays(1);
             }
@@ -155,7 +156,7 @@ public class DayOfWeekInMonthRule extends AnnualDateRule {
         }
         else {
             // start at the end of the month and work backwards...
-            result = DayDate.createInstance(1, this.month, year);
+            result = DayDateFactory.makeDate(1, this.month, year);
             result = result.getEndOfMonth();
             while (result.getDayOfWeek() != this.dayOfWeek) {
                 result = result.plusDays(-1);
