@@ -307,92 +307,38 @@ public class SpreadsheetDate extends DayDate {
      *         is less than, equal to, or greater than the specified object.
      */
     @Override
-    public int compareTo(final Object other) {
+    public int compareTo(Object other) {
         return daysSince((DayDate) other);
     }
-    
-    /**
-     * Returns true if this SerialDate represents the same date as the
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date as
-     *         the specified SerialDate.
-     */
+
+
     @Override
-    public boolean isOn(final DayDate other) {
-        return (this.serial == other.getOrdinalDay());
+    public boolean isOn(DayDate other) {
+        return (getOrdinalDay() == other.getOrdinalDay());
     }
 
-    /**
-     * Returns true if this SerialDate represents an earlier date compared to
-     * the specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents an earlier date
-     *         compared to the specified SerialDate.
-     */
     @Override
-    public boolean isBefore(final DayDate other) {
-        return (this.serial < other.getOrdinalDay());
+    public boolean isBefore(DayDate other) {
+        return (getOrdinalDay() < other.getOrdinalDay());
     }
 
-    /**
-     * Returns true if this SerialDate represents the same date as the
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date
-     *         as the specified SerialDate.
-     */
     @Override
-    public boolean isOnOrBefore(final DayDate other) {
-        return (this.serial <= other.getOrdinalDay());
+    public boolean isOnOrBefore(DayDate other) {
+        return (getOrdinalDay() <= other.getOrdinalDay());
     }
 
-    /**
-     * Returns true if this SerialDate represents the same date as the
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date
-     *         as the specified SerialDate.
-     */
     @Override
-    public boolean isAfter(final DayDate other) {
-        return (this.serial > other.getOrdinalDay());
+    public boolean isAfter(DayDate other) {
+        return (getOrdinalDay() > other.getOrdinalDay());
     }
 
-    /**
-     * Returns true if this SerialDate represents the same date as the
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date as
-     *         the specified SerialDate.
-     */
     @Override
-    public boolean isOnOrAfter(final DayDate other) {
-        return (this.serial >= other.getOrdinalDay());
+    public boolean isOnOrAfter(DayDate other) {
+        return (getOrdinalDay() >= other.getOrdinalDay());
     }
 
-    /**
-     * Returns <code>true</code> if this {@link DayDate} is within the
-     * specified range (INCLUSIVE).  The date order of d1 and d2 is not 
-     * important.
-     *
-     * @param d1  a boundary date for the range.
-     * @param d2  the other boundary date for the range.
-     *
-     * @return A boolean.
-     */
     @Override
-    public boolean isInRange(final DayDate d1, final DayDate d2) {
+    public boolean isInRange(DayDate d1, DayDate d2) {
         return isInRange(d1, d2, DateInterval.OPEN);
     }
 
@@ -403,10 +349,10 @@ public class SpreadsheetDate extends DayDate {
      *
      * @param d1  one boundary date for the range.
      * @param d2  a second boundary date for the range.
-     * @param include  a code that controls whether or not the start and end 
+     * @param include  a code that controls whether or not the start and end
      *                 dates are included in the range.
      *
-     * @return <code>true</code> if this SerialDate is within the specified 
+     * @return <code>true</code> if this SerialDate is within the specified
      *         range.
      */
     @Override
