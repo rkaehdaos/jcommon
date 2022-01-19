@@ -217,6 +217,11 @@ public class SpreadsheetDate extends DayDate {
     }
 
 
+    @Override
+    public Day getDayOfWeekForOrdinalZero() {
+        return Day.SATURDAY;
+    }
+
     /**
      * Returns the serial number for the date, where 1 January 1900 = 2
      * (this corresponds, almost, to the numbering system used in Microsoft

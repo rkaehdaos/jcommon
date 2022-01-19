@@ -115,6 +115,8 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
 
+    public abstract Day getDayOfWeekForOrdinalZero();
+
     /**
      * Factory method that returns an instance of some concrete subclass of 
      * {@link DayDate}.
@@ -167,27 +169,6 @@ public abstract class DayDate implements Comparable, Serializable {
      * @return the serial number for the date.
      */
     public abstract int toOrdinal();
-
-    /**
-     * Returns a <code>java.util.Date</code> equivalent to this date.
-     *
-     * @return The date.
-     */
-    public Date toDate() {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYear(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
-        return calendar.getTime();
-    }
-
-    /**
-     * Converts the date to a string.
-     *
-     * @return  a string representation of the date.
-     */
-    public String toString() {
-        return getDayOfMonth() + "-" + getMonth().toString()
-                               + "-" + getYear();
-    }
 
     /**
      * Returns the year (assume a valid range of 1900 to 9999).
@@ -336,5 +317,26 @@ public abstract class DayDate implements Comparable, Serializable {
         if (offsetToTarget >= 0)
             offsetToTarget -= 7;
         return plusDays(offsetToTarget);
+    }
+
+    /**
+     * Returns a <code>java.util.Date</code> equivalent to this date.
+     *
+     * @return The date.
+     */
+    public Date toDate() {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(getYear(), getMonth().index - 1, getDayOfMonth(), 0, 0, 0);
+        return calendar.getTime();
+    }
+
+    /**
+     * Converts the date to a string.
+     *
+     * @return  a string representation of the date.
+     */
+    public String toString() {
+        return getDayOfMonth() + "-" + getMonth().toString()
+                + "-" + getYear();
     }
 }
