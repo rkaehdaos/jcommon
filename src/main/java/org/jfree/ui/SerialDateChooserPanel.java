@@ -61,6 +61,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.jfree.date.DateUtil;
 import org.jfree.date.Day;
 import org.jfree.date.DayDate;
 import org.jfree.date.Month;
@@ -365,7 +366,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      */
     private JPanel constructSelectionPanel() {
         final JPanel p = new JPanel();
-        this.monthSelector = new JComboBox(DayDate.getMonthNames());
+        this.monthSelector = new JComboBox(DateUtil.getMonthNames());
         this.monthSelector.addActionListener(this);
         this.monthSelector.setActionCommand("monthSelectionChanged");
         p.add(this.monthSelector);

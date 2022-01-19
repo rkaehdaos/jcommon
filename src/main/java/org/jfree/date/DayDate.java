@@ -66,11 +66,6 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
 
-    public static String[] getMonthNames() {
-        return DateUtil.dateFormatSymbols.getMonths();
-
-    }
-
     public static boolean isLeapYear(int year) {
         boolean fourth = year % 4 == 0;
         boolean hundredth = year % 100 == 0;

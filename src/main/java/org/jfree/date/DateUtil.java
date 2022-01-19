@@ -10,4 +10,9 @@ public class DateUtil {
 
     public static DateFormatSymbols
             dateFormatSymbols = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
+
+    public static String[] getMonthNames() {
+        return dateFormatSymbols.getMonths();
+
+    }
 }
