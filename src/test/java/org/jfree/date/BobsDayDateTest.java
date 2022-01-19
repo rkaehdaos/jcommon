@@ -389,31 +389,31 @@ public class BobsDayDateTest extends TestCase {
 
     public void testEndOfCurrentMonth() throws Exception {
         DayDate d = DayDateFactory.makeDate(1, JANUARY, 2006);
-        assertEquals(d(31, JANUARY, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, JANUARY, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(28, FEBRUARY, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(28, FEBRUARY, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, MARCH, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, MARCH, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(30, APRIL, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(30, APRIL, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, MAY, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, MAY, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(30, JUNE, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(30, JUNE, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, JULY, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, JULY, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, AUGUST, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, AUGUST, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(30, SEPTEMBER, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(30, SEPTEMBER, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, OCTOBER, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, OCTOBER, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(30, NOVEMBER, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(30, NOVEMBER, 2006), d.getEndOfMonth());
         d = d.plusMonths(1);
-        assertEquals(d(31, DECEMBER, 2006), d.getEndOfCurrentMonth());
+        assertEquals(d(31, DECEMBER, 2006), d.getEndOfMonth());
         d = d.plusMonths(14);
-        assertEquals(d(29, FEBRUARY, 2008), d.getEndOfCurrentMonth());
+        assertEquals(d(29, FEBRUARY, 2008), d.getEndOfMonth());
     }
 
     public void testCreateInstanceFromDDMMYYY() throws Exception {

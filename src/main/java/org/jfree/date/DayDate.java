@@ -129,7 +129,7 @@ public abstract class DayDate implements Comparable, Serializable {
             return plusDays(offsetToFutureTarget);
     }
 
-    public DayDate getEndOfCurrentMonth() {
+    public DayDate getEndOfMonth() {
         Month month = getMonth();
         int year = getYear();
         int lastDay = DateUtil.lastDayOfMonth(month, year);
