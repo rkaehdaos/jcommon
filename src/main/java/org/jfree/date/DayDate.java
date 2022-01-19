@@ -87,6 +87,8 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
     }
 
+
+
     public DayDate getEndOfCurrentMonth() {
         Month month = getMonth();
         int year = getYear();

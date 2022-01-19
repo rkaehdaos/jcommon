@@ -23,7 +23,7 @@ public enum Month {
     static int[] LAST_DAY_OF_MONTH =
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    public final int index;
+    private final int index;
 
     Month(int index) {
         this.index = index;
