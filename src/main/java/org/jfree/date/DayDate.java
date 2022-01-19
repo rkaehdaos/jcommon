@@ -73,9 +73,6 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public abstract Day getDayOfWeekForOrdinalZero();
 
-    public static final int MINIMUM_YEAR_SUPPORTED = 1900;
-    public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
-
     public DayDate plusDays(int days) {
         return DayDateFactory.makeDate(getOrdinalDay() + days);
     }
