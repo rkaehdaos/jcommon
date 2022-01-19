@@ -312,36 +312,6 @@ public class SpreadsheetDate extends DayDate {
     }
 
 
-    @Override
-    public boolean isOn(DayDate other) {
-        return (getOrdinalDay() == other.getOrdinalDay());
-    }
-
-    @Override
-    public boolean isBefore(DayDate other) {
-        return (getOrdinalDay() < other.getOrdinalDay());
-    }
-
-    @Override
-    public boolean isOnOrBefore(DayDate other) {
-        return (getOrdinalDay() <= other.getOrdinalDay());
-    }
-
-    @Override
-    public boolean isAfter(DayDate other) {
-        return (getOrdinalDay() > other.getOrdinalDay());
-    }
-
-    @Override
-    public boolean isOnOrAfter(DayDate other) {
-        return (getOrdinalDay() >= other.getOrdinalDay());
-    }
-
-    @Override
-    public boolean isInRange(DayDate d1, DayDate d2) {
-        return isInRange(d1, d2, DateInterval.OPEN);
-    }
-
     /**
      * Returns true if this SerialDate is within the specified range (caller
      * specifies whether or not the end-points are included).  The order of d1

@@ -150,17 +150,29 @@ public abstract class DayDate implements Comparable, Serializable {
         return getOrdinalDay() - other.getOrdinalDay();
     }
 
-    public abstract boolean isOn(DayDate other);
+    public boolean isOn(DayDate other) {
+        return (getOrdinalDay() == other.getOrdinalDay());
+    }
 
-    public abstract boolean isBefore(DayDate other);
+    public boolean isBefore(DayDate other) {
+        return (getOrdinalDay() < other.getOrdinalDay());
+    }
 
-    public abstract boolean isOnOrBefore(DayDate other);
+    public boolean isOnOrBefore(DayDate other) {
+        return (getOrdinalDay() <= other.getOrdinalDay());
+    }
 
-    public abstract boolean isAfter(DayDate other);
+    public boolean isAfter(DayDate other) {
+        return (getOrdinalDay() > other.getOrdinalDay());
+    }
 
-    public abstract boolean isOnOrAfter(DayDate other);
+    public boolean isOnOrAfter(DayDate other) {
+        return (getOrdinalDay() >= other.getOrdinalDay());
+    }
 
-    public abstract boolean isInRange(DayDate d1, DayDate d2);
+    public boolean isInRange(DayDate d1, DayDate d2) {
+        return isInRange(d1, d2, DateInterval.OPEN);
+    }
 
     public abstract boolean isInRange(DayDate d1, DayDate d2, DateInterval include);
 
