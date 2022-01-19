@@ -110,7 +110,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return plusDays(offsetToTarget);
     }
 
-
     public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
 
         int offsetToTarget = targetDayOfWeek.toInt() - getDayOfWeek().toInt();
@@ -119,18 +118,16 @@ public abstract class DayDate implements Comparable, Serializable {
         return plusDays(offsetToTarget);
     }
 
-
     public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
         int offsetToThisWeeksTarget = targetDayOfWeek.toInt() - getDayOfWeek().toInt();
         int offsetToFutureTarget = (offsetToThisWeeksTarget + 7) % 7;
         int offsetToPreviousTarget = offsetToFutureTarget - 7;
-        if (offsetToFutureTarget > 3) {
+        if (offsetToFutureTarget > 3)
             return plusDays(offsetToPreviousTarget);
-        } else
+        else
             return plusDays(offsetToFutureTarget);
     }
-
 
     public DayDate getEndOfCurrentMonth() {
         Month month = getMonth();
@@ -139,17 +136,15 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-
     public Date toDate() {
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYear(), getMonth().toInt() - 1, getDayOfMonth(), 0, 0, 0);
+        int ordinalMonth = getMonth().toInt() - Month.JANUARY.toInt();
+        calendar.set(getYear(), ordinalMonth, getDayOfMonth(), 0, 0, 0);
         return calendar.getTime();
     }
 
-
     public String toString() {
-        return getDayOfMonth() + "-" + getMonth().toString()
-                + "-" + getYear();
+        return String.format("%02d-%s-%d", getDayOfMonth(), getMonth(),getYear());
     }
 
 
