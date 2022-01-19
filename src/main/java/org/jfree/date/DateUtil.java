@@ -15,4 +15,13 @@ public class DateUtil {
         return dateFormatSymbols.getMonths();
 
     }
+
+    public static int lastDayOfMonth(Month month, int year) {
+        int lastDay = month.lastDay();
+        if (month == Month.FEBRUARY && DayDate.isLeapYear(year)) {
+            return lastDay + 1;
+        } else {
+            return lastDay;
+        }
+    }
 }

@@ -241,19 +241,19 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testLastDayOfMonth() throws Exception {
-        assertEquals(31, lastDayOfMonth(JANUARY, 1901));
-        assertEquals(28, lastDayOfMonth(FEBRUARY, 1901));
-        assertEquals(31, lastDayOfMonth(MARCH, 1901));
-        assertEquals(30, lastDayOfMonth(APRIL, 1901));
-        assertEquals(31, lastDayOfMonth(MAY, 1901));
-        assertEquals(30, lastDayOfMonth(JUNE, 1901));
-        assertEquals(31, lastDayOfMonth(JULY, 1901));
-        assertEquals(31, lastDayOfMonth(AUGUST, 1901));
-        assertEquals(30, lastDayOfMonth(SEPTEMBER, 1901));
-        assertEquals(31, lastDayOfMonth(OCTOBER, 1901));
-        assertEquals(30, lastDayOfMonth(NOVEMBER, 1901));
-        assertEquals(31, lastDayOfMonth(DECEMBER, 1901));
-        assertEquals(29, lastDayOfMonth(FEBRUARY, 1904));
+        assertEquals(31, DateUtil.lastDayOfMonth(JANUARY, 1901));
+        assertEquals(28, DateUtil.lastDayOfMonth(FEBRUARY, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(MARCH, 1901));
+        assertEquals(30, DateUtil.lastDayOfMonth(APRIL, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(MAY, 1901));
+        assertEquals(30, DateUtil.lastDayOfMonth(JUNE, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(JULY, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(AUGUST, 1901));
+        assertEquals(30, DateUtil.lastDayOfMonth(SEPTEMBER, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(OCTOBER, 1901));
+        assertEquals(30, DateUtil.lastDayOfMonth(NOVEMBER, 1901));
+        assertEquals(31, DateUtil.lastDayOfMonth(DECEMBER, 1901));
+        assertEquals(29, DateUtil.lastDayOfMonth(FEBRUARY, 1904));
     }
 
     public void testAddDays() throws Exception {
