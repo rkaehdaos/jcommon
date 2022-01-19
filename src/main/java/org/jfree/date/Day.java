@@ -15,6 +15,7 @@ public enum Day {
     SATURDAY(Calendar.SATURDAY);
 
     private final int index;
+
     private static DateFormatSymbols dateFormatSymbols =
             new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 

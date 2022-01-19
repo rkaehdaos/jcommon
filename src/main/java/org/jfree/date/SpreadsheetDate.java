@@ -109,7 +109,7 @@ public class SpreadsheetDate extends DayDate {
 
     public SpreadsheetDate(int day, Month month, int year) {
 
-        if ((year < MINIMUM_YEAR_SUPPORTED) && (year > MAXIMUM_YEAR_SUPPORTED))
+        if ((year < MINIMUM_YEAR_SUPPORTED) || (year > MAXIMUM_YEAR_SUPPORTED))
             throw new IllegalArgumentException(
                     "The 'year' argument must be in range 1900 to 9999.");
         this.year = year;
@@ -124,7 +124,7 @@ public class SpreadsheetDate extends DayDate {
 
     public SpreadsheetDate(int serial) {
 
-        if ((serial < EARLIEST_DATE_ORDINAL) && (serial > LATEST_DATE_ORDINAL))
+        if ((serial < EARLIEST_DATE_ORDINAL) || (serial > LATEST_DATE_ORDINAL))
             throw new IllegalArgumentException(
                     "SpreadsheetDate: Serial must be in range 2 to 2958465.");
 
@@ -137,7 +137,7 @@ public class SpreadsheetDate extends DayDate {
         year = huntForYearContaining(underestimatedYear);
         int firstOrdinalOfYear = firstOrdinalOfYear(year);
         month = huntForMonthContaing(firstOrdinalOfYear);
-        day = ordinalDay - firstOrdinalOfYear - daysBeforeThisMonth(month.toInt()) ;
+        day = ordinalDay - firstOrdinalOfYear - daysBeforeThisMonth(month.toInt());
     }
 
     private int daysBeforeThisMonth(int aMonth) {
@@ -151,7 +151,7 @@ public class SpreadsheetDate extends DayDate {
         int daysIntoThisYear = ordinalDay - firstOrdinalOfYear;
         int aMonth = 1;
         while (daysBeforeThisMonth(aMonth) < daysIntoThisYear)
-            aMonth ++;
+            aMonth++;
 
         return Month.fromInt(aMonth - 1);
     }

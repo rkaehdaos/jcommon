@@ -142,7 +142,7 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
     public String toString() {
-        return String.format("%02d-%s-%d", getDayOfMonth(), getMonth(),getYear());
+        return String.format("%02d-%s-%d", getDayOfMonth(), getMonth(), getYear());
     }
 
     public Day getDayOfWeek() {

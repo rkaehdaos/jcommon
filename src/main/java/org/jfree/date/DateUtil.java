@@ -6,12 +6,11 @@ import java.util.Locale;
 
 public class DateUtil {
 
-    public static DateFormatSymbols
-            dateFormatSymbols = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
+    public static DateFormatSymbols dateFormatSymbols =
+            new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
     public static String[] getMonthNames() {
         return dateFormatSymbols.getMonths();
-
     }
 
     public static int lastDayOfMonth(Month month, int year) {
