@@ -46,8 +46,8 @@ package org.jfree.date;
 
 import static org.jfree.date.Day.MONDAY;
 import static org.jfree.date.Month.JANUARY;
-import static org.jfree.date.WeekInMonth.FIRST;
-import static org.jfree.date.WeekInMonth.LAST;
+import static org.jfree.date.WeekInterval.FIRST;
+import static org.jfree.date.WeekInterval.LAST;
 
 /**
  * An annual date rule that specifies the nth day of the week in a given month
@@ -58,7 +58,7 @@ import static org.jfree.date.WeekInMonth.LAST;
 public class DayOfWeekInMonthRule extends AnnualDateRule {
 
     /** FIRST, SECOND, THIRD, FOURTH or LAST. */
-    private WeekInMonth weekInMonth;
+    private WeekInterval weekInterval;
 
     /** The day of the week (SerialDate.MONDAY, SerialDate.TUESDAY...). */
     private Day dayOfWeek;
@@ -76,12 +76,12 @@ public class DayOfWeekInMonthRule extends AnnualDateRule {
     /**
      * Standard constructor: builds a rule with the specified attributes.
      *
-     * @param weekInMonth  one of: FIRST, SECOND, THIRD, FOURTH or LAST.
+     * @param weekInterval  one of: FIRST, SECOND, THIRD, FOURTH or LAST.
      * @param dayOfWeek  the day-of-the-week (SerialDate.MONDAY, SerialDate.TUESDAY, etc.).
      * @param month  the month (SerialDate.JANUARY, SerialDate.FEBRUARY, etc.).
      */
-    public DayOfWeekInMonthRule(final WeekInMonth weekInMonth, final Day dayOfWeek, final Month month) {
-        this.weekInMonth = weekInMonth;
+    public DayOfWeekInMonthRule(final WeekInterval weekInterval, final Day dayOfWeek, final Month month) {
+        this.weekInterval = weekInterval;
         this.dayOfWeek = dayOfWeek;
         this.month = month;
     }
@@ -91,17 +91,17 @@ public class DayOfWeekInMonthRule extends AnnualDateRule {
      *
      * @return the 'count'.
      */
-    public WeekInMonth getWeekInMonth() {
-        return this.weekInMonth;
+    public WeekInterval getWeekInMonth() {
+        return this.weekInterval;
     }
 
     /**
      * Sets the 'count' for this rule (one of FIRST, SECOND, THIRD, FOURTH and LAST).
      *
-     * @param weekInMonth the 'count'.
+     * @param weekInterval the 'count'.
      */
-    public void setWeekInMonth(final WeekInMonth weekInMonth) {
-        this.weekInMonth = weekInMonth;
+    public void setWeekInMonth(final WeekInterval weekInterval) {
+        this.weekInterval = weekInterval;
     }
 
 
@@ -145,13 +145,13 @@ public class DayOfWeekInMonthRule extends AnnualDateRule {
      */
     public DayDate getDate(final int year) {
         DayDate result;
-        if (this.weekInMonth != LAST) {
+        if (this.weekInterval != LAST) {
             // start at the beginning of the month
             result = DayDateFactory.makeDate(1, this.month, year);
             while (result.getDayOfWeek() != this.dayOfWeek) {
                 result = result.plusDays(1);
             }
-            result = result.plusDays(7 * (this.weekInMonth.index - 1));
+            result = result.plusDays(7 * (this.weekInterval.index - 1));
 
         }
         else {
