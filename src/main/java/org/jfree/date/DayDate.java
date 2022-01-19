@@ -141,8 +141,9 @@ public abstract class DayDate implements Comparable, Serializable {
     public abstract int getDayOfMonth();
 
     public Day getDayOfWeek() {
-        int intResult = (getOrdinalDay() + 6) % 7 + 1;
-        return Day.fromInt(intResult);
+        Day startingDay = getDayOfWeekForOrdinalZero();
+        int startingOffset = startingDay.index - Day.SUNDAY.index;
+        return Day.fromInt((getOrdinalDay() + startingOffset) % 7 + 1);
     }
 
     public abstract int compare(DayDate other);
