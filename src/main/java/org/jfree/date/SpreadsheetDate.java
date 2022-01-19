@@ -308,7 +308,7 @@ public class SpreadsheetDate extends DayDate {
      */
     @Override
     public int compareTo(final Object other) {
-        return compare((DayDate) other);
+        return daysSince((DayDate) other);
     }
     
     /**

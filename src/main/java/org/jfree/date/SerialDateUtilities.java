@@ -148,7 +148,7 @@ public class SerialDateUtilities {
      * @return the number of days between the start date and the end date.
      */
     public static int dayCountActual(final DayDate start, final DayDate end) {
-        return end.compare(start);
+        return end.daysSince(start);
     }
 
     /**
