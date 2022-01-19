@@ -84,35 +84,24 @@ public class SpreadsheetDate extends DayDate {
     static final int[]
             LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
             {0, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
-    /** For serialization. */
+
     private static final long serialVersionUID = -2039586705374454461L;
     
-    /** 
-     * The day number (1-Jan-1900 = 2, 2-Jan-1900 = 3, ..., 31-Dec-9999 = 
-     * 2958465). 
-     */
+
     private final int serial;
 
-    /** The day of the month (1 to 28, 29, 30 or 31 depending on the month). */
     private final int day;
 
-    /** The month of the year (1 to 12). */
     private final Month month;
 
-    /** The year (1900 to 9999). */
+
     private final int year;
 
 
     public SpreadsheetDate(final int day, final int month, final int year) {
         this(day, Month.fromInt(month), year);
     }
-    /**
-     * Creates a new date instance.
-     *
-     * @param day  the day (in the range 1 to 28/29/30/31).
-     * @param month  the month (in the range 1 to 12).
-     * @param year  the year (in the range 1900 to 9999).
-     */
+
     public SpreadsheetDate(final int day, final Month month, final int year) {
 
         if ((year >= 1900) && (year <= 9999)) {
@@ -146,12 +135,7 @@ public class SpreadsheetDate extends DayDate {
 
     }
 
-    /**
-     * Standard constructor - creates a new date object representing the
-     * specified day number (which should be in the range 2 to 2958465.
-     *
-     * @param serial  the serial number for the day (range: 2 to 2958465).
-     */
+
     public SpreadsheetDate(final int serial) {
 
         if ((serial >= EARLIEST_DATE_ORDINAL) && (serial <= LATEST_DATE_ORDINAL)) {
@@ -215,59 +199,28 @@ public class SpreadsheetDate extends DayDate {
         return Day.SATURDAY;
     }
 
-    /**
-     * Returns the serial number for the date, where 1 January 1900 = 2
-     * (this corresponds, almost, to the numbering system used in Microsoft
-     * Excel for Windows and Lotus 1-2-3).
-     *
-     * @return The serial number of this date.
-     */
     @Override
     public int getOrdinalDay() {
         return this.serial;
     }
 
-    /**
-     * Returns the year (assume a valid range of 1900 to 9999).
-     *
-     * @return The year.
-     */
+
     @Override
     public int getYear() {
         return this.year;
     }
 
-    /**
-     * Returns the month (January = 1, February = 2, March = 3).
-     *
-     * @return The month of the year.
-     */
+
     @Override
     public Month getMonth() {
         return this.month;
     }
 
-    /**
-     * Returns the day of the month.
-     *
-     * @return The day of the month.
-     */
     @Override
     public int getDayOfMonth() {
         return this.day;
     }
 
-    /**
-     * Tests the equality of this date with an arbitrary object.
-     * <P>
-     * This method will return true ONLY if the object is an instance of the
-     * {@link DayDate} base class, and it represents the same day as this
-     * {@link SpreadsheetDate}.
-     *
-     * @param object  the object to compare (<code>null</code> permitted).
-     *
-     * @return A boolean.
-     */
     @Override
     public boolean equals(final Object object) {
 
@@ -281,41 +234,19 @@ public class SpreadsheetDate extends DayDate {
 
     }
 
-    /**
-     * Returns a hash code for this object instance.
-     * 
-     * @return A hash code.
-     */
+
     @Override
     public int hashCode() {
         return getOrdinalDay();
     }
 
-    /**
-     * Implements the method required by the Comparable interface.
-     * 
-     * @param other  the other object (usually another SerialDate).
-     * 
-     * @return A negative integer, zero, or a positive integer as this object 
-     *         is less than, equal to, or greater than the specified object.
-     */
+
     @Override
     public int compareTo(Object other) {
         return daysSince((DayDate) other);
     }
 
 
-    /**
-     * Calculate the serial number from the day, month and year.
-     * <P>
-     * 1-Jan-1900 = 2.
-     *
-     * @param d  the day.
-     * @param m  the month.
-     * @param y  the year.
-     *
-     * @return the serial number from the day, month and year.
-     */
     private int calcSerial(final int d, final Month m, final int y) {
         final int yy = ((y - 1900) * 365) + DateUtil.leapYearCount(y - 1);
         int mm = SpreadsheetDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m.toInt()];
