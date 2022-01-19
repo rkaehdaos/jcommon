@@ -3,7 +3,7 @@
  * ========================================================================
  *
  * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
- * 
+ *
  * Project Info:  http://www.jfree.org/jcommon/index.html
  *
  * 이 라이브러리는 자유 소프트웨어입니다.
@@ -39,26 +39,37 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- *  <pre>
+ * <pre>
  *  An abstract class that defines our requirements for manipulating dates,
  *  without tying down a particular implementation.
- *  <P>
+ * <p>
  *  Requirement 1 : match at least what Excel does for dates;
  *  Requirement 2 : the date represented by the class is immutable;
- *  <P>
+ * <p>
  *  Why not just use java.util.Date?  We will, when it makes sense.  At times,
  *  java.util.Date can be *too* precise - it represents an instant in time,
  *  accurate to 1/1000th of a second (with the date itself depending on the
  *  time-zone).  Sometimes we just want to represent a particular day (e.g. 21
  *  January 2015) without concerning ourselves about the time of day, or the
  *  time-zone, or anything else.  That's what we've defined SerialDate for.
- *  <P>
+ * <p>
  *  You can call getInstance() to get a concrete subclass of SerialDate,
  *  without worrying about the exact implementation.
  *  </pre>
+ *
  * @author David Gilbert
  */
 public abstract class DayDate implements Comparable, Serializable {
+
+    public abstract int getOrdinalDay();
+
+    public abstract int getYear();
+
+    public abstract Month getMonth();
+
+    public abstract int getDayOfMonth();
+
+    public abstract Day getDayOfWeekForOrdinalZero();
 
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
@@ -74,7 +85,7 @@ public abstract class DayDate implements Comparable, Serializable {
         int resultYear = resultMonthAndYearAsOrdinal / 12;
         int resultMonthAsOrdinal = resultMonthAndYearAsOrdinal % 12 + Month.JANUARY.toInt();
         Month resultMonth = Month.fromInt(resultMonthAsOrdinal);
-        int resultDay = correctLastDayOfMonth(getDayOfMonth(),resultMonth,resultYear);
+        int resultDay = correctLastDayOfMonth(getDayOfMonth(), resultMonth, resultYear);
         return DayDateFactory.makeDate(resultDay, resultMonth, resultYear);
     }
 
@@ -86,10 +97,40 @@ public abstract class DayDate implements Comparable, Serializable {
 
     private int correctLastDayOfMonth(int day, Month month, int year) {
         int lastDayOfMonth = DateUtil.lastDayOfMonth(month, year);
-        if (day> lastDayOfMonth)
+        if (day > lastDayOfMonth)
             day = lastDayOfMonth;
         return day;
     }
+
+    public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
+
+        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        if (offsetToTarget >= 0)
+            offsetToTarget -= 7;
+        return plusDays(offsetToTarget);
+    }
+
+
+    public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
+
+        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        if (offsetToTarget <= 0)
+            offsetToTarget += 7;
+        return plusDays(offsetToTarget);
+    }
+
+
+    public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
+
+        int offsetToThisWeeksTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        int offsetToFutureTarget = (offsetToThisWeeksTarget + 7) % 7;
+        int offsetToPreviousTarget = offsetToFutureTarget - 7;
+        if (offsetToFutureTarget > 3) {
+            return plusDays(offsetToPreviousTarget);
+        } else
+            return plusDays(offsetToFutureTarget);
+    }
+
 
     public DayDate getEndOfCurrentMonth() {
         Month month = getMonth();
@@ -98,37 +139,26 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-    public static DayDate createInstance(int day, Month month, int yyyy) {
-        return new SpreadsheetDate(day, month, yyyy);
+
+    public Date toDate() {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(getYear(), getMonth().toInt() - 1, getDayOfMonth(), 0, 0, 0);
+        return calendar.getTime();
     }
 
-    public static DayDate createInstance(int serial) {
-        return new SpreadsheetDate(serial);
+
+    public String toString() {
+        return getDayOfMonth() + "-" + getMonth().toString()
+                + "-" + getYear();
     }
 
-    public static DayDate createInstance(java.util.Date date) {
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return new SpreadsheetDate(calendar.get(Calendar.DATE),
-                                   Month.fromInt(calendar.get(Calendar.MONTH) + 1),
-                                   calendar.get(Calendar.YEAR));
-
-    }
-
-    public abstract int getOrdinalDay();
-
-    public abstract int getYear();
-
-    public abstract Month getMonth();
-
-    public abstract int getDayOfMonth();
 
     public Day getDayOfWeek() {
         Day startingDay = getDayOfWeekForOrdinalZero();
         int startingOffset = startingDay.index - Day.SUNDAY.index;
         return Day.fromInt((getOrdinalDay() + startingOffset) % 7 + 1);
     }
+
 
     public int daysSince(DayDate other) {
         return getOrdinalDay() - other.getOrdinalDay();
@@ -164,48 +194,24 @@ public abstract class DayDate implements Comparable, Serializable {
         return interval.isIn(getOrdinalDay(), left, right);
     }
 
-    public abstract Day getDayOfWeekForOrdinalZero();
 
-    public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
-
-        int offsetToThisWeeksTarget = targetDayOfWeek.index - getDayOfWeek().index;
-        int offsetToFutureTarget = (offsetToThisWeeksTarget + 7) % 7;
-        int offsetToPreviousTarget = offsetToFutureTarget - 7;
-        if (offsetToFutureTarget > 3) {
-            return plusDays(offsetToPreviousTarget);
-        } else
-            return plusDays(offsetToFutureTarget);
+    public static DayDate createInstance(int day, Month month, int yyyy) {
+        return new SpreadsheetDate(day, month, yyyy);
     }
 
-    public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
-
-        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
-        if (offsetToTarget <= 0)
-            offsetToTarget += 7;
-        return plusDays(offsetToTarget);
+    public static DayDate createInstance(int serial) {
+        return new SpreadsheetDate(serial);
     }
 
-    public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
+    public static DayDate createInstance(java.util.Date date) {
 
-        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
-        if (offsetToTarget >= 0)
-            offsetToTarget -= 7;
-        return plusDays(offsetToTarget);
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return new SpreadsheetDate(calendar.get(Calendar.DATE),
+                Month.fromInt(calendar.get(Calendar.MONTH) + 1),
+                calendar.get(Calendar.YEAR));
+
     }
 
-    /**
-     * Returns a <code>java.util.Date</code> equivalent to this date.
-     *
-     * @return The date.
-     */
-    public Date toDate() {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYear(), getMonth().toInt() - 1, getDayOfMonth(), 0, 0, 0);
-        return calendar.getTime();
-    }
 
-    public String toString() {
-        return getDayOfMonth() + "-" + getMonth().toString()
-                + "-" + getYear();
-    }
 }
