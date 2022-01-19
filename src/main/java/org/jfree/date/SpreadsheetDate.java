@@ -128,42 +128,42 @@ public class SpreadsheetDate extends DayDate {
             throw new IllegalArgumentException(
                     "SpreadsheetDate: Serial must be in range 2 to 2958465.");
 
-        this.ordinalDay = serial;
+        ordinalDay = serial;
 
-        int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
+        int days = ordinalDay - EARLIEST_DATE_ORDINAL;
         int overestimatedYear = MINIMUM_YEAR_SUPPORTED + days / 365;
         int nonleapdays = days - DateUtil.leapYearCount(overestimatedYear);
         int underestimatedYear = MINIMUM_YEAR_SUPPORTED + (nonleapdays / 365);
 
         if (underestimatedYear == overestimatedYear) {
-            this.year = underestimatedYear;
+            year = underestimatedYear;
         } else {
             int ss1 = firstOrdinalOfYear(underestimatedYear);
-            while (ss1 <= this.ordinalDay) {
+            while (ss1 <= ordinalDay) {
                 underestimatedYear = underestimatedYear + 1;
                 ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
             }
-            this.year = underestimatedYear - 1;
+            year = underestimatedYear - 1;
         }
 
-        final int ss2 = calcOrdinal(1, Month.JANUARY, this.year);
+        final int ss2 = calcOrdinal(1, Month.JANUARY, year);
 
         int[] daysToEndOfPrecedingMonth
                 = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
 
-        if (DateUtil.isLeapYear(this.year)) {
+        if (DateUtil.isLeapYear(year)) {
             daysToEndOfPrecedingMonth
                     = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
         }
         int mm = 1;
         int sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
-        while (sss < this.ordinalDay) {
+        while (sss < ordinalDay) {
             mm = mm + 1;
             sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
         }
-        this.month = Month.fromInt(mm - 1);
-        this.day = this.ordinalDay - ss2
-                - daysToEndOfPrecedingMonth[this.month.toInt()] + 1;
+        month = Month.fromInt(mm - 1);
+        day = ordinalDay - ss2
+                - daysToEndOfPrecedingMonth[month.toInt()] + 1;
 
     }
 
