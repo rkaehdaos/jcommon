@@ -1,10 +1,30 @@
 package org.jfree.date;
 
 public enum DateInterval {
-    CLOSED(0),
-    CLOSED_LEFT(1),
-    CLOSED_RIGHT(2),
-    OPEN(3);
+    CLOSED(0) {
+        @Override
+        public boolean isIn(int d, int left, int right) {
+            return false;
+        }
+    },
+    CLOSED_LEFT(1) {
+        @Override
+        public boolean isIn(int d, int left, int right) {
+            return false;
+        }
+    },
+    CLOSED_RIGHT(2) {
+        @Override
+        public boolean isIn(int d, int left, int right) {
+            return false;
+        }
+    },
+    OPEN(3) {
+        @Override
+        public boolean isIn(int d, int left, int right) {
+            return false;
+        }
+    };
 
     public final int index;
 
@@ -21,4 +41,6 @@ public enum DateInterval {
                 String.format("Invalid arg : %d", index)
         );
     }
+
+    public abstract boolean isIn(int d, int left, int right);
 }
