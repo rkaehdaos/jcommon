@@ -146,7 +146,7 @@ public class SpreadsheetDate extends DayDate {
             year = underestimatedYear - 1;
         }
 
-        final int ss2 = calcOrdinal(1, Month.JANUARY, year);
+        int firstOrdinalOfYear = calcOrdinal(1, Month.JANUARY, year);
 
         int[] daysToEndOfPrecedingMonth
                 = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
@@ -156,13 +156,13 @@ public class SpreadsheetDate extends DayDate {
                     = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
         }
         int mm = 1;
-        int sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
+        int sss = firstOrdinalOfYear + daysToEndOfPrecedingMonth[mm] - 1;
         while (sss < ordinalDay) {
             mm = mm + 1;
-            sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
+            sss = firstOrdinalOfYear + daysToEndOfPrecedingMonth[mm] - 1;
         }
         month = Month.fromInt(mm - 1);
-        day = ordinalDay - ss2
+        day = ordinalDay - firstOrdinalOfYear
                 - daysToEndOfPrecedingMonth[month.toInt()] + 1;
 
     }
