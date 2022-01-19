@@ -114,43 +114,14 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(lastDay, month, year);
     }
 
-
-    public abstract Day getDayOfWeekForOrdinalZero();
-
-    /**
-     * Factory method that returns an instance of some concrete subclass of 
-     * {@link DayDate}.
-     *
-     * @param day  the day (1-31).
-     * @param month  the month (1-12).
-     * @param yyyy  the year (in the range 1900 to 9999).
-     *
-     * @return An instance of {@link DayDate}.
-     */
-    public static DayDate createInstance(int day, Month month,
-                                         int yyyy) {
+    public static DayDate createInstance(int day, Month month, int yyyy) {
         return new SpreadsheetDate(day, month, yyyy);
     }
 
-    /**
-     * Factory method that returns an instance of some concrete subclass of 
-     * {@link DayDate}.
-     *
-     * @param serial  the serial number for the day (1 January 1900 = 2).
-     *
-     * @return a instance of SerialDate.
-     */
     public static DayDate createInstance(int serial) {
         return new SpreadsheetDate(serial);
     }
 
-    /**
-     * Factory method that returns an instance of a subclass of SerialDate.
-     *
-     * @param date  A Java date object.
-     *
-     * @return a instance of SerialDate.
-     */
     public static DayDate createInstance(java.util.Date date) {
 
         GregorianCalendar calendar = new GregorianCalendar();
@@ -161,136 +132,33 @@ public abstract class DayDate implements Comparable, Serializable {
 
     }
 
-    /**
-     * Returns the serial number for the date, where 1 January 1900 = 2 (this
-     * corresponds, almost, to the numbering system used in Microsoft Excel for
-     * Windows and Lotus 1-2-3).
-     *
-     * @return the serial number for the date.
-     */
     public abstract int getOrdinalDay();
 
-    /**
-     * Returns the year (assume a valid range of 1900 to 9999).
-     *
-     * @return the year.
-     */
     public abstract int getYear();
 
-    /**
-     * Returns the month (January = 1, February = 2, March = 3).
-     *
-     * @return the month of the year.
-     */
     public abstract Month getMonth();
 
-    /**
-     * Returns the day of the month.
-     *
-     * @return the day of the month.
-     */
     public abstract int getDayOfMonth();
 
-    /**
-     * Returns the day of the week.
-     *
-     * @return the day of the week.
-     */
     public abstract Day getDayOfWeek();
 
-    /**
-     * Returns the difference (in days) between this date and the specified 
-     * 'other' date.
-     * <P>
-     * The result is positive if this date is after the 'other' date and
-     * negative if it is before the 'other' date.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return the difference between this and the other date.
-     */
     public abstract int compare(DayDate other);
 
-    /**
-     * Returns true if this SerialDate represents the same date as the 
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date as 
-     *         the specified SerialDate.
-     */
     public abstract boolean isOn(DayDate other);
 
-    /**
-     * Returns true if this SerialDate represents an earlier date compared to
-     * the specified SerialDate.
-     *
-     * @param other  The date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents an earlier date 
-     *         compared to the specified SerialDate.
-     */
     public abstract boolean isBefore(DayDate other);
 
-    /**
-     * Returns true if this SerialDate represents the same date as the 
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date
-     *         as the specified SerialDate.
-     */
     public abstract boolean isOnOrBefore(DayDate other);
 
-    /**
-     * Returns true if this SerialDate represents the same date as the 
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date
-     *         as the specified SerialDate.
-     */
     public abstract boolean isAfter(DayDate other);
 
-    /**
-     * Returns true if this SerialDate represents the same date as the 
-     * specified SerialDate.
-     *
-     * @param other  the date being compared to.
-     *
-     * @return <code>true</code> if this SerialDate represents the same date
-     *         as the specified SerialDate.
-     */
     public abstract boolean isOnOrAfter(DayDate other);
 
-    /**
-     * Returns <code>true</code> if this {@link DayDate} is within the
-     * specified range (INCLUSIVE).  The date order of d1 and d2 is not 
-     * important.
-     *
-     * @param d1  a boundary date for the range.
-     * @param d2  the other boundary date for the range.
-     *
-     * @return A boolean.
-     */
     public abstract boolean isInRange(DayDate d1, DayDate d2);
 
-    /**
-     * Returns <code>true</code> if this {@link DayDate} is within the
-     * specified range (caller specifies whether or not the end-points are 
-     * included).  The date order of d1 and d2 is not important.
-     *
-     * @param d1  a boundary date for the range.
-     * @param d2  the other boundary date for the range.
-     * @param include  a code that controls whether or not the start and end 
-     *                 dates are included in the range.
-     *
-     * @return A boolean.
-     */
     public abstract boolean isInRange(DayDate d1, DayDate d2, DateInterval include);
+
+    public abstract Day getDayOfWeekForOrdinalZero();
 
     public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
@@ -330,11 +198,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return calendar.getTime();
     }
 
-    /**
-     * Converts the date to a string.
-     *
-     * @return  a string representation of the date.
-     */
     public String toString() {
         return getDayOfMonth() + "-" + getMonth().toString()
                 + "-" + getYear();
