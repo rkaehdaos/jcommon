@@ -22,7 +22,7 @@ public enum Day {
         this.index = day;
     }
 
-    public static Day fromInt(int index) throws IllegalArgumentException{
+    public static Day fromInt(int index) throws IllegalArgumentException {
         for (Day d : Day.values()) {
             if (d.index == index)
                 return d;
@@ -32,12 +32,6 @@ public enum Day {
         );
     }
 
-    public static String weekdayEnumToString(Day weekday) {
-        return weekday.toString();
-    }
-
-
-    public int toInt() { return index; }
 
     public static Day parse(String s) {
         s = s.trim();
@@ -63,5 +57,9 @@ public enum Day {
 
     private String toShortString() {
         return dateFormatSymbols.getShortWeekdays()[index];
+    }
+
+    public int toInt() {
+        return index;
     }
 }

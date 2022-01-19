@@ -68,13 +68,13 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testWeekdayCodeToString() throws Exception {
-        assertEquals("Sunday", weekdayEnumToString(SUNDAY));
-        assertEquals("Monday", weekdayEnumToString(MONDAY));
-        assertEquals("Tuesday", weekdayEnumToString(TUESDAY));
-        assertEquals("Wednesday", weekdayEnumToString(WEDNESDAY));
-        assertEquals("Thursday", weekdayEnumToString(THURSDAY));
-        assertEquals("Friday", weekdayEnumToString(FRIDAY));
-        assertEquals("Saturday", weekdayEnumToString(SATURDAY));
+        assertEquals("Sunday", SUNDAY.toString());
+        assertEquals("Monday", MONDAY.toString());
+        assertEquals("Tuesday", TUESDAY.toString());
+        assertEquals("Wednesday", WEDNESDAY.toString());
+        assertEquals("Thursday", THURSDAY.toString());
+        assertEquals("Friday", FRIDAY.toString());
+        assertEquals("Saturday", SATURDAY.toString());
     }
 
      public void testMonthCodeToString() throws Exception {

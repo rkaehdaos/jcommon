@@ -157,7 +157,7 @@ public class DayDateTest extends TestCase {
      */
     public void testWeekdayCodeToString() {
 
-        final String test = weekdayEnumToString(SATURDAY);
+        final String test = SATURDAY.toString();
         assertEquals("Saturday", test);
 
     }
