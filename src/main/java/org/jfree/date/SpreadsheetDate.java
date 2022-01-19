@@ -225,8 +225,8 @@ public class SpreadsheetDate extends DayDate {
         int daysUpToMonth = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[month.toInt()];
         if (DateUtil.isLeapYear(year) && month.toInt() > FEBRUARY.toInt())
             daysUpToMonth += 1;
-        int dd = day;
-        return daysUpToYear + daysUpToMonth + dd + 1;
+        int daysInMonth = day - 1;
+        return daysUpToYear + daysUpToMonth + daysInMonth + EARLIEST_DATE_ORDINAL;
     }
 
 }
