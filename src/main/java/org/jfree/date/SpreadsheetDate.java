@@ -138,10 +138,8 @@ public class SpreadsheetDate extends DayDate {
         if (underestimatedYear == overestimatedYear) {
             year = underestimatedYear;
         } else {
-            int firstOrdinalOfYear_ifelse = firstOrdinalOfYear(underestimatedYear);
-            while (firstOrdinalOfYear_ifelse <= ordinalDay) {
+            while ( firstOrdinalOfYear(underestimatedYear) <= ordinalDay) {
                 underestimatedYear = underestimatedYear + 1;
-                firstOrdinalOfYear_ifelse = firstOrdinalOfYear(underestimatedYear);
             }
             year = underestimatedYear - 1;
         }
