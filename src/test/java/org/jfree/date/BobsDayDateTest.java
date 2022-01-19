@@ -8,7 +8,6 @@ import java.util.GregorianCalendar;
 import static org.jfree.date.Day.*;
 import static org.jfree.date.DayDate.*;
 import static org.jfree.date.Month.*;
-import static org.jfree.date.WeekInMonth.*;
 
 public class BobsDayDateTest extends TestCase {
 
@@ -422,7 +421,7 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(1, date.getDayOfMonth());
         assertEquals(JANUARY, date.getMonth());
         assertEquals(1900, date.getYear());
-        assertEquals(2, date.toOrdinal());
+        assertEquals(2, date.getOrdinalDay());
     }
 
     public void testCreateInstanceFromSerial() throws Exception {

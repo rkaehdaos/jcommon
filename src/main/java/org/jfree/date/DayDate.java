@@ -104,7 +104,7 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
     public DayDate plusDays(int days) {
-        return DayDateFactory.makeDate(toOrdinal() + days);
+        return DayDateFactory.makeDate(getOrdinalDay() + days);
     }
 
     public DayDate getEndOfCurrentMonth() {
@@ -168,7 +168,7 @@ public abstract class DayDate implements Comparable, Serializable {
      *
      * @return the serial number for the date.
      */
-    public abstract int toOrdinal();
+    public abstract int getOrdinalDay();
 
     /**
      * Returns the year (assume a valid range of 1900 to 9999).
