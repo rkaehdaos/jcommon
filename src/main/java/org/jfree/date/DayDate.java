@@ -87,6 +87,13 @@ public abstract class DayDate implements Comparable, Serializable {
         return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
     }
 
+    private int correctLastDayOfMonth(int day, Month month, int year) {
+        int lastDayOfMonth = DateUtil.lastDayOfMonth(month, year);
+        if (day> lastDayOfMonth)
+            day = lastDayOfMonth;
+        return day;
+    }
+
 
 
     public DayDate getEndOfCurrentMonth() {
