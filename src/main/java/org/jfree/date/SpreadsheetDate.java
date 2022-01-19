@@ -3,25 +3,25 @@
  * ========================================================================
  *
  * (C) Copyright 2000-2006, by Object Refinery Limited and Contributors.
- * 
+ *
  * Project Info:  http://www.jfree.org/jcommon/index.html
  *
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the GNU Lesser General Public License as published by 
- * the Free Software Foundation; either version 2.1 of the License, or 
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful, but 
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
- * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public 
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
  * License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, 
- * USA.  
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
  *
- * [Java is a trademark or registered trademark of Sun Microsystems, Inc. 
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
  * --------------------
@@ -39,9 +39,9 @@
  * 11-Oct-2001 : Version 1 (DG);
  * 05-Nov-2001 : Added getDescription() and setDescription() methods (DG);
  * 12-Nov-2001 : Changed name from ExcelDate.java to SpreadsheetDate.java (DG);
- *               Fixed a bug in calculating day, month and year from serial 
+ *               Fixed a bug in calculating day, month and year from serial
  *               number (DG);
- * 24-Jan-2002 : Fixed a bug in calculating the serial number from the day, 
+ * 24-Jan-2002 : Fixed a bug in calculating the serial number from the day,
  *               month and year.  Thanks to Trevor Hills for the report (DG);
  * 29-May-2002 : Added equals(Object) method (SourceForge ID 558850) (DG);
  * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
@@ -61,15 +61,15 @@ package org.jfree.date;
  * (Represents a date using an integer, in a similar fashion to the
  * implementation in Microsoft Excel.  The range of dates supported is
  * 1-Jan-1900 to 31-Dec-9999.)
- * <P>
+ * <p>
  * 엑셀에는 실제로 윤년이 아니지만 1900년을 윤년으로 인식하는 고의적인 버그가 존재한다.
  * 세부사항은 마이크로소프트 웹 사이트의 Q181370 아티클에서 볼 수 있다.
  * (Be aware that there is a deliberate bug in Excel that recognises the year
  * 1900 as a leap year when in fact it is not a leap year. You can find more
  * information on the Microsoft website in article Q181370):
- * <P>
+ * <p>
  * http://support.microsoft.com/support/kb/articles/Q181/3/70.asp
- * <P>
+ * <p>
  * 엑셀은 1900년 1월 1일을 1로 취급하는 관례를 사용한다.
  * 이 클래스는 1900년 1월 1일을 2로 취급하는 관례를 사용한다.
  * (Excel uses the convention that 1-Jan-1900 = 1.  This class uses the
@@ -97,112 +97,103 @@ public class SpreadsheetDate extends DayDate {
             {0, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
 
     private static final long serialVersionUID = -2039586705374454461L;
-    
 
-    private final int serial;
-
+    private final int ordinalDay;
     private final int day;
-
     private final Month month;
-
-
     private final int year;
-
 
     public SpreadsheetDate(final int day, final int month, final int year) {
         this(day, Month.fromInt(month), year);
+    }
+
+    public SpreadsheetDate(final int ordinalDay) {
+
+        if ((ordinalDay >= EARLIEST_DATE_ORDINAL) && (ordinalDay <= LATEST_DATE_ORDINAL)) {
+            this.ordinalDay = ordinalDay;
+        } else {
+            throw new IllegalArgumentException(
+                    "SpreadsheetDate: Serial must be in range 2 to 2958465.");
+        }
+
+        // the day-month-year needs to be synchronised with the serial number...
+        // get the year from the serial date
+        final int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
+        // overestimated because we ignored leap days
+        final int overestimatedYYYY = 1900 + (days / 365);
+        final int leaps = DateUtil.leapYearCount(overestimatedYYYY);
+        final int nonleapdays = days - leaps;
+        // underestimated because we overestimated years
+        int underestimatedYYYY = 1900 + (nonleapdays / 365);
+
+        if (underestimatedYYYY == overestimatedYYYY) {
+            this.year = underestimatedYYYY;
+        } else {
+            int ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
+            while (ss1 <= this.ordinalDay) {
+                underestimatedYYYY = underestimatedYYYY + 1;
+                ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
+            }
+            this.year = underestimatedYYYY - 1;
+        }
+
+        final int ss2 = calcSerial(1, Month.JANUARY, this.year);
+
+        int[] daysToEndOfPrecedingMonth
+                = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
+
+        if (DateUtil.isLeapYear(this.year)) {
+            daysToEndOfPrecedingMonth
+                    = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
+        }
+
+        // get the month from the serial date
+        int mm = 1;
+        int sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
+        while (sss < this.ordinalDay) {
+            mm = mm + 1;
+            sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
+        }
+        this.month = Month.fromInt(mm - 1);
+
+        // what's left is d(+1);
+        this.day = this.ordinalDay - ss2
+                - daysToEndOfPrecedingMonth[this.month.toInt()] + 1;
+
     }
 
     public SpreadsheetDate(final int day, final Month month, final int year) {
 
         if ((year >= 1900) && (year <= 9999)) {
             this.year = year;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException(
-                "The 'year' argument must be in range 1900 to 9999."
+                    "The 'year' argument must be in range 1900 to 9999."
             );
         }
 
         if ((month.toInt() >= Month.JANUARY.toInt())
                 && (month.toInt() <= Month.DECEMBER.toInt())) {
             this.month = month;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException(
-                "The 'month' argument must be in the range 1 to 12."
+                    "The 'month' argument must be in the range 1 to 12."
             );
         }
 
         if ((day >= 1) && (day <= DateUtil.lastDayOfMonth(month, year))) {
             this.day = day;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Invalid 'day' argument.");
         }
 
         // the serial number needs to be synchronised with the day-month-year...
-        this.serial = calcSerial(day, month, year);
+        this.ordinalDay = calcSerial(day, month, year);
 
     }
 
 
-    public SpreadsheetDate(final int serial) {
 
-        if ((serial >= EARLIEST_DATE_ORDINAL) && (serial <= LATEST_DATE_ORDINAL)) {
-            this.serial = serial;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "SpreadsheetDate: Serial must be in range 2 to 2958465.");
-        }
-
-        // the day-month-year needs to be synchronised with the serial number...
-      // get the year from the serial date
-      final int days = this.serial - EARLIEST_DATE_ORDINAL;
-      // overestimated because we ignored leap days
-      final int overestimatedYYYY = 1900 + (days / 365);
-      final int leaps = DateUtil.leapYearCount(overestimatedYYYY);
-      final int nonleapdays = days - leaps;
-      // underestimated because we overestimated years
-      int underestimatedYYYY = 1900 + (nonleapdays / 365);
-
-      if (underestimatedYYYY == overestimatedYYYY) {
-          this.year = underestimatedYYYY;
-      }
-      else {
-          int ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
-          while (ss1 <= this.serial) {
-              underestimatedYYYY = underestimatedYYYY + 1;
-              ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
-          }
-          this.year = underestimatedYYYY - 1;
-      }
-
-      final int ss2 = calcSerial(1, Month.JANUARY, this.year);
-
-      int[] daysToEndOfPrecedingMonth 
-          = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
-
-      if (DateUtil.isLeapYear(this.year)) {
-          daysToEndOfPrecedingMonth 
-              = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
-      }
-
-      // get the month from the serial date
-      int mm = 1;
-      int sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
-      while (sss < this.serial) {
-          mm = mm + 1;
-          sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
-      }
-      this.month = Month.fromInt(mm - 1);
-
-      // what's left is d(+1);
-      this.day = this.serial - ss2 
-                 - daysToEndOfPrecedingMonth[this.month.toInt()] + 1;
-
-    }
 
 
     @Override
@@ -212,7 +203,7 @@ public class SpreadsheetDate extends DayDate {
 
     @Override
     public int getOrdinalDay() {
-        return this.serial;
+        return this.ordinalDay;
     }
 
 
@@ -238,8 +229,7 @@ public class SpreadsheetDate extends DayDate {
         if (object instanceof DayDate) {
             final DayDate s = (DayDate) object;
             return (s.getOrdinalDay() == this.getOrdinalDay());
-        }
-        else {
+        } else {
             return false;
         }
 
