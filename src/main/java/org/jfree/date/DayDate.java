@@ -147,11 +147,11 @@ public abstract class DayDate implements Comparable, Serializable {
         return String.format("%02d-%s-%d", getDayOfMonth(), getMonth(),getYear());
     }
 
-
     public Day getDayOfWeek() {
         Day startingDay = getDayOfWeekForOrdinalZero();
         int startingOffset = startingDay.toInt() - Day.SUNDAY.toInt();
-        return Day.fromInt((getOrdinalDay() + startingOffset) % 7 + 1);
+        int ordinalOfDayOfWeek = (getOrdinalDay() + startingOffset) % 7;
+        return Day.fromInt(ordinalOfDayOfWeek + Day.SUNDAY.toInt());
     }
 
 
