@@ -80,10 +80,8 @@ public abstract class DayDate implements Comparable, Serializable {
     }
 
     public DayDate plusYears(int years) {
-
         int resultYear = getYear() + years;
-        int lastDayOfMonthInResultYear = DateUtil.lastDayOfMonth(getMonth(), resultYear);
-        int resultDay = Math.min(getDayOfMonth(), lastDayOfMonthInResultYear);
+        int resultDay = correctLastDayOfMonth(getDayOfMonth(), getMonth(), resultYear);
         return DayDateFactory.makeDate(resultDay, getMonth(), resultYear);
     }
 
