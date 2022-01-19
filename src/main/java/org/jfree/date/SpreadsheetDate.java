@@ -96,14 +96,12 @@ public class SpreadsheetDate extends DayDate {
             LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
             {0, 0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
 
-    private static final long serialVersionUID = -2039586705374454461L;
+    private int ordinalDay;
+    private int day;
+    private Month month;
+    private int year;
 
-    private final int ordinalDay;
-    private final int day;
-    private final Month month;
-    private final int year;
-
-    public SpreadsheetDate(final int day, final Month month, final int year) {
+    public SpreadsheetDate(int day, Month month, int year) {
 
         if ((year < MINIMUM_YEAR_SUPPORTED) && (year > MAXIMUM_YEAR_SUPPORTED))
             throw new IllegalArgumentException(
@@ -111,24 +109,21 @@ public class SpreadsheetDate extends DayDate {
         this.year = year;
         this.month = month;
         this.day = day;
-        this.ordinalDay = calcSerial(day, month, year);
+        this.ordinalDay = calcOrdinal(day, month, year);
 
     }
-    public SpreadsheetDate(final int day, final int month, final int year) {
+    public SpreadsheetDate(int day, int month, int year) {
         this(day, Month.fromInt(month), year);
     }
 
-    public SpreadsheetDate(final int ordinalDay) {
+    public SpreadsheetDate(int serial) {
 
-        if ((ordinalDay >= EARLIEST_DATE_ORDINAL) && (ordinalDay <= LATEST_DATE_ORDINAL)) {
-            this.ordinalDay = ordinalDay;
-        } else {
+        if ((serial < EARLIEST_DATE_ORDINAL) && (serial > LATEST_DATE_ORDINAL))
             throw new IllegalArgumentException(
                     "SpreadsheetDate: Serial must be in range 2 to 2958465.");
-        }
 
-        // the day-month-year needs to be synchronised with the serial number...
-        // get the year from the serial date
+        this.ordinalDay = serial;
+
         final int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
         // overestimated because we ignored leap days
         final int overestimatedYYYY = 1900 + (days / 365);
@@ -140,15 +135,15 @@ public class SpreadsheetDate extends DayDate {
         if (underestimatedYYYY == overestimatedYYYY) {
             this.year = underestimatedYYYY;
         } else {
-            int ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
+            int ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYYYY);
             while (ss1 <= this.ordinalDay) {
                 underestimatedYYYY = underestimatedYYYY + 1;
-                ss1 = calcSerial(1, Month.JANUARY, underestimatedYYYY);
+                ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYYYY);
             }
             this.year = underestimatedYYYY - 1;
         }
 
-        final int ss2 = calcSerial(1, Month.JANUARY, this.year);
+        final int ss2 = calcOrdinal(1, Month.JANUARY, this.year);
 
         int[] daysToEndOfPrecedingMonth
                 = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
@@ -177,18 +172,10 @@ public class SpreadsheetDate extends DayDate {
 
 
 
-
-
-    @Override
-    public Day getDayOfWeekForOrdinalZero() {
-        return Day.SATURDAY;
-    }
-
     @Override
     public int getOrdinalDay() {
         return this.ordinalDay;
     }
-
 
     @Override
     public int getYear() {
@@ -207,39 +194,38 @@ public class SpreadsheetDate extends DayDate {
     }
 
     @Override
-    public boolean equals(final Object object) {
-
-        if (object instanceof DayDate) {
-            final DayDate s = (DayDate) object;
-            return (s.getOrdinalDay() == this.getOrdinalDay());
-        } else {
-            return false;
-        }
-
+    public Day getDayOfWeekForOrdinalZero() {
+        return Day.SATURDAY;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof DayDate)) {
+            return false;
+        }
+        DayDate date = (DayDate) object;
+        return (date.getOrdinalDay() == this.getOrdinalDay());
+    }
 
     @Override
     public int hashCode() {
         return getOrdinalDay();
     }
 
-
     @Override
     public int compareTo(Object other) {
         return daysSince((DayDate) other);
     }
 
-
-    private int calcSerial(final int d, final Month m, final int y) {
-        final int yy = ((y - 1900) * 365) + DateUtil.leapYearCount(y - 1);
+    private int calcOrdinal(int d, Month m, int y) {
+        int yy = ((y - 1900) * 365) + DateUtil.leapYearCount(y - 1);
         int mm = SpreadsheetDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m.toInt()];
         if (m.toInt() > Month.FEBRUARY.toInt()) {
             if (DateUtil.isLeapYear(y)) {
                 mm = mm + 1;
             }
         }
-        final int dd = d;
+        int dd = d;
         return yy + mm + dd + 1;
     }
 
