@@ -36,7 +36,6 @@
 package org.jfree.date;
 
 import java.io.Serializable;
-import java.text.*;
 import java.util.*;
 
 import static org.jfree.date.Month.*;
@@ -63,15 +62,12 @@ import static org.jfree.date.Month.*;
  */
 public abstract class DayDate implements Comparable, Serializable {
 
-    public static DateFormatSymbols
-            dateFormatSymbols = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
-
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
 
     public static String[] getMonthNames() {
-        return dateFormatSymbols.getMonths();
+        return DateUtil.dateFormatSymbols.getMonths();
 
     }
 
