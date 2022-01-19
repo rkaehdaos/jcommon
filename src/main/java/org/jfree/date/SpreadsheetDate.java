@@ -135,14 +135,12 @@ public class SpreadsheetDate extends DayDate {
         int nonleapdays = days - DateUtil.leapYearCount(overestimatedYear);
         int underestimatedYear = MINIMUM_YEAR_SUPPORTED + (nonleapdays / 365);
 
-        if (underestimatedYear == overestimatedYear) {
-            year = underestimatedYear;
-        } else {
-            while ( firstOrdinalOfYear(underestimatedYear) <= ordinalDay) {
-                underestimatedYear = underestimatedYear + 1;
-            }
-            year = underestimatedYear - 1;
+
+        while (firstOrdinalOfYear(underestimatedYear) <= ordinalDay) {
+            underestimatedYear = underestimatedYear + 1;
         }
+        year = underestimatedYear - 1;
+
 
         int firstOrdinalOfYear = firstOrdinalOfYear(year);
 
