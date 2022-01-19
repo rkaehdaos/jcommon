@@ -49,6 +49,9 @@ package org.jfree.date;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
+import static org.jfree.date.Day.*;
+import static org.jfree.date.Month.FEBRUARY;
+
 /**
  * A utility class that provides a number of useful methods (some static).
  * Many of these are used in the implementation of the day-count convention
@@ -110,28 +113,28 @@ public class SerialDateUtilities {
      *
      * @return an integer representing the day-of-the-week.
      */
-    public int stringToWeekday(final String s) {
+    public Day stringToWeekday(final String s) {
 
         if (s.equals(this.weekdays[Calendar.SATURDAY])) {
-            return SerialDate.SATURDAY;
+            return SATURDAY;
         }
         else if (s.equals(this.weekdays[Calendar.SUNDAY])) {
-            return SerialDate.SUNDAY;
+            return SUNDAY;
         }
         else if (s.equals(this.weekdays[Calendar.MONDAY])) {
-            return SerialDate.MONDAY;
+            return MONDAY;
         }
         else if (s.equals(this.weekdays[Calendar.TUESDAY])) {
-            return SerialDate.TUESDAY;
+            return TUESDAY;
         }
         else if (s.equals(this.weekdays[Calendar.WEDNESDAY])) {
-            return SerialDate.WEDNESDAY;
+            return WEDNESDAY;
         }
         else if (s.equals(this.weekdays[Calendar.THURSDAY])) {
-            return SerialDate.THURSDAY;
+            return THURSDAY;
         }
         else {
-            return SerialDate.FRIDAY;
+            return FRIDAY;
         }
 
     }
@@ -144,8 +147,8 @@ public class SerialDateUtilities {
      *
      * @return the number of days between the start date and the end date.
      */
-    public static int dayCountActual(final SerialDate start, final SerialDate end) {
-        return end.compare(start);
+    public static int dayCountActual(final DayDate start, final DayDate end) {
+        return end.daysSince(start);
     }
 
     /**
@@ -161,7 +164,7 @@ public class SerialDateUtilities {
      *
      * @return the number of days between the two dates, assuming the 30/360 day-count convention.
      */
-    public static int dayCount30(final SerialDate start, final SerialDate end) {
+    public static int dayCount30(final DayDate start, final DayDate end) {
         final int d1;
         final int m1;
         final int y1;
@@ -170,11 +173,11 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {  // check the order of the dates
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
-            y1 = start.getYYYY();
+            m1 = start.getMonth().toInt();
+            y1 = start.getYear();
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
-            y2 = end.getYYYY();
+            m2 = end.getMonth().toInt();
+            y2 = end.getYear();
             return 360 * (y2 - y1) + 30 * (m2 - m1) + (d2 - d1);
         }
         else {
@@ -197,7 +200,7 @@ public class SerialDateUtilities {
      * @return The number of days between the two dates, assuming the 30/360
      *      (ISDA) day-count convention.
      */
-    public static int dayCount30ISDA(final SerialDate start, final SerialDate end) {
+    public static int dayCount30ISDA(final DayDate start, final DayDate end) {
         int d1;
         final int m1;
         final int y1;
@@ -206,14 +209,14 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
-            y1 = start.getYYYY();
+            m1 = start.getMonth().toInt();
+            y1 = start.getYear();
             if (d1 == 31) {  // first ISDA adjustment
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
-            y2 = end.getYYYY();
+            m2 = end.getMonth().toInt();
+            y2 = end.getYear();
             if ((d2 == 31) && (d1 == 30)) {  // second ISDA adjustment
                 d2 = 30;
             }
@@ -240,7 +243,7 @@ public class SerialDateUtilities {
      * @return The number of days between the two dates, assuming the 30/360
      *      (PSA) day-count convention.
      */
-    public static int dayCount30PSA(final SerialDate start, final SerialDate end) {
+    public static int dayCount30PSA(final DayDate start, final DayDate end) {
         int d1;
         final int m1;
         final int y1;
@@ -250,8 +253,8 @@ public class SerialDateUtilities {
 
         if (start.isOnOrBefore(end)) { // check the order of the dates
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
-            y1 = start.getYYYY();
+            m1 = start.getMonth().toInt();
+            y1 = start.getYear();
 
             if (SerialDateUtilities.isLastDayOfFebruary(start)) {
                 d1 = 30;
@@ -261,8 +264,8 @@ public class SerialDateUtilities {
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
-            y2 = end.getYYYY();
+            m2 = end.getMonth().toInt();
+            y2 = end.getYear();
             if ((d2 == 31) && (d1 == 30)) {  // second PSA adjustment
                 d2 = 30;
             }
@@ -288,7 +291,7 @@ public class SerialDateUtilities {
      * @return the number of days between the two dates, assuming the 30E/360
      *      day-count convention.
      */
-    public static int dayCount30E(final SerialDate start, final SerialDate end) {
+    public static int dayCount30E(final DayDate start, final DayDate end) {
         int d1;
         final int m1;
         final int y1;
@@ -297,14 +300,14 @@ public class SerialDateUtilities {
         final int y2;
         if (start.isBefore(end)) {
             d1 = start.getDayOfMonth();
-            m1 = start.getMonth();
-            y1 = start.getYYYY();
+            m1 = start.getMonth().toInt();
+            y1 = start.getYear();
             if (d1 == 31) {  // first European adjustment
                 d1 = 30;
             }
             d2 = end.getDayOfMonth();
-            m2 = end.getMonth();
-            y2 = end.getYYYY();
+            m2 = end.getMonth().toInt();
+            y2 = end.getYear();
             if (d2 == 31) {  // first European adjustment
                 d2 = 30;
             }
@@ -327,12 +330,12 @@ public class SerialDateUtilities {
      * @return a boolean that indicates whether or not the specified date is
      *      the last day of February.
      */
-    public static boolean isLastDayOfFebruary(final SerialDate d) {
+    public static boolean isLastDayOfFebruary(final DayDate d) {
 
         final int dom;
-        if (d.getMonth() == MonthConstants.FEBRUARY) {
+        if (d.getMonth() == FEBRUARY) {
             dom = d.getDayOfMonth();
-            if (SerialDate.isLeapYear(d.getYYYY())) {
+            if (DateUtil.isLeapYear(d.getYear())) {
                 return (dom == 29);
             }
             else {
@@ -358,9 +361,9 @@ public class SerialDateUtilities {
      * @return the number of times that February 29 occurs within the date
      *      range.
      */
-    public static int countFeb29s(final SerialDate start, final SerialDate end) {
+    public static int countFeb29s(final DayDate start, final DayDate end) {
         int count = 0;
-        SerialDate feb29;
+        DayDate feb29;
         final int y1;
         final int y2;
         int year;
@@ -368,12 +371,12 @@ public class SerialDateUtilities {
         // check the order of the dates
         if (start.isBefore(end)) {
 
-            y1 = start.getYYYY();
-            y2 = end.getYYYY();
+            y1 = start.getYear();
+            y2 = end.getYear();
             for (year = y1; year == y2; year++) {
-                if (SerialDate.isLeapYear(year)) {
-                    feb29 = SerialDate.createInstance(29, MonthConstants.FEBRUARY, year);
-                    if (feb29.isInRange(start, end, SerialDate.INCLUDE_SECOND)) {
+                if (DateUtil.isLeapYear(year)) {
+                    feb29 = DayDateFactory.makeDate(29, FEBRUARY, year);
+                    if (feb29.isInRange(start, end, DateInterval.CLOSED_RIGHT)) {
                         count++;
                     }
                 }
