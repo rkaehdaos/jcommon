@@ -55,6 +55,8 @@
 
 package org.jfree.date;
 
+import static org.jfree.date.Month.FEBRUARY;
+
 /**
  * 마이크로소프트 엑셀에서 구현한 방식과 유사하게 정수를 사용해서 날짜를 표현한다.
  * 지원하는 날짜 범위는 1900년 1월 1일 부터 9999년 12월 31일 까지다.
@@ -217,16 +219,14 @@ public class SpreadsheetDate extends DayDate {
         return daysSince((DayDate) other);
     }
 
-    private int calcOrdinal(int d, Month m, int y) {
-        int yy = ((y - 1900) * 365) + DateUtil.leapYearCount(y - 1);
-        int mm = SpreadsheetDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m.toInt()];
-        if (m.toInt() > Month.FEBRUARY.toInt()) {
-            if (DateUtil.isLeapYear(y)) {
-                mm = mm + 1;
-            }
-        }
-        int dd = d;
-        return yy + mm + dd + 1;
+    private int calcOrdinal(int day, Month month, int year) {
+        int leapDaysForYear = DateUtil.leapYearCount(year - 1);
+        int daysUpToYear = ((year - MINIMUM_YEAR_SUPPORTED) * 365) + leapDaysForYear;
+        int daysUpToMonth = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[month.toInt()];
+        if (DateUtil.isLeapYear(year) && month.toInt() > FEBRUARY.toInt())
+            daysUpToMonth += 1;
+        int dd = day;
+        return daysUpToYear + daysUpToMonth + dd + 1;
     }
 
 }
