@@ -11,7 +11,6 @@ public abstract class DayDateFactory {
     protected abstract DayDate _makeDate(int day, Month month, int year);
     protected abstract DayDate _makeDate(int day, int month, int year);
     protected abstract DayDate _makeDate(java.util.Date date);
-
     protected abstract int _getMiniMumYear();
     protected abstract int _getMaximumYear();
 
