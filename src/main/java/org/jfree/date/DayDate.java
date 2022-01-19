@@ -174,22 +174,23 @@ public abstract class DayDate implements Comparable, Serializable {
         return isInRange(d1, d2, DateInterval.OPEN);
     }
 
-    public boolean isInRange(DayDate d1, DayDate d2, DateInterval include) {
+    public boolean isInRange(DayDate d1, DayDate d2, DateInterval interval) {
         int left = Math.min(d1.getOrdinalDay(), d2.getOrdinalDay());
         int right = Math.max(d1.getOrdinalDay(), d2.getOrdinalDay());
 
-        final int s = getOrdinalDay();
-        if (include == DateInterval.OPEN) {
-            return (s >= left && s <= right);
+
+        final int d = getOrdinalDay();
+        if (interval == DateInterval.OPEN) {
+            return (d >= left && d <= right);
         }
-        else if (include == DateInterval.CLOSED_LEFT) {
-            return (s >= left && s < right);
+        else if (interval == DateInterval.CLOSED_LEFT) {
+            return (d >= left && d < right);
         }
-        else if (include == DateInterval.CLOSED_RIGHT) {
-            return (s > left && s <= right);
+        else if (interval == DateInterval.CLOSED_RIGHT) {
+            return (d > left && d <= right);
         }
         else {
-            return (s > left && s < right);
+            return (d > left && d < right);
         }
     }
 
