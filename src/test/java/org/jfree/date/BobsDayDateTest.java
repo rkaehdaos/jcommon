@@ -434,6 +434,13 @@ public class BobsDayDateTest extends TestCase {
         assertEquals(d(1, JANUARY, 2006), createInstance(new GregorianCalendar(2006, 0, 1).getTime()));
     }
 
+    public void testDaysSince() throws Exception {
+        assertEquals(14, d(15, JANUARY, 2006).daysSince(d(1, JANUARY, 2006)));
+        assertEquals(-17, d(15, JANUARY, 2006).daysSince(d(1, FEBRUARY, 2006)));
+        assertEquals(0, d(1, JANUARY, 2006).daysSince(d(1, JANUARY, 2006)));
+    }
+
+
   public static void main(String[] args) {
     junit.textui.TestRunner.run(BobsDayDateTest.class);
   }
