@@ -208,18 +208,18 @@ public class BobsDayDateTest extends TestCase {
     }
 
     public void testIsLeapYear() throws Exception {
-        assertFalse(isLeapYear(1900));
-        assertFalse(isLeapYear(1901));
-        assertFalse(isLeapYear(1902));
-        assertFalse(isLeapYear(1903));
-        assertTrue(isLeapYear(1904));
-        assertTrue(isLeapYear(1908));
-        assertFalse(isLeapYear(1955));
-        assertTrue(isLeapYear(1964));
-        assertTrue(isLeapYear(1980));
-        assertTrue(isLeapYear(2000));
-        assertFalse(isLeapYear(2001));
-        assertFalse(isLeapYear(2100));
+        assertFalse(DateUtil.isLeapYear(1900));
+        assertFalse(DateUtil.isLeapYear(1901));
+        assertFalse(DateUtil.isLeapYear(1902));
+        assertFalse(DateUtil.isLeapYear(1903));
+        assertTrue(DateUtil.isLeapYear(1904));
+        assertTrue(DateUtil.isLeapYear(1908));
+        assertFalse(DateUtil.isLeapYear(1955));
+        assertTrue(DateUtil.isLeapYear(1964));
+        assertTrue(DateUtil.isLeapYear(1980));
+        assertTrue(DateUtil.isLeapYear(2000));
+        assertFalse(DateUtil.isLeapYear(2001));
+        assertFalse(DateUtil.isLeapYear(2100));
     }
 
     public void testLeapYearCount() throws Exception {
