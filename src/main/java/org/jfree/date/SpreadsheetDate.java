@@ -264,12 +264,6 @@ public class SpreadsheetDate extends DayDate {
         return this.day;
     }
 
-    @Override
-    public Day getDayOfWeek() {
-        int intResult = (this.serial + 6) % 7 + 1;
-        return Day.fromInt(intResult);
-    }
-
     /**
      * Tests the equality of this date with an arbitrary object.
      * <P>
