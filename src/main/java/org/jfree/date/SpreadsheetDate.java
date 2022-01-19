@@ -56,22 +56,31 @@
 package org.jfree.date;
 
 /**
- * Represents a date using an integer, in a similar fashion to the
+ * 마이크로소프트 엑셀에서 구현한 방식과 유사하게 정수를 사용해서 날짜를 표현한다.
+ * 지원하는 날짜 범위는 1900년 1월 1일 부터 9999년 12월 31일 까지다.
+ * (Represents a date using an integer, in a similar fashion to the
  * implementation in Microsoft Excel.  The range of dates supported is
- * 1-Jan-1900 to 31-Dec-9999.
+ * 1-Jan-1900 to 31-Dec-9999.)
  * <P>
- * Be aware that there is a deliberate bug in Excel that recognises the year
+ * 엑셀에는 실제로 윤년이 아니지만 1900년을 윤년으로 인식하는 고의적인 버그가 존재한다.
+ * 세부사항은 마이크로소프트 웹 사이트의 Q181370 아티클에서 볼 수 있다.
+ * (Be aware that there is a deliberate bug in Excel that recognises the year
  * 1900 as a leap year when in fact it is not a leap year. You can find more
- * information on the Microsoft website in article Q181370:
+ * information on the Microsoft website in article Q181370):
  * <P>
  * http://support.microsoft.com/support/kb/articles/Q181/3/70.asp
  * <P>
- * Excel uses the convention that 1-Jan-1900 = 1.  This class uses the
- * convention 1-Jan-1900 = 2.
- * The result is that the day number in this class will be different to the
+ * 엑셀은 1900년 1월 1일을 1로 취급하는 관례를 사용한다.
+ * 이 클래스는 1900년 1월 1일을 2로 취급하는 관례를 사용한다.
+ * (Excel uses the convention that 1-Jan-1900 = 1.  This class uses the
+ * convention 1-Jan-1900 = 2.)
+ * 이 클래스를 사용해서 1900년 1월과 2월을 계산하면 엑셀계산과 달라진다.
+ * 하지만 엑셀은 버그로 1900년을 윤년으로 인식해서 (존재하지 않는) 29일 하루를 추가해서
+ * 이 날짜 이후부터는 엑셀 계산과 일치한다
+ * (The result is that the day number in this class will be different to the
  * Excel figure for January and February 1900...but then Excel adds in an extra
  * day (29-Feb-1900 which does not actually exist!) and from that point forward
- * the day numbers will match.
+ * the day numbers will match.)
  *
  * @author David Gilbert
  */
