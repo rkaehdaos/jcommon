@@ -16,7 +16,7 @@ public enum Day {
     public static DateFormatSymbols
             dateFormatSymbols = new SimpleDateFormat("", Locale.US).getDateFormatSymbols();
 
-    public final int index;
+    private final int index;
 
     Day(int index) { this.index = index; }
 

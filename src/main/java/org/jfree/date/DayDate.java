@@ -104,7 +104,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
 
-        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        int offsetToTarget = targetDayOfWeek.toInt() - getDayOfWeek().toInt();
         if (offsetToTarget >= 0)
             offsetToTarget -= 7;
         return plusDays(offsetToTarget);
@@ -113,7 +113,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public DayDate getFollowingDayOfWeek(Day targetDayOfWeek) {
 
-        int offsetToTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        int offsetToTarget = targetDayOfWeek.toInt() - getDayOfWeek().toInt();
         if (offsetToTarget <= 0)
             offsetToTarget += 7;
         return plusDays(offsetToTarget);
@@ -122,7 +122,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public DayDate getNearestDayOfWeek(Day targetDayOfWeek) {
 
-        int offsetToThisWeeksTarget = targetDayOfWeek.index - getDayOfWeek().index;
+        int offsetToThisWeeksTarget = targetDayOfWeek.toInt() - getDayOfWeek().toInt();
         int offsetToFutureTarget = (offsetToThisWeeksTarget + 7) % 7;
         int offsetToPreviousTarget = offsetToFutureTarget - 7;
         if (offsetToFutureTarget > 3) {
@@ -155,7 +155,7 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public Day getDayOfWeek() {
         Day startingDay = getDayOfWeekForOrdinalZero();
-        int startingOffset = startingDay.index - Day.SUNDAY.index;
+        int startingOffset = startingDay.toInt() - Day.SUNDAY.toInt();
         return Day.fromInt((getOrdinalDay() + startingOffset) % 7 + 1);
     }
 
