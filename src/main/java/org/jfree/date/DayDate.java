@@ -70,7 +70,7 @@ public abstract class DayDate implements Comparable, Serializable {
     public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
 
 
-    public static String[] getMonths() {
+    public static String[] getMonthNames() {
         return dateFormatSymbols.getMonths();
 
     }

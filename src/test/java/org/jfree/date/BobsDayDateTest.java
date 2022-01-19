@@ -12,7 +12,7 @@ import static org.jfree.date.Month.*;
 public class BobsDayDateTest extends TestCase {
 
     public void testGetMonths() throws Exception {
-        assertEquals(13, getMonths().length);
+        assertEquals(13, getMonthNames().length);
     }
 
     public void testDayParse() throws Exception {
