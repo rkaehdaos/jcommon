@@ -131,11 +131,9 @@ public class SpreadsheetDate extends DayDate {
         this.ordinalDay = serial;
 
         final int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
-        // overestimated because we ignored leap days
         final int overestimatedYYYY = 1900 + (days / 365);
         final int leaps = DateUtil.leapYearCount(overestimatedYYYY);
         final int nonleapdays = days - leaps;
-        // underestimated because we overestimated years
         int underestimatedYYYY = 1900 + (nonleapdays / 365);
 
         if (underestimatedYYYY == overestimatedYYYY) {
@@ -158,8 +156,6 @@ public class SpreadsheetDate extends DayDate {
             daysToEndOfPrecedingMonth
                     = LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
         }
-
-        // get the month from the serial date
         int mm = 1;
         int sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
         while (sss < this.ordinalDay) {
@@ -167,8 +163,6 @@ public class SpreadsheetDate extends DayDate {
             sss = ss2 + daysToEndOfPrecedingMonth[mm] - 1;
         }
         this.month = Month.fromInt(mm - 1);
-
-        // what's left is d(+1);
         this.day = this.ordinalDay - ss2
                 - daysToEndOfPrecedingMonth[this.month.toInt()] + 1;
 
