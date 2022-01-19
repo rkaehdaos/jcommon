@@ -105,30 +105,12 @@ public class SpreadsheetDate extends DayDate {
 
     public SpreadsheetDate(final int day, final Month month, final int year) {
 
-        if ((year >= 1900) && (year <= 9999)) {
-            this.year = year;
-        } else {
+        if ((year < MINIMUM_YEAR_SUPPORTED) && (year > MAXIMUM_YEAR_SUPPORTED))
             throw new IllegalArgumentException(
-                    "The 'year' argument must be in range 1900 to 9999."
-            );
-        }
-
-        if ((month.toInt() >= Month.JANUARY.toInt())
-                && (month.toInt() <= Month.DECEMBER.toInt())) {
-            this.month = month;
-        } else {
-            throw new IllegalArgumentException(
-                    "The 'month' argument must be in the range 1 to 12."
-            );
-        }
-
-        if ((day >= 1) && (day <= DateUtil.lastDayOfMonth(month, year))) {
-            this.day = day;
-        } else {
-            throw new IllegalArgumentException("Invalid 'day' argument.");
-        }
-
-        // the serial number needs to be synchronised with the day-month-year...
+                    "The 'year' argument must be in range 1900 to 9999.");
+        this.year = year;
+        this.month = month;
+        this.day = day;
         this.ordinalDay = calcSerial(day, month, year);
 
     }
