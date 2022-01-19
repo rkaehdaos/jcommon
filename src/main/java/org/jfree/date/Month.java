@@ -59,7 +59,7 @@ public enum Month {
         }
     }
 
-    private int lastDay() {
+    public int lastDay() {
         return LAST_DAY_OF_MONTH[index];
     }
 
