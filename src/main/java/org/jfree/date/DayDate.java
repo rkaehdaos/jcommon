@@ -38,7 +38,6 @@ package org.jfree.date;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * <pre>
@@ -186,16 +185,5 @@ public abstract class DayDate implements Comparable, Serializable {
         int right = Math.max(d1.getOrdinalDay(), d2.getOrdinalDay());
         return interval.isIn(getOrdinalDay(), left, right);
     }
-
-    public static DayDate createInstance(java.util.Date date) {
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return new SpreadsheetDate(calendar.get(Calendar.DATE),
-                Month.fromInt(calendar.get(Calendar.MONTH) + 1),
-                calendar.get(Calendar.YEAR));
-
-    }
-
 
 }

@@ -55,6 +55,10 @@
 
 package org.jfree.date;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import static org.jfree.date.Month.FEBRUARY;
 
 /**
@@ -170,9 +174,13 @@ public class SpreadsheetDate extends DayDate {
 
     }
 
-
-
-
+    public static DayDate createInstance(Date date) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return new SpreadsheetDate(calendar.get(Calendar.DATE),
+                Month.fromInt(calendar.get(Calendar.MONTH) + 1),
+                calendar.get(Calendar.YEAR));
+    }
 
     @Override
     public int getOrdinalDay() {

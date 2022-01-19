@@ -110,7 +110,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      */
     public SerialDateChooserPanel() {
 
-        this(DayDate.createInstance(new Date()), false,
+        this(SpreadsheetDate.createInstance(new Date()), false,
              DEFAULT_DATE_BUTTON_COLOR,
              DEFAULT_MONTH_BUTTON_COLOR);
 
@@ -205,7 +205,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
             }
         }
         else if (e.getActionCommand().equals("todayButtonClicked")) {
-            setDate(DayDate.createInstance(new Date()));
+            setDate(SpreadsheetDate.createInstance(new Date()));
         }
         else if (e.getActionCommand().equals("dateButtonClicked")) {
             final JButton b = (JButton) e.getSource();
