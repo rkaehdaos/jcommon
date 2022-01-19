@@ -209,13 +209,6 @@ public class SpreadsheetDate extends DayDate {
 
     }
 
-    public static int leapYearCount(int year) {
-        int leap4 = (year - 1896) / 4;
-        int leap100 = (year - 1800) / 100;
-        int leap400 = (year - 1600) / 400;
-        return leap4 - leap100 + leap400;
-    }
-
 
     @Override
     public Day getDayOfWeekForOrdinalZero() {

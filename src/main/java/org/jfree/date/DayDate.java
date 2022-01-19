@@ -71,6 +71,13 @@ public abstract class DayDate implements Comparable, Serializable {
 
     public abstract int getDayOfMonth();
 
+    public static int leapYearCount(int year) {
+        int leap4 = (year - 1896) / 4;
+        int leap100 = (year - 1800) / 100;
+        int leap400 = (year - 1600) / 400;
+        return leap4 - leap100 + leap400;
+    }
+
     public abstract Day getDayOfWeekForOrdinalZero();
 
     public static final int MINIMUM_YEAR_SUPPORTED = 1900;
