@@ -106,7 +106,7 @@ public class DayAndMonthRule extends AnnualDateRule {
     public void setDayOfMonth(final int dayOfMonth) {
 
         // check arguments...
-        if ((dayOfMonth < 1) || (dayOfMonth > Month.LAST_DAY_OF_MONTH[this.month.toInt()])) {
+        if ((dayOfMonth < 1) || (dayOfMonth >this.month.lastDay())) {
             throw new IllegalArgumentException(
                 "DayAndMonthRule(): dayOfMonth outside valid range.");
         }
