@@ -187,13 +187,6 @@ public abstract class DayDate implements Comparable, Serializable {
         return interval.isIn(getOrdinalDay(), left, right);
     }
 
-
-    public static DayDate createInstance(int day, Month month, int yyyy) {
-        return new SpreadsheetDate(day, month, yyyy);
-    }
-
-
-
     public static DayDate createInstance(java.util.Date date) {
 
         GregorianCalendar calendar = new GregorianCalendar();

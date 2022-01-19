@@ -43,28 +43,16 @@
 
 package org.jfree.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import org.jfree.date.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Vector;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import org.jfree.date.DateUtil;
-import org.jfree.date.Day;
-import org.jfree.date.DayDate;
-import org.jfree.date.Month;
 
 /**
  * A panel that allows the user to select a date.
@@ -200,8 +188,8 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
 
         if (e.getActionCommand().equals("monthSelectionChanged")) {
             final JComboBox c = (JComboBox) e.getSource();
-            this.date = DayDate.createInstance(
-                this.date.getDayOfMonth(), Month.fromInt(c.getSelectedIndex() + 1), this.date.getYear()
+            this.date = DayDateFactory.makeDate(
+                    this.date.getDayOfMonth(), Month.fromInt(c.getSelectedIndex() + 1), this.date.getYear()
             );
             refreshButtons();
         }
@@ -209,7 +197,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
             if (!this.refreshing) {
                 final JComboBox c = (JComboBox) e.getSource();
                 final Integer y = (Integer) c.getSelectedItem();
-                this.date = DayDate.createInstance(
+                this.date = DayDateFactory.makeDate(
                     this.date.getDayOfMonth(), this.date.getMonth(), y.intValue()
                 );
                 refreshYearSelector();
@@ -291,7 +279,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      */
     protected DayDate getFirstVisibleDate() {
 
-        DayDate result = DayDate.createInstance(1, this.date.getMonth(), this.date.getYear());
+        DayDate result = DayDateFactory.makeDate(1, this.date.getMonth(), this.date.getYear());
         result = result.plusDays(-1);
         while (result.getDayOfWeek() != getFirstDayOfWeek()) {
             result = result.plusDays(-1);
