@@ -138,15 +138,15 @@ public class SpreadsheetDate extends DayDate {
         if (underestimatedYear == overestimatedYear) {
             year = underestimatedYear;
         } else {
-            int ss1 = firstOrdinalOfYear(underestimatedYear);
-            while (ss1 <= ordinalDay) {
+            int firstOrdinalOfYear_ifelse = firstOrdinalOfYear(underestimatedYear);
+            while (firstOrdinalOfYear_ifelse <= ordinalDay) {
                 underestimatedYear = underestimatedYear + 1;
-                ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
+                firstOrdinalOfYear_ifelse = firstOrdinalOfYear(underestimatedYear);
             }
             year = underestimatedYear - 1;
         }
 
-        int firstOrdinalOfYear = calcOrdinal(1, Month.JANUARY, year);
+        int firstOrdinalOfYear = firstOrdinalOfYear(year);
 
         int[] daysToEndOfPrecedingMonth
                 = AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH;
@@ -165,6 +165,11 @@ public class SpreadsheetDate extends DayDate {
         day = ordinalDay - firstOrdinalOfYear
                 - daysToEndOfPrecedingMonth[month.toInt()] + 1;
 
+    }
+
+    private int huntForYearContaining(int anOrdinalDay, int startingYear){
+        int aYear = startingYear;
+        return 0;
     }
 
     private int firstOrdinalOfYear(int underestimatedYear) {
