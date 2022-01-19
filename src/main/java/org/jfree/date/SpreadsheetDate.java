@@ -130,21 +130,20 @@ public class SpreadsheetDate extends DayDate {
 
         this.ordinalDay = serial;
 
-        final int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
-        final int overestimatedYYYY = 1900 + (days / 365);
-        final int leaps = DateUtil.leapYearCount(overestimatedYYYY);
-        final int nonleapdays = days - leaps;
-        int underestimatedYYYY = 1900 + (nonleapdays / 365);
+        int days = this.ordinalDay - EARLIEST_DATE_ORDINAL;
+        int overestimatedYear = MINIMUM_YEAR_SUPPORTED + days / 365;
+        int nonleapdays = days - DateUtil.leapYearCount(overestimatedYear);
+        int underestimatedYear = MINIMUM_YEAR_SUPPORTED + (nonleapdays / 365);
 
-        if (underestimatedYYYY == overestimatedYYYY) {
-            this.year = underestimatedYYYY;
+        if (underestimatedYear == overestimatedYear) {
+            this.year = underestimatedYear;
         } else {
-            int ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYYYY);
+            int ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
             while (ss1 <= this.ordinalDay) {
-                underestimatedYYYY = underestimatedYYYY + 1;
-                ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYYYY);
+                underestimatedYear = underestimatedYear + 1;
+                ss1 = calcOrdinal(1, Month.JANUARY, underestimatedYear);
             }
-            this.year = underestimatedYYYY - 1;
+            this.year = underestimatedYear - 1;
         }
 
         final int ss2 = calcOrdinal(1, Month.JANUARY, this.year);
