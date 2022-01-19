@@ -192,9 +192,7 @@ public abstract class DayDate implements Comparable, Serializable {
         return new SpreadsheetDate(day, month, yyyy);
     }
 
-    public static DayDate createInstance(int serial) {
-        return new SpreadsheetDate(serial);
-    }
+
 
     public static DayDate createInstance(java.util.Date date) {
 
