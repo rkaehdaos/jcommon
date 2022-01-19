@@ -1,46 +1,30 @@
 package org.jfree.date;
 
 public enum DateInterval {
-    CLOSED(0) {
+    CLOSED {
         @Override
         public boolean isIn(int d, int left, int right) {
-            return false;
+            return d > left && d < right;
         }
     },
-    CLOSED_LEFT(1) {
+    CLOSED_LEFT {
         @Override
         public boolean isIn(int d, int left, int right) {
-            return false;
+            return d >= left && d < right;
         }
     },
-    CLOSED_RIGHT(2) {
+    CLOSED_RIGHT {
         @Override
         public boolean isIn(int d, int left, int right) {
-            return false;
+            return d > left && d <= right;
         }
     },
-    OPEN(3) {
+    OPEN {
         @Override
         public boolean isIn(int d, int left, int right) {
-            return false;
+            return d >= left && d <= right;
         }
     };
-
-    public final int index;
-
-    DateInterval(int index) {
-        this.index = index;
-    }
-
-    public static DateInterval fromInt(int index) {
-        for (DateInterval dateInterval : DateInterval.values()) {
-            if (dateInterval.index == index)
-                return dateInterval;
-        }
-        throw new IllegalArgumentException(
-                String.format("Invalid arg : %d", index)
-        );
-    }
 
     public abstract boolean isIn(int d, int left, int right);
 }
